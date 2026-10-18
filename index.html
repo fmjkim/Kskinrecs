@@ -48,20 +48,23 @@
 		}
 
 		.masthead {
-			display: flex;
+			display: grid;
+			grid-template-columns: 1fr auto;
 			align-items: center;
 			justify-content: space-between;
-			padding-bottom: 17px;
+			gap: 20px;
+			padding-bottom: 18px;
 			border-bottom: 1px solid var(--line);
 			color: var(--green);
-			font-size: 12px;
-			font-weight: 750;
-			letter-spacing: .12em;
 			text-transform: uppercase;
 		}
 
-		.masthead-right { display: flex; align-items: center; gap: 16px; }
-		#duration { color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+		.brand-lockup { display: grid; justify-items: start; gap: 4px; min-width: 0; }
+		.brand-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 9px; direction: ltr; }
+		.brand-name { color: var(--green-dark); font-size: 14px; font-weight: 800; letter-spacing: .16em; }
+		.brand-edition { color: var(--muted); font-size: 10px; font-weight: 650; letter-spacing: .12em; }
+		#duration { color: var(--muted); font-size: 11px; font-weight: 550; letter-spacing: .08em; text-transform: none; }
+		.masthead-right { display: flex; align-items: center; }
 		.language-picker { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px; max-width: 390px; color: var(--muted); font-size: 12px; letter-spacing: 0; text-transform: none; }
 		.language-picker button { min-height: 30px; padding: 0 9px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-size: 12px; font-weight: 600; white-space: nowrap; transition: border-color .16s ease, background .16s ease, color .16s ease; }
 		.language-picker button:hover { transform: none; border-color: var(--green); background: var(--soft-green); color: var(--green-dark); }
@@ -89,15 +92,17 @@
 		.eyebrow::before { width: 22px; height: 1px; background: currentColor; content: ""; }
 
 		h1 {
-			max-width: 620px;
+			max-width: 580px;
 			margin: 0;
 			font-family: "Noto Serif KR", "Batang", serif;
-			font-size: clamp(32px, 7vw, 48px);
+			font-size: clamp(36px, 7vw, 54px);
 			font-weight: 600;
-			line-height: 1.3;
+			line-height: 1.18;
 			letter-spacing: 0;
 			white-space: pre-line;
 		}
+
+		html[lang="en"] h1 { max-width: 520px; font-family: "Georgia", "Times New Roman", serif; font-size: clamp(42px, 8vw, 64px); font-weight: 500; line-height: 1.06; letter-spacing: -.045em; }
 
 		.intro-copy {
 			max-width: 580px;
@@ -230,6 +235,7 @@
 		.recommendation-section { margin-top: 24px; padding-top: 20px; border-top: 1px dashed var(--line); }
 		.recommendation-section h3 { margin: 0 0 12px; font-size: 18px; color: var(--green-dark); }
 		.recommendation-note { margin: 0 0 16px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+		.recommendation-evidence { color: #505c55; }
 		.rec-category { margin-bottom: 18px; }
 		.rec-category h4 { margin: 0 0 8px; font-size: 14px; color: var(--coral); letter-spacing: .06em; text-transform: uppercase; }
 		.rec-items { display: grid; gap: 8px; }
@@ -280,12 +286,15 @@
 
 		@media (max-width: 560px) {
 			.page { width: min(100% - 32px, 760px); padding-top: 28px; }
-			.masthead { gap: 12px; letter-spacing: .06em; }
-			.masthead-right { flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
-			#duration { display: none; }
-			.language-picker { max-width: 220px; gap: 3px; }
+			.masthead { grid-template-columns: 1fr; gap: 12px; padding-bottom: 14px; }
+			.brand-name { font-size: 13px; }
+			.brand-edition { font-size: 9px; }
+			.masthead-right { justify-content: flex-start; }
+			.language-picker { justify-content: flex-start; max-width: none; gap: 3px; }
 			.language-picker button { min-height: 28px; padding: 0 7px; font-size: 11px; }
 			.intro { padding-top: 34px; }
+			h1 { font-size: clamp(34px, 10vw, 48px); }
+			html[lang="en"] h1 { max-width: 420px; font-size: clamp(42px, 12vw, 58px); }
 			.choices { grid-template-columns: 1fr; gap: 7px; margin-left: 0; margin-right: 0; }
 			.hint { margin-left: 0; margin-right: 0; }
 			.concern-note { margin-left: 0; margin-right: 0; }
@@ -312,9 +321,11 @@
 <body>
 	<main class="page">
 		<header class="masthead">
-				<span data-i18n="brand">Skin notes · Korean Skincare 101</span>
+			<div class="brand-lockup">
+				<div class="brand-line"><span class="brand-name" data-i18n="brand">SKIN NOTE</span><span class="brand-edition">KOREAN SKINCARE 101</span></div>
+				<span id="duration" data-i18n="duration">2분 피부 체크</span>
+			</div>
 			<div class="masthead-right">
-				<span id="duration" data-i18n="duration">2분 셀프 체크</span>
 				<div class="language-picker" id="language-picker" role="group" aria-label="언어 선택">
 					<button type="button" data-language="ko" lang="ko" aria-pressed="true">한국어</button>
 					<button type="button" data-language="en" lang="en" aria-pressed="false">English</button>
@@ -435,6 +446,8 @@
 			<div class="recommendation-section" id="recommendation-section">
 				<h3 data-i18n="recTitle">피부 타입 맞춤 제품 추천</h3>
 				<p class="recommendation-note" id="recommendation-note"></p>
+				<p class="recommendation-note recommendation-evidence" id="recommendation-evidence"></p>
+				<p class="recommendation-note"><span id="science-disclaimer"></span> <a id="moisturizer-evidence" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5849435/" target="_blank" rel="noopener noreferrer"></a> · <a id="vitamin-c-evidence" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5605218/" target="_blank" rel="noopener noreferrer"></a></p>
 				<div class="rec-category">
 					<h4 data-i18n="mustCategory">피부 타입 기본 추천</h4>
 					<div class="rec-items" id="rec-must-items"></div>
@@ -550,7 +563,7 @@
 
 		const translations = {
 			ko: {
-				lang: "ko", title: "Korean Skincare 101 | 피부 타입과 고민 해결하기", description: "Korean Skincare 101: 세안 후 당김과 부위별 유분감으로 피부 타입을 살펴보고 고민별 한국 스킨케어 정보를 확인하는 무료 셀프 체크입니다.", brand: "Skin notes · Korean Skincare 101", duration: "2분 셀프 체크",
+				lang: "ko", title: "Korean Skincare 101 | 피부 타입과 고민 해결하기", description: "Korean Skincare 101: 세안 후 당김과 부위별 유분감으로 피부 타입을 살펴보고 고민별 한국 스킨케어 정보를 확인하는 무료 셀프 체크입니다.", brand: "SKIN NOTE", duration: "2분 피부 체크",
 				languageLabel: "언어 선택", eyebrow: "YOUR SKIN, IN CONTEXT", pageTitle: "내 피부 타입과\n요즘 고민 해결하기",
 				intro: "피부 타입은 당김과 번들거림이 얼굴 어디에서 나타나는지 살펴보면 더 잘 구분할 수 있어요. 최근 피부 상태를 떠올리며 답해 주세요.",
 				guideTitle: "답변 기준", guide: "세안 후 아무것도 바르지 않은 채 30~60분 지난 때와, 평소 낮 시간의 피부를 기준으로 해주세요. 최근 2주간의 평균적인 상태가 가장 정확합니다.",
@@ -588,8 +601,8 @@
 				}
 			},
 			en: {
-				lang: "en", title: "Korean Skincare 101 | Skin Type & Concern Check", description: "Korean Skincare 101: a free self-check for skin type and concerns, with transparent scoring, practical care guidance, and Korean skincare product information.", brand: "Skin notes · Korean Skincare 101", duration: "2-minute skin check",
-				languageLabel: "Choose language", eyebrow: "YOUR SKIN, IN CONTEXT", pageTitle: "Understand your skin type\nand what it needs",
+				lang: "en", title: "Korean Skincare 101 | Skin Type & Concern Check", description: "Korean Skincare 101: a free self-check for skin type and concerns, with transparent scoring, practical care guidance, and Korean skincare product information.", brand: "SKIN NOTE", duration: "2 min skin check",
+				languageLabel: "Choose language", eyebrow: "YOUR SKIN, IN CONTEXT", pageTitle: "Understand your\nskin type\nand what it needs",
 				intro: "You can better identify your skin type by noticing where your skin feels tight or gets oily. Answer based on how your skin has been lately.",
 				guideTitle: "How to answer", guide: "Think about your skin 30–60 minutes after cleansing, before applying anything, and during a typical afternoon. Your average skin over the past two weeks is most helpful.",
 				q1: "How does your skin feel 30–60 minutes after cleansing?", q1Hint: "Choose how your skin feels before applying skincare.",
@@ -626,7 +639,7 @@
 				}
 			},
 			fr: {
-				lang: "fr", title: "Korean Skincare 101 | Type et besoins de la peau", description: "Korean Skincare 101 : un bilan gratuit du type de peau et de ses préoccupations, avec une méthode expliquée et des conseils pratiques sur les soins coréens.", brand: "Skin notes · Korean Skincare 101", duration: "Bilan peau en 2 min",
+				lang: "fr", title: "Korean Skincare 101 | Type et besoins de la peau", description: "Korean Skincare 101 : un bilan gratuit du type de peau et de ses préoccupations, avec une méthode expliquée et des conseils pratiques sur les soins coréens.", brand: "SKIN NOTE", duration: "Bilan peau en 2 min",
 				languageLabel: "Choisir la langue", eyebrow: "VOTRE PEAU, EN CONTEXTE", pageTitle: "Comprendre votre type de peau\net ses besoins",
 				intro: "Pour mieux reconnaître votre type de peau, observez les zones qui tiraillent ou brillent. Répondez en pensant à l’état récent de votre peau.",
 				guideTitle: "Comment répondre", guide: "Pensez à votre peau 30 à 60 minutes après le nettoyage, sans avoir appliqué de produit, puis pendant une journée habituelle. La moyenne des deux dernières semaines est la plus utile.",
@@ -664,7 +677,7 @@
 				}
 			},
 			it: {
-				lang: "it", title: "Korean Skincare 101 | Tipo ed esigenze della pelle", description: "Korean Skincare 101: un check gratuito del tipo di pelle e delle sue esigenze, con metodo trasparente, consigli pratici e informazioni sulla skincare coreana.", brand: "Skin notes · Korean Skincare 101", duration: "Check della pelle in 2 min",
+				lang: "it", title: "Korean Skincare 101 | Tipo ed esigenze della pelle", description: "Korean Skincare 101: un check gratuito del tipo di pelle e delle sue esigenze, con metodo trasparente, consigli pratici e informazioni sulla skincare coreana.", brand: "SKIN NOTE", duration: "Check della pelle in 2 min",
 				languageLabel: "Scegli la lingua", eyebrow: "LA TUA PELLE, NEL SUO CONTESTO", pageTitle: "Scopri il tuo tipo di pelle\ne le sue esigenze",
 				intro: "Per capire meglio il tuo tipo di pelle, osserva dove senti tensione o noti lucidità. Rispondi pensando a come è stata la tua pelle di recente.",
 				guideTitle: "Come rispondere", guide: "Pensa alla pelle 30–60 minuti dopo la detersione, senza aver applicato prodotti, e durante una giornata normale. La media delle ultime due settimane è la più utile.",
@@ -702,7 +715,7 @@
 				}
 			},
 			ja: {
-				lang: "ja", title: "Korean Skincare 101 | 肌タイプ・肌悩みチェック", description: "Korean Skincare 101：肌タイプや悩みを確認できる無料セルフチェック。判定方法、日々のケア、韓国スキンケア製品の情報を紹介します。", brand: "Skin notes · Korean Skincare 101", duration: "2分セルフチェック",
+				lang: "ja", title: "Korean Skincare 101 | 肌タイプ・肌悩みチェック", description: "Korean Skincare 101：肌タイプや悩みを確認できる無料セルフチェック。判定方法、日々のケア、韓国スキンケア製品の情報を紹介します。", brand: "SKIN NOTE", duration: "2分セルフチェック",
 				languageLabel: "言語を選択", eyebrow: "肌の状態をチェック", pageTitle: "自分の肌タイプと\n今の肌悩みを知る",
 				intro: "つっぱりやテカリが顔のどこに出るかを見ると、肌タイプを判断しやすくなります。最近の肌状態を思い出して回答してください。",
 				guideTitle: "回答の基準", guide: "洗顔後、何も塗らずに30〜60分経ったときと、普段の日中の肌を基準にしてください。直近2週間の平均的な状態が参考になります。",
@@ -740,7 +753,7 @@
 				}
 			},
 			zh: {
-				lang: "zh", title: "Korean Skincare 101 | 肤质与肌肤困扰自测", description: "Korean Skincare 101：免费肤质与肌肤困扰自测，提供清晰的判断方法、日常护理建议和韩国护肤产品信息。", brand: "Skin notes · Korean Skincare 101", duration: "2分钟肌肤自测",
+				lang: "zh", title: "Korean Skincare 101 | 肤质与肌肤困扰自测", description: "Korean Skincare 101：免费肤质与肌肤困扰自测，提供清晰的判断方法、日常护理建议和韩国护肤产品信息。", brand: "SKIN NOTE", duration: "2分钟肌肤自测",
 				languageLabel: "选择语言", eyebrow: "了解你的肌肤状态", pageTitle: "了解你的肤质\n与近期肌肤困扰",
 				intro: "观察脸部哪些部位容易紧绷或出油，可以更好地判断肤质。请根据近期的肌肤状态作答。",
 				guideTitle: "作答参考", guide: "请以洁面后30–60分钟、尚未涂抹护肤品时，以及平时白天的状态为准。近两周的平均状态最有参考价值。",
@@ -778,7 +791,7 @@
 				}
 			},
 			ar: {
-				lang: "ar", title: "Korean Skincare 101 | فحص نوع البشرة واحتياجاتها", description: "Korean Skincare 101: فحص ذاتي مجاني لنوع البشرة ومشكلاتها، مع طريقة واضحة ونصائح عملية ومعلومات عن العناية الكورية بالبشرة.", brand: "Skin notes · Korean Skincare 101", duration: "فحص البشرة في دقيقتين",
+				lang: "ar", title: "Korean Skincare 101 | فحص نوع البشرة واحتياجاتها", description: "Korean Skincare 101: فحص ذاتي مجاني لنوع البشرة ومشكلاتها، مع طريقة واضحة ونصائح عملية ومعلومات عن العناية الكورية بالبشرة.", brand: "SKIN NOTE", duration: "فحص البشرة في دقيقتين",
 				languageLabel: "اختيار اللغة", eyebrow: "بشرتك كما هي", pageTitle: "تعرّفي على نوع بشرتك\nواحتياجاتها الحالية",
 				intro: "يساعدك الانتباه إلى مواضع الجفاف أو اللمعان في الوجه على تحديد نوع بشرتك. أجيبي وفق حالة بشرتك مؤخرًا.",
 				guideTitle: "طريقة الإجابة", guide: "فكّري في بشرتك بعد 30–60 دقيقة من غسلها من دون وضع أي منتج، وكذلك خلال النهار المعتاد. يُعد متوسط حالتها خلال الأسبوعين الماضيين الأكثر فائدة.",
@@ -1155,51 +1168,128 @@
 		const recommendationUi = {
 			ko: {
 				title: "피부 타입 맞춤 제품 추천", basic: "피부 타입 기본 추천", additional: "함께 고려할 제품",
-				concerns: "선택한 고민에 맞춘 제품", open: "제품명을 누르면 선택한 고민에 맞는 설명을 볼 수 있어요.",
+				concerns: "선택한 고민에 맞춘 제품", open: "제품명을 누르면 추천 이유와 성분의 피부 작용을 확인할 수 있어요.",
+				scienceDisclaimer: "성분의 일반적인 작용을 설명하며 완제품의 임상 효과를 보증하지 않습니다. 최신 전성분과 함량을 확인하세요.",
+				moisturizerEvidence: "보습제 작용에 대한 리뷰", vitaminCEvidence: "국소 비타민 C 리뷰",
+				noConcernEvidence: "성분의 알려진 작용 원리와 한계를 제품별 설명에서 확인할 수 있어요.",
 				fit: "선택한 고민({concerns})과 {skinType} 피부를 고려한 추천입니다. {benefit} 새로운 제품은 먼저 소량으로 테스트하고, 따가움이나 붉어짐이 생기면 사용을 중단하세요.",
 				noConcern: "선택하신 피부 타입에 맞춘 제품입니다. {benefit} 새로운 제품은 먼저 소량으로 테스트하고, 따가움이나 붉어짐이 생기면 사용을 중단하세요.",
+				evidence: [
+					"트러블·막힘에는 살리실산·벤조일퍼옥사이드·레티노이드처럼 여드름 치료 근거가 있는 성분이 쓰입니다. 아래 보습·진정 제품은 보조 관리용이며 여드름 치료를 대신하지 않습니다.",
+					"민감함·붉음에는 자극을 줄이고 보습 장벽을 유지하는 것이 기본입니다. 세라마이드 등 보습 성분은 건조로 약해진 장벽을 보조할 수 있지만, 식물 추출물의 진정 효과는 제품별 근거가 다르고 지속되는 붉음의 진단·치료를 대신하지 않습니다.",
+					"건조·각질에는 히알루론산·글리세린 같은 흡습제가 각질층의 수분을 끌어당기고, 세라마이드·유분 성분을 포함한 크림이 수분 손실을 줄이는 데 도움을 줄 수 있습니다. 세럼 뒤 크림으로 덮어 주세요.",
+					"모공·피지에는 살리실산 같은 각질용해 성분이 모공 입구의 각질을 관리하는 데 쓰입니다. 다만 피부 타입에 따라 이번 추천은 보습·세정 제품일 수 있으며, 살리실산이 포함됐다는 뜻은 아니니 전성분을 확인하세요. 모공 크기를 영구적으로 줄이는 제품은 없습니다.",
+					"칙칙함·잡티에는 비타민 C 계열 성분이 항산화 및 색소 형성 경로에 작용할 가능성이 있지만, 유도체·농도·제형에 따라 근거와 효과가 달라집니다. 색소 악화를 막는 데 매일 자외선 차단이 중요합니다.",
+					"잔주름·탄력 저하에는 펩타이드의 화장품 효과가 성분별로 다르고 임상 근거도 제한적입니다. 보습은 건조로 도드라진 잔주름을 일시적으로 덜 보이게 할 수 있으며, 자외선 차단은 광노화 예방의 기본입니다."
+				],
 				type: { oily: "지성", combination: "복합성", dry: "건성", normal: "중성" }
 			},
 			en: {
 				title: "Products for your skin type", basic: "Skin-type essentials", additional: "More to consider",
-				concerns: "Products for your selected concerns", open: "Select a product name to see how it relates to your concerns.",
+				concerns: "Products for your selected concerns", open: "Select a product name to see why it was suggested and how its ingredients work on skin.",
+				scienceDisclaimer: "These are ingredient-level mechanisms, not proof of clinical effects for the finished products. Check current ingredient lists and concentrations.",
+				moisturizerEvidence: "Moisturizer mechanisms review", vitaminCEvidence: "Topical vitamin C review",
+				noConcernEvidence: "Product details explain relevant ingredient roles and the limits of available evidence.",
 				fit: "Suggested with your concern ({concerns}) and {skinType} skin in mind. {benefit} Patch-test new products first and stop use if irritation or redness occurs.",
 				noConcern: "Suggested for your {skinType} skin. {benefit} Patch-test new products first and stop use if irritation or redness occurs.",
+				evidence: [
+					"For breakouts and clogged pores, evidence-based acne actives include salicylic acid, benzoyl peroxide, and retinoids. The soothing and moisturizing products below are supportive care, not acne treatments.",
+					"For sensitivity and redness, reduce irritation and maintain moisturization. Ceramide-containing moisturizers can support a dry, impaired barrier; evidence for botanical soothing extracts varies by formula, and cosmetics do not diagnose or treat persistent redness.",
+					"For dryness and flaking, humectants such as hyaluronic acid or glycerin attract water to the outer skin layer, while creams with barrier lipids can reduce water loss. Layer a moisturizer over a hydrating serum.",
+					"For pores and oiliness, exfoliants such as salicylic acid are used to help clear pore openings. Depending on skin type, these suggestions may instead be moisturizers or cleansers; they are not necessarily salicylic-acid products. Check the current ingredient list, and note that products cannot permanently shrink pores.",
+					"For dullness and dark spots, topical vitamin C may provide antioxidant effects and influence pigmentation pathways, but evidence varies by derivative, concentration, and formulation. Daily sunscreen is important to limit worsening from UV exposure.",
+					"For fine lines and loss of firmness, evidence for cosmetic peptides varies by peptide and formulation and remains limited. Moisturizing can temporarily soften the look of dehydration lines; daily sun protection helps prevent photoaging."
+				],
 				type: { oily: "oily", combination: "combination", dry: "dry", normal: "balanced" }
 			},
 			fr: {
 				title: "Produits adaptés à votre peau", basic: "Les essentiels selon votre type de peau", additional: "Autres produits à envisager",
-				concerns: "Produits pour vos préoccupations", open: "Sélectionnez le nom d’un produit pour voir son lien avec vos préoccupations.",
+				concerns: "Produits pour vos préoccupations", open: "Sélectionnez un produit pour découvrir pourquoi il est proposé et comment ses ingrédients agissent sur la peau.",
+				scienceDisclaimer: "Ces mécanismes concernent les ingrédients et ne prouvent pas l’efficacité clinique des produits finis. Vérifiez les listes d’ingrédients et concentrations actuelles.",
+				moisturizerEvidence: "Revue sur les mécanismes des hydratants", vitaminCEvidence: "Revue sur la vitamine C topique",
+				noConcernEvidence: "Les descriptions précisent le rôle des ingrédients et les limites des données disponibles.",
 				fit: "Suggestion tenant compte de votre préoccupation ({concerns}) et de votre peau {skinType}. {benefit} Testez d’abord les nouveaux produits sur une petite zone et cessez en cas d’irritation ou de rougeur.",
 				noConcern: "Suggestion adaptée à votre peau {skinType}. {benefit} Testez d’abord les nouveaux produits sur une petite zone et cessez en cas d’irritation ou de rougeur.",
+				evidence: [
+					"Pour les imperfections et pores obstrués, les actifs anti-acné ayant des données cliniques incluent l’acide salicylique, le peroxyde de benzoyle et les rétinoïdes. Les produits apaisants et hydratants ci-dessous sont des soins complémentaires, pas des traitements anti-acné.",
+					"En cas de sensibilité et de rougeurs, il est essentiel de limiter les irritants et de maintenir l’hydratation. Les soins contenant des céramides peuvent soutenir une barrière fragilisée par la sécheresse ; les données sur les extraits végétaux varient selon la formule.",
+					"Pour la sécheresse et les squames, des humectants comme l’acide hyaluronique ou la glycérine attirent l’eau vers la couche superficielle, tandis que les crèmes à lipides de barrière peuvent limiter sa perte. Appliquez une crème après le sérum hydratant.",
+					"Pour les pores et l’excès de sébum, des exfoliants comme l’acide salicylique aident à désobstruer les pores. Selon votre type de peau, les produits proposés peuvent plutôt être des hydratants ou nettoyants et ne pas contenir d’acide salicylique. Vérifiez la liste d’ingrédients ; aucun produit ne réduit définitivement les pores.",
+					"Pour le teint terne et les taches, la vitamine C topique peut avoir un effet antioxydant et influencer la pigmentation, mais les données varient selon le dérivé, la concentration et la formule. Une protection solaire quotidienne aide à limiter l’aggravation liée aux UV.",
+					"Pour les ridules et la perte de fermeté, les données sur les peptides cosmétiques varient selon le peptide et la formule et restent limitées. L’hydratation peut atténuer temporairement l’apparence des ridules de déshydratation ; la protection solaire aide à prévenir le photovieillissement."
+				],
 				type: { oily: "grasse", combination: "mixte", dry: "sèche", normal: "équilibrée" }
 			},
 			it: {
 				title: "Prodotti per il tuo tipo di pelle", basic: "Essenziali per il tuo tipo di pelle", additional: "Altri prodotti da valutare",
-				concerns: "Prodotti per le esigenze selezionate", open: "Seleziona il nome di un prodotto per vedere come risponde alle tue esigenze.",
+				concerns: "Prodotti per le esigenze selezionate", open: "Seleziona un prodotto per scoprire perché è consigliato e come agiscono sulla pelle i suoi ingredienti.",
+				scienceDisclaimer: "Si tratta dei meccanismi generali degli ingredienti, non di prove cliniche sui prodotti finiti. Controlla gli elenchi e le concentrazioni aggiornati.",
+				moisturizerEvidence: "Revisione sui meccanismi degli idratanti", vitaminCEvidence: "Revisione sulla vitamina C topica",
+				noConcernEvidence: "Le descrizioni spiegano il ruolo degli ingredienti e i limiti delle prove disponibili.",
 				fit: "Consigliato considerando l’esigenza ({concerns}) e la pelle {skinType}. {benefit} Prova prima i nuovi prodotti su una piccola zona e interrompi in caso di irritazione o rossore.",
 				noConcern: "Consigliato per la pelle {skinType}. {benefit} Prova prima i nuovi prodotti su una piccola zona e interrompi in caso di irritazione o rossore.",
+				evidence: [
+					"Per imperfezioni e pori ostruiti, tra gli attivi con evidenze per l’acne ci sono acido salicilico, perossido di benzoile e retinoidi. I prodotti lenitivi e idratanti qui sotto sono un supporto, non trattamenti per l’acne.",
+					"Per sensibilità e rossori, è importante ridurre gli irritanti e mantenere l’idratazione. Le creme con ceramidi possono sostenere una barriera indebolita dalla secchezza; le evidenze sugli estratti botanici variano secondo la formula.",
+					"Per secchezza e desquamazione, umettanti come acido ialuronico o glicerina attirano acqua nello strato superficiale, mentre creme con lipidi di barriera possono ridurne la perdita. Applica una crema dopo il siero idratante.",
+					"Per pori e sebo, esfolianti come l’acido salicilico aiutano a liberare i pori. In base al tipo di pelle, i prodotti consigliati possono invece essere idratanti o detergenti e non contenere acido salicilico. Controlla l’INCI; nessun prodotto restringe i pori in modo permanente.",
+					"Per colorito spento e macchie, la vitamina C topica può avere effetti antiossidanti e influire sui processi della pigmentazione, ma le evidenze variano per derivato, concentrazione e formula. La protezione solare quotidiana aiuta a limitare i danni UV.",
+					"Per rughe sottili e perdita di tono, le evidenze sui peptidi cosmetici variano in base a peptide e formula e restano limitate. L’idratazione può attenuare temporaneamente le linee da disidratazione; la protezione solare aiuta a prevenire il fotoinvecchiamento."
+				],
 				type: { oily: "grassa", combination: "mista", dry: "secca", normal: "equilibrata" }
 			},
 			ja: {
 				title: "肌タイプに合わせたおすすめ", basic: "肌タイプ別の基本アイテム", additional: "あわせて検討したいアイテム",
-				concerns: "選択した肌悩みに合わせたアイテム", open: "商品名を選ぶと、肌悩みに合わせた説明が表示されます。",
+				concerns: "選択した肌悩みに合わせたアイテム", open: "商品名を選ぶと、おすすめの理由と成分の肌への働きを確認できます。",
+				scienceDisclaimer: "成分レベルの一般的な作用であり、完成品の臨床効果を証明するものではありません。最新の全成分表示と濃度を確認してください。",
+				moisturizerEvidence: "保湿剤の作用に関するレビュー", vitaminCEvidence: "外用ビタミンCのレビュー",
+				noConcernEvidence: "各商品の説明で、成分の役割と根拠の限界を確認できます。",
 				fit: "選択した悩み（{concerns}）と{skinType}肌を考慮したおすすめです。{benefit} 新しい製品は少量から試し、刺激や赤みが出た場合は使用を中止してください。",
 				noConcern: "{skinType}肌向けのおすすめです。{benefit} 新しい製品は少量から試し、刺激や赤みが出た場合は使用を中止してください。",
+				evidence: [
+					"ニキビや毛穴詰まりには、サリチル酸、過酸化ベンゾイル、レチノイドなど臨床的根拠のある成分が使われます。以下の保湿・鎮静製品は補助的なケアで、ニキビ治療薬の代わりではありません。",
+					"敏感さや赤みには、刺激を減らし保湿を保つことが基本です。セラミド配合の保湿剤は乾燥で弱ったバリアを支えますが、植物エキスの根拠は製品ごとに異なります。",
+					"乾燥や皮むけには、ヒアルロン酸やグリセリンなどの保湿成分が角層に水分を引き寄せ、バリア脂質を含むクリームが水分蒸散を抑える助けになります。保湿セラムの後にクリームを重ねてください。",
+					"毛穴や皮脂には、サリチル酸などの角質ケア成分が毛穴詰まりを整える目的で使われます。ただし肌タイプにより、今回のおすすめは保湿剤や洗顔料の場合があり、サリチル酸配合とは限りません。全成分表示を確認してください。毛穴を永久に小さくする製品はありません。",
+					"くすみやシミには、外用ビタミンCが抗酸化作用や色素形成経路に働く可能性がありますが、根拠は誘導体・濃度・処方によって異なります。紫外線による悪化を抑えるため、日々のUV対策が重要です。",
+					"小じわやハリ低下に対する化粧品ペプチドの根拠は種類や処方によって異なり、まだ限られています。保湿は乾燥小じわを一時的に目立ちにくくし、日焼け止めは光老化予防の基本です。"
+				],
 				type: { oily: "脂性", combination: "混合", dry: "乾燥", normal: "普通" }
 			},
 			zh: {
 				title: "适合你肤质的产品推荐", basic: "适合该肤质的基础产品", additional: "还可考虑的产品",
-				concerns: "针对已选肌肤困扰的产品", open: "点击产品名称，查看它与所选肌肤困扰的关联。",
+				concerns: "针对已选肌肤困扰的产品", open: "点击产品名称，查看推荐理由及成分对皮肤的作用。",
+				scienceDisclaimer: "这里说明的是成分层面的作用原理，并非成品临床效果的证明。请查看最新成分表和浓度。",
+				moisturizerEvidence: "保湿剂作用机制综述", vitaminCEvidence: "外用维生素C综述",
+				noConcernEvidence: "产品说明会介绍相关成分作用及现有证据的局限。",
 				fit: "结合你选择的困扰（{concerns}）和{skinType}肤质推荐。{benefit} 首次使用新产品前请先小范围测试；如出现刺痛或泛红，请停止使用。",
 				noConcern: "根据你的{skinType}肤质推荐。{benefit} 首次使用新产品前请先小范围测试；如出现刺痛或泛红，请停止使用。",
+				evidence: [
+					"针对痘痘和毛孔堵塞，有临床依据的成分包括水杨酸、过氧化苯甲酰和维A类。以下舒缓保湿产品仅作辅助护理，不能替代痘痘治疗。",
+					"敏感和泛红时，减少刺激并维持保湿很重要。含神经酰胺的保湿产品可帮助支持因干燥而受损的皮肤屏障；植物提取物的证据因配方而异。",
+					"干燥和起皮时，透明质酸或甘油等吸湿剂可将水分吸引到角质层，含屏障脂质的面霜有助于减少水分流失。保湿精华后建议叠加面霜。",
+					"毛孔和出油护理中会使用水杨酸等角质调理成分帮助清理毛孔开口。但根据肤质，本次推荐也可能是保湿或洁面产品，并不一定含水杨酸。请查看当前成分表；没有产品能永久缩小毛孔。",
+					"暗沉和色斑护理中，外用维生素C可能具有抗氧化作用并影响色素形成，但证据取决于衍生物、浓度和配方。每日防晒有助于减少紫外线造成的加重。",
+					"针对细纹和紧致度，化妆品肽类的证据因肽种类和配方而异，整体仍有限。保湿可暂时减轻缺水纹的明显程度；日常防晒有助于预防光老化。"
+				],
 				type: { oily: "油性", combination: "混合性", dry: "干性", normal: "中性" }
 			},
 			ar: {
 				title: "منتجات تناسب نوع بشرتك", basic: "الأساسيات المناسبة لنوع البشرة", additional: "منتجات أخرى يمكن أخذها في الاعتبار",
-				concerns: "منتجات تناسب المشكلات التي اخترتها", open: "اختاري اسم المنتج لمعرفة صلته بمشكلات بشرتك.",
+				concerns: "منتجات تناسب المشكلات التي اخترتها", open: "اختاري اسم المنتج لمعرفة سبب اقتراحه وكيفية تأثير مكوناته في البشرة.",
+				scienceDisclaimer: "هذه آليات عامة للمكونات وليست دليلًا على فعالية سريرية للمنتجات النهائية. تحققي من قوائم المكونات والتركيزات الحالية.",
+				moisturizerEvidence: "مراجعة لآليات عمل المرطبات", vitaminCEvidence: "مراجعة لفيتامين سي الموضعي",
+				noConcernEvidence: "توضح تفاصيل المنتجات دور المكونات وحدود الأدلة المتاحة.",
 				fit: "اقتراح يراعي المشكلة التي اخترتها ({concerns}) والبشرة {skinType}. {benefit} اختبري المنتجات الجديدة على مساحة صغيرة أولًا، وأوقفي استخدامها إذا ظهر تهيج أو احمرار.",
 				noConcern: "اقتراح مناسب للبشرة {skinType}. {benefit} اختبري المنتجات الجديدة على مساحة صغيرة أولًا، وأوقفي استخدامها إذا ظهر تهيج أو احمرار.",
+				evidence: [
+					"للبثور وانسداد المسام، تشمل المكونات المدعومة لعلاج حب الشباب حمض الساليسيليك وبنزويل بيروكسيد والريتينويدات. المنتجات المرطبة والمهدئة أدناه للعناية المساندة وليست علاجًا لحب الشباب.",
+					"للحساسية والاحمرار، من المهم تقليل المهيجات والحفاظ على الترطيب. قد تساعد المرطبات المحتوية على السيراميد في دعم الحاجز المتأثر بالجفاف؛ وتختلف الأدلة على المستخلصات النباتية حسب التركيبة.",
+					"للجفاف والتقشر، تجذب مواد الترطيب مثل حمض الهيالورونيك أو الغليسرين الماء إلى الطبقة الخارجية، وقد تقلل الكريمات المحتوية على دهون الحاجز فقدانه. ضعي كريمًا بعد السيروم المرطب.",
+					"للمسام والدهون، تُستخدم مقشرات مثل حمض الساليسيليك للمساعدة على تنظيف فتحات المسام. لكن قد تكون المنتجات المقترحة مرطبات أو غسولًا بحسب نوع البشرة، ولا يعني ذلك أنها تحتوي على حمض الساليسيليك. تحققي من قائمة المكونات؛ ولا يوجد منتج يصغّر المسام بصورة دائمة.",
+					"للبهتان والبقع الداكنة، قد يوفر فيتامين سي الموضعي تأثيرًا مضادًا للأكسدة ويؤثر في مسارات التصبغ، لكن الأدلة تختلف باختلاف الشكل والتركيز والتركيبة. الحماية اليومية من الشمس مهمة للحد من تفاقمها.",
+					"للخطوط الدقيقة وفقدان التماسك، تختلف الأدلة على الببتيدات التجميلية حسب نوع الببتيد والتركيبة وما زالت محدودة. قد يحسن الترطيب مظهر خطوط الجفاف مؤقتًا؛ وتساعد الحماية اليومية من الشمس على الوقاية من شيخوخة الضوء."
+				],
 				type: { oily: "الدهنية", combination: "المختلطة", dry: "الجافة", normal: "العادية" }
 			}
 		};
@@ -1212,8 +1302,8 @@
 					ja: "ROUND LAB 1025 独島クレンザー", zh: "ROUND LAB 1025 独岛洁面", ar: "ROUND LAB 1025 منظف دوكدو"
 				},
 				benefit: {
-					ko: "히알루론산과 세라마이드가 포함된 세안제로, 노폐물을 씻어내면서 세안 후 당김이 신경 쓰이는 루틴에 고려할 수 있어요.",
-					en: "A cleanser formulated with hyaluronic acid and ceramide; consider it when cleansing is needed without an overly stripped after-feel.",
+					ko: "세정 성분은 피지와 오염물을 물로 씻어내고, 히알루론산은 흡습제로 각질층에 수분을 끌어당기며 세라마이드는 피부 장벽 지질과 관련됩니다. 다만 씻어내는 제품의 보습 성분은 피부에 머무는 시간과 제형에 따라 효과가 달라져요.",
+					en: "Cleansing surfactants lift oil and soil for rinsing; hyaluronic acid is a humectant that attracts water to the outer skin, while ceramides are barrier lipids. In a rinse-off formula, the effect of moisturizing ingredients depends on contact time and formulation.",
 					fr: "Un nettoyant formulé avec de l’acide hyaluronique et des céramides, à envisager si vous souhaitez nettoyer sans sensation de peau trop décapée.",
 					it: "Un detergente con acido ialuronico e ceramide, da considerare per detergere evitando una sensazione di pelle eccessivamente secca.",
 					ja: "ヒアルロン酸とセラミドを配合した洗顔料です。洗顔後のつっぱりが気になる場合の洗顔ステップに取り入れられます。",
@@ -1228,8 +1318,8 @@
 					ja: "Dr.G レッドブレミッシュ クリアスージングクリーム", zh: "Dr.G Red Blemish 舒缓面霜", ar: "Dr.G Red Blemish كريم مهدئ"
 				},
 				benefit: {
-					ko: "브랜드가 진정·보습 크림으로 소개하는 제품으로, 붉음이나 트러블이 신경 쓰일 때 가벼운 보습 단계를 더하는 선택지예요.",
-					en: "Marketed as a soothing moisturizer; it is an option for adding a moisturizing step when visible redness or blemish-prone areas are a concern.",
+					ko: "진정·보습용으로 소개되는 크림입니다. 보습제는 각질층 수분과 장벽 상태를 보조해 건조로 인한 불편감을 줄일 수 있지만, 크림 자체가 여드름이나 지속되는 붉음을 치료한다는 뜻은 아니에요.",
+					en: "This cream is marketed for soothing and moisturization. Moisturizers support stratum-corneum hydration and barrier function, which may ease dryness-related discomfort; that does not establish the cream as a treatment for acne or persistent redness.",
 					fr: "Présentée comme une crème apaisante et hydratante, elle peut compléter l’hydratation lorsque les rougeurs ou les imperfections vous préoccupent.",
 					it: "Presentata come crema lenitiva e idratante, può aggiungere idratazione quando rossori o imperfezioni sono una preoccupazione.",
 					ja: "鎮静・保湿クリームとして紹介されている製品です。赤みや肌荒れが気になるときの保湿ステップとして検討できます。",
@@ -1244,8 +1334,8 @@
 					ja: "Anua ドクダミ77 スージングトナー", zh: "Anua 鱼腥草77舒缓爽肤水", ar: "Anua تونر مهدئ بخلاصة الهارتليف 77"
 				},
 				benefit: {
-					ko: "어성초 추출물 77%를 내세운 토너로, 세안 후 수분을 보충하고 편안한 사용감을 원하는 루틴에 맞아요.",
-					en: "A toner featuring 77% heartleaf extract, suited to a routine seeking a light, hydrating step after cleansing.",
+					ko: "어성초 추출물 77%를 내세운 수분 토너입니다. 식물 추출물의 진정 작용은 실험 연구와 실제 완제품의 임상 효과를 구분해야 하고, 배합·농도별 근거가 제한적일 수 있어요. 이 제품은 여드름 치료보다 가벼운 보습 단계로 보는 편이 정확합니다.",
+					en: "A hydrating toner featuring 77% heartleaf extract. Laboratory findings about botanical extracts should not be treated as proof of clinical benefit from a finished product; evidence depends on the extract and formulation. Consider it a light hydration step, not an acne treatment.",
 					fr: "Un tonique mettant en avant 77 % d’extrait de houttuynia, adapté à une routine qui recherche une étape légère et hydratante après le nettoyage.",
 					it: "Un tonico che valorizza il 77% di estratto di heartleaf, adatto a una routine che cerca un passaggio leggero e idratante dopo la detersione.",
 					ja: "ドクダミエキス77%を特徴とする化粧水です。洗顔後に軽い水分補給を加えたいときに使えます。",
@@ -1260,8 +1350,8 @@
 					ja: "Torriden ダイブイン 低分子ヒアルロン酸セラム", zh: "Torriden DIVE-IN 低分子透明质酸精华", ar: "Torriden DIVE-IN سيروم حمض الهيالورونيك"
 				},
 				benefit: {
-					ko: "히알루론산 보습 세럼으로, 속당김이나 건조함이 고민일 때 크림 전 수분 단계를 보태는 제품이에요.",
-					en: "A hyaluronic-acid hydrating serum that can add a moisture layer before cream when tightness or dryness is a concern.",
+					ko: "히알루론산은 흡습제로 각질층에 수분을 끌어당겨 일시적인 건조감 완화에 도움을 줄 수 있습니다. 세럼만으로 수분 증발을 막지는 못하므로, 건조함이 고민이면 위에 크림을 발라 보습막을 더하세요.",
+					en: "Hyaluronic acid is a humectant that attracts water to the outer skin and can temporarily improve the feel of dryness. A serum alone does not prevent water loss; layer a moisturizer over it when dryness is a concern.",
 					fr: "Un sérum hydratant à l’acide hyaluronique, à appliquer avant la crème si vous souhaitez ajouter une étape contre la sensation de tiraillement ou de sécheresse.",
 					it: "Un siero idratante all’acido ialuronico da applicare prima della crema se vuoi aggiungere idratazione in caso di secchezza o tensione.",
 					ja: "ヒアルロン酸の保湿セラムです。乾燥やつっぱりが気になるとき、クリームの前に水分ケアを加えられます。",
@@ -1276,8 +1366,8 @@
 					ja: "AESTURA アトバリア365 クリーム", zh: "AESTURA ATOBARRIER365 面霜", ar: "AESTURA ATOBARRIER365 كريم"
 				},
 				benefit: {
-					ko: "브랜드가 민감 피부 장벽 보습을 위해 소개하는 크림으로, 건조함과 보습 유지가 고민인 루틴의 마무리에 고려할 수 있어요.",
-					en: "A cream presented for barrier moisturization on sensitive skin; consider it as a final moisturizing step when dryness is a concern.",
+					ko: "장벽 보습용으로 소개되는 크림입니다. 세라마이드 등 피부 지질을 보완하는 보습제는 각질층 장벽과 수분 유지에 도움을 줄 수 있어 건조한 루틴의 마지막 단계로 고려할 수 있어요. 민감 피부에서도 자극 여부는 개인차가 있습니다.",
+					en: "Marketed as a barrier moisturizer, this cream can be considered as a final step for dry skin. Moisturizers containing barrier lipids such as ceramides can support stratum-corneum barrier function and water retention; tolerance still varies by person.",
 					fr: "Une crème présentée pour hydrater la barrière des peaux sensibles, à envisager en dernière étape si la sécheresse vous préoccupe.",
 					it: "Una crema proposta per idratare la barriera della pelle sensibile, da considerare come ultimo passaggio in caso di secchezza.",
 					ja: "敏感肌のバリア保湿向けとして紹介されているクリームです。乾燥が気になるときの仕上げの保湿に検討できます。",
@@ -1292,8 +1382,8 @@
 					ja: "ILLIYOON セラミド アト集中クリーム", zh: "ILLIYOON 神经酰胺Ato修护霜", ar: "ILLIYOON كريم سيراميد آتو المركز"
 				},
 				benefit: {
-					ko: "세라마이드 보습 크림으로, 건조한 부위에 보습막을 더하고 싶은 경우에 맞는 선택지예요.",
-					en: "A ceramide moisturizer to consider when you want a richer moisturizing layer on dry areas.",
+					ko: "세라마이드는 각질층 장벽을 이루는 지질 계열 성분입니다. 세라마이드 함유 크림은 건조 부위의 수분 유지와 장벽 보습을 보조할 수 있지만, 피부 질환 치료제와 같은 효과를 의미하지는 않아요.",
+					en: "Ceramides are lipids found in the skin barrier. A ceramide-containing cream can support moisturization and water retention on dry areas, but this is not equivalent to treating a skin disease.",
 					fr: "Un soin hydratant aux céramides à envisager pour apporter une couche nourrissante aux zones sèches.",
 					it: "Una crema idratante con ceramidi da considerare per aggiungere uno strato più ricco sulle zone secche.",
 					ja: "セラミド配合の保湿クリームです。乾燥しやすい部分にしっかり保湿を加えたい場合に検討できます。",
@@ -1308,8 +1398,8 @@
 					ja: "Beauty of Joseon 米プロバイオティクス サンクリーム", zh: "Beauty of Joseon 米益生菌防晒霜", ar: "Beauty of Joseon واقي Relief Sun بالأرز والبروبيوتيك"
 				},
 				benefit: {
-					ko: "쌀 추출물과 프로바이오틱스 성분을 내세운 자외선 차단제예요. 잡티 고민이 있다면 새로운 잡티를 예방하는 기본 단계로 자외선 차단을 함께 챙길 수 있어요.",
-					en: "A sunscreen featuring rice extract and probiotics. When uneven tone is a concern, daily sun protection is a useful companion step to help prevent further sun-related discoloration.",
+					ko: "피부에 도달하는 자외선량을 줄이는 것이 광노화와 자외선 관련 색소 악화를 예방하는 데 중요합니다. 표시된 SPF·PA 등급은 정량을 고르게 바를 때 의미가 있으며, 야외에서는 덧바르세요. 쌀·프로바이오틱스 성분은 자외선 차단 필터의 역할과 구분해야 합니다.",
+					en: "Reducing UV exposure helps prevent photoaging and UV-related worsening of pigmentation. SPF/UVA ratings apply when the labeled amount is applied evenly; reapply during outdoor exposure. Rice and probiotic ingredients are separate from the sunscreen filters that provide UV protection.",
 					fr: "Une protection solaire mettant en avant l’extrait de riz et des probiotiques. En cas de taches, la protection quotidienne aide à limiter les marques liées au soleil.",
 					it: "Una protezione solare che valorizza estratto di riso e probiotici. In caso di macchie, la protezione quotidiana aiuta a prevenire ulteriori discromie dovute al sole.",
 					ja: "米エキスとプロバイオティクスを特徴とする日焼け止めです。色ムラが気になる場合は、日々の紫外線対策をあわせて行うことが大切です。",
@@ -1324,8 +1414,8 @@
 					ja: "ROUND LAB 白樺樹液 保湿クリーム", zh: "ROUND LAB 白桦树汁保湿霜", ar: "ROUND LAB كريم ترطيب بعصارة البتولا"
 				},
 				benefit: {
-					ko: "자작나무 수액을 내세운 보습 크림으로, 복합성 피부에서 건조한 부위의 수분을 보충하는 용도로 고려할 수 있어요.",
-					en: "A moisturizer featuring birch juice; consider applying it to drier areas when combination skin needs targeted hydration.",
+					ko: "자작나무 수액을 강조한 보습 크림입니다. 수액 추출물 자체의 임상 근거는 보습제의 일반적인 작용보다 제한적이므로, 건조한 부위에는 제품의 전체 보습 제형을 기준으로 선택하세요. 복합성 피부라면 필요한 부위에만 바를 수 있어요.",
+					en: "A moisturizer highlighting birch sap. Clinical evidence for the sap itself is more limited than evidence for moisturizers as a class, so choose it for its overall moisturizing formula and apply to drier areas as needed.",
 					fr: "Une crème hydratante mettant en avant la sève de bouleau, à appliquer sur les zones plus sèches si votre peau est mixte.",
 					it: "Una crema idratante che valorizza la linfa di betulla, da applicare sulle zone più secche della pelle mista.",
 					ja: "白樺樹液を特徴とする保湿クリームです。混合肌で乾燥しやすい部分に使う保湿ケアとして検討できます。",
@@ -1340,8 +1430,8 @@
 					ja: "medicube ゼロ毛穴パッド 2.0", zh: "medicube Zero Pore 毛孔棉片 2.0", ar: "medicube Zero Pore Pad 2.0 وسادات"
 				},
 				benefit: {
-					ko: "각질과 모공 결 관리를 위한 패드 제품이에요. 건조하거나 민감한 피부라면 빈도를 낮추고 다른 각질 제거 제품과 겹치지 않도록 하세요.",
-					en: "An exfoliating pad positioned for pore and skin-texture care. If your skin is dry or sensitive, use it sparingly and avoid combining it with other exfoliants.",
+					ko: "각질·모공 결 관리용 패드로 소개됩니다. 살리실산 등 각질용해 성분이 실제 전성분에 포함된 경우 모공 입구의 각질을 관리할 수 있지만, 성분·농도·pH를 확인해야 해요. 과도한 사용은 자극과 장벽 손상을 일으킬 수 있으므로 다른 각질 제거제와 겹치지 마세요.",
+					en: "Marketed for pore and texture care. If its current ingredient list includes a keratolytic such as salicylic acid, it may help exfoliate pore openings; verify the ingredient list, concentration, and formulation. Overuse can irritate and impair the skin barrier, so avoid stacking exfoliants.",
 					fr: "Un disque exfoliant destiné aux pores et au grain de peau. En cas de peau sèche ou sensible, espacez les utilisations et évitez de le combiner à d’autres exfoliants.",
 					it: "Un pad esfoliante pensato per pori e texture. Se la pelle è secca o sensibile, usalo con moderazione e non abbinarlo ad altri esfolianti.",
 					ja: "毛穴や肌のキメをケアする拭き取りパッドです。乾燥肌・敏感肌は使用頻度を控え、他の角質ケア製品との併用に注意してください。",
@@ -1356,8 +1446,8 @@
 					ja: "goodal 青みかんビタC シミケアセラム", zh: "goodal 青橘维C淡斑精华", ar: "goodal سيروم فيتامين سي باليوسفي الأخضر للبقع"
 				},
 				benefit: {
-					ko: "청귤 유래 비타민C 성분을 활용한 잡티 케어 세럼으로, 칙칙함과 피부 톤이 고민인 루틴에 고려할 수 있어요.",
-					en: "A dark-spot-care serum featuring vitamin C from green tangerine, for routines focused on dullness and uneven-looking tone.",
+					ko: "청귤 추출물과 비타민 C 계열 성분을 내세운 톤 케어 세럼입니다. 비타민 C는 항산화 및 멜라닌 생성 경로에 작용할 가능성이 있지만, 유도체의 안정성·농도·제형에 따라 완제품 근거가 달라집니다. 잡티 관리에는 자외선 차단을 함께 하세요.",
+					en: "A tone-care serum featuring green tangerine extract and vitamin C-related ingredients. Vitamin C may provide antioxidant effects and influence melanin pathways, but evidence for the finished product depends on the derivative, stability, concentration, and formulation. Pair spot-care routines with sun protection.",
 					fr: "Un sérum anti-taches mettant en avant la vitamine C de mandarine verte, à envisager si le teint terne ou irrégulier vous préoccupe.",
 					it: "Un siero antimacchie che valorizza la vitamina C del mandarino verde, da considerare se ti preoccupano colorito spento o disomogeneo.",
 					ja: "青みかん由来のビタミンCを特徴とするスポットケア美容液です。くすみや色ムラが気になるときに検討できます。",
@@ -1372,8 +1462,8 @@
 					ja: "numbuzin No.5 ビタミン集中セラム", zh: "numbuzin 5号维生素浓缩精华", ar: "numbuzin No.5 سيروم الفيتامين المركز"
 				},
 				benefit: {
-					ko: "브랜드가 흔적·톤 케어용으로 소개하는 비타민 세럼이에요. 칙칙함이 고민일 때 자외선 차단과 함께 사용하는 루틴을 고려할 수 있어요.",
-					en: "A vitamin serum presented for post-blemish marks and tone care; consider it alongside daily sunscreen when dullness is a concern.",
+					ko: "브랜드가 비타민 성분 기반 흔적·톤 케어로 소개하는 세럼입니다. 색소 관리 성분은 종류와 농도에 따라 작용 방식과 근거가 다르므로 전성분을 확인하세요. 국소 비타민 C 연구도 제형별 결과 차이가 있어 특정 제품의 효과를 단정할 수 없으며, 자외선 차단을 기본으로 하세요.",
+					en: "Marketed for post-blemish marks and tone care with vitamin ingredients. Pigment-care ingredients differ in mechanism and evidence by type and concentration, so check the current ingredient list. Clinical findings for topical vitamin C also vary by formulation and cannot establish this product's effect; keep sunscreen as a foundation.",
 					fr: "Un sérum vitaminé présenté pour les marques et l’éclat du teint, à associer à une protection solaire quotidienne si le teint terne vous préoccupe.",
 					it: "Un siero vitaminico presentato per macchie post-imperfezioni e luminosità, da abbinare alla protezione solare quotidiana.",
 					ja: "肌の跡やトーンケア向けとして紹介されているビタミン美容液です。くすみが気になる場合は日焼け止めと併用するケアを検討できます。",
@@ -1388,8 +1478,8 @@
 					ja: "COSRX ザ・6ペプチド スキンブースターセラム", zh: "COSRX 六重胜肽肌底精华", ar: "COSRX The 6 Peptide سيروم معزز للبشرة"
 				},
 				benefit: {
-					ko: "여러 펩타이드 성분을 담은 부스터 세럼으로, 피부 결이나 탄력 저하가 신경 쓰이는 루틴의 첫 세럼 단계로 고려할 수 있어요.",
-					en: "A booster serum featuring multiple peptides; consider it as an early serum step when skin texture or firmness is a concern.",
+					ko: "여러 펩타이드가 배합된 세럼입니다. 펩타이드는 종류·피부 전달·완제품 임상 자료에 따라 근거가 달라지며, 화장품 펩타이드만으로 콜라겐 증가나 탄력 개선이 입증됐다고 단정하기 어렵습니다. 보습 세럼 단계로 기대치를 조절해 사용하세요.",
+					en: "A serum formulated with multiple peptides. Evidence varies by peptide, skin delivery, and finished-product trials; the presence of cosmetic peptides alone does not establish increased collagen or improved firmness. Treat it as a serum step with modest expectations.",
 					fr: "Un sérum booster mettant en avant plusieurs peptides, à envisager en première étape sérum si le grain ou la fermeté de la peau vous préoccupe.",
 					it: "Un siero booster con diversi peptidi, da considerare come primo siero se ti preoccupano la texture o la compattezza della pelle.",
 					ja: "複数のペプチドを特徴とするブースター美容液です。肌のキメやハリが気になるとき、最初の美容液として検討できます。",
@@ -1404,8 +1494,8 @@
 					ja: "medicube PDRN ピンクペプチドセラム", zh: "medicube PDRN粉色胜肽精华", ar: "medicube PDRN Pink Peptide سيروم"
 				},
 				benefit: {
-					ko: "PDRN과 펩타이드 성분을 내세운 보습 세럼으로, 탄력과 피부 결을 함께 관리하고 싶은 경우에 고려할 수 있어요.",
-					en: "A hydrating serum featuring PDRN and peptides, to consider when your routine focuses on skin texture and the look of firmness.",
+					ko: "PDRN·펩타이드를 내세운 보습 세럼입니다. 국소 화장품 PDRN의 임상 근거는 제한적이며, 의료적 시술이나 상처 치료 연구를 바르는 화장품의 효과로 그대로 환산할 수 없습니다. 피부 결·탄력 개선을 확정적으로 기대하기보다 보습 단계로 고려하세요.",
+					en: "A hydrating serum featuring PDRN and peptides. Clinical evidence for topical cosmetic PDRN is limited, and findings from medical procedures or wound-care settings cannot be directly applied to a leave-on cosmetic. Consider it a moisturizing step rather than a proven firmness treatment.",
 					fr: "Un sérum hydratant mettant en avant le PDRN et les peptides, à envisager pour une routine axée sur le grain et l’apparence de fermeté.",
 					it: "Un siero idratante che valorizza PDRN e peptidi, da considerare per una routine dedicata a texture e aspetto della compattezza.",
 					ja: "PDRNとペプチドを特徴とする保湿美容液です。肌のキメやハリを意識したケアに検討できます。",
@@ -1444,10 +1534,14 @@
 			const concernTitle = document.querySelector("#concern-recommendation-title");
 			const concernContainer = document.querySelector("#rec-concern-items");
 			const recommendationNote = document.querySelector("#recommendation-note");
+			const recommendationEvidence = document.querySelector("#recommendation-evidence");
+			const scienceDisclaimer = document.querySelector("#science-disclaimer");
+			const moisturizerEvidence = document.querySelector("#moisturizer-evidence");
+			const vitaminCEvidence = document.querySelector("#vitamin-c-evidence");
 			const title = document.querySelector('[data-i18n="recTitle"]');
 			const basicHeading = document.querySelector('[data-i18n="mustCategory"]');
 			const additionalHeading = document.querySelector('[data-i18n="alsoCategory"]');
-			if (!mustContainer || !alsoContainer || !concernCategory || !concernTitle || !concernContainer || !recommendationNote || !title || !basicHeading || !additionalHeading) {
+			if (!mustContainer || !alsoContainer || !concernCategory || !concernTitle || !concernContainer || !recommendationNote || !recommendationEvidence || !scienceDisclaimer || !moisturizerEvidence || !vitaminCEvidence || !title || !basicHeading || !additionalHeading) {
 				throw new Error("Recommendation containers are missing from the survey result.");
 			}
 
@@ -1458,6 +1552,16 @@
 			additionalHeading.textContent = ui.additional;
 			concernTitle.textContent = ui.concerns;
 			recommendationNote.textContent = ui.open;
+			recommendationEvidence.textContent = concernIndexes.length
+				? concernIndexes.map((index) => {
+					const rationale = ui.evidence[index];
+					if (!rationale) throw new Error(`Missing ${currentLanguage} evidence rationale for concern ${index}.`);
+					return rationale;
+				}).join(" ")
+				: ui.noConcernEvidence;
+			scienceDisclaimer.textContent = ui.scienceDisclaimer;
+			moisturizerEvidence.textContent = ui.moisturizerEvidence;
+			vitaminCEvidence.textContent = ui.vitaminCEvidence;
 
 			const selectedConcerns = concernIndexes.map((index) => messages.choices.concerns[index]).join(", ");
 			const renderProduct = (productId, concernLabel = selectedConcerns) => {
