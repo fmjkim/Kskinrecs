@@ -243,7 +243,7 @@
 		.rec-item details p { margin: 0; color: #505c55; font-size: 13px; line-height: 1.7; }
 		.rec-item details a { display: inline-block; margin-top: 8px; color: var(--green-dark); font-size: 12px; font-weight: 700; }
 		.editorial { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
-		.editorial-section { margin: 0 0 34px; }
+		.editorial-section { margin: 0 0 10px; border: 1px solid var(--line); background: rgba(255, 254, 250, .55); }
 		.editorial-kicker { margin: 0 0 7px; color: var(--coral); font-size: 11px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
 		.editorial h2 { margin: 0 0 10px; font-family: "Noto Serif KR", "Batang", serif; font-size: 24px; font-weight: 600; line-height: 1.4; }
 		.editorial h3 { margin: 22px 0 8px; color: var(--green-dark); font-size: 15px; }
@@ -251,9 +251,17 @@
 		.editorial p { margin: 8px 0; }
 		.editorial ol, .editorial ul { padding-left: 22px; }
 		[dir="rtl"] .editorial ol, [dir="rtl"] .editorial ul { padding-left: 0; padding-right: 22px; }
-		.editorial details { margin: 8px 0; padding: 12px 14px; border: 1px solid var(--line); background: rgba(255, 254, 250, .55); }
-		.editorial details summary { color: var(--green-dark); cursor: pointer; font-size: 14px; font-weight: 700; line-height: 1.6; }
-		.editorial details p { margin-bottom: 0; }
+		.editorial-section > summary { padding: 14px; color: var(--green-dark); cursor: pointer; }
+		.editorial-section > summary:focus-visible { outline: 3px solid rgba(211, 109, 86, .45); outline-offset: 2px; }
+		.editorial-section > summary::marker { color: var(--coral); }
+		.editorial-section > summary .editorial-kicker { display: block; margin-bottom: 4px; }
+		.editorial-section > summary h2 { margin: 0; }
+		.editorial-section[open] > summary { border-bottom: 1px solid var(--line); }
+		.editorial-content { padding: 8px 14px 14px; }
+		.editorial-content > details { margin: 8px 0; padding: 12px 14px; border: 1px solid var(--line); background: rgba(255, 254, 250, .55); }
+		.editorial-content > details summary { color: var(--green-dark); cursor: pointer; font-size: 14px; font-weight: 700; line-height: 1.6; }
+		.editorial-content > details summary:focus-visible { outline: 3px solid rgba(211, 109, 86, .45); outline-offset: 3px; }
+		.editorial-content > details p { margin-bottom: 0; }
 		.site-footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); }
 		.site-footer nav { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 12px; }
 		.site-footer p { margin: 7px 0; font-size: 11px; line-height: 1.7; }
@@ -437,63 +445,69 @@
 		</section>
 
 		<div class="editorial" id="site-guide">
-			<section class="editorial-section" id="how-it-works" aria-labelledby="guide-title">
-				<p class="editorial-kicker" data-site-copy="guideKicker">사용 가이드</p>
-				<h2 id="guide-title" data-site-copy="guideTitle">더 일관된 피부 체크를 위한 안내</h2>
-				<p data-site-copy="guideIntro">이 체크는 특정 날짜의 피부 상태가 아니라 최근 상태의 경향을 살펴보도록 설계했습니다. 결과를 더 유용하게 활용하려면 아래 기준에 따라 답해 주세요.</p>
-				<ol>
-					<li data-site-copy="guideStep1">순한 세안 후 아무 제품도 바르지 않고 30~60분 기다립니다. 운동, 더위, 샤워 직후처럼 피부 상태가 달라질 수 있는 상황은 피하세요.</li>
-					<li data-site-copy="guideStep2">이마와 코(T존), 양 볼을 나누어 살핍니다. 얼굴 전체가 아니라 기름기가 나타나는 부위를 구분하는 것이 복합성 피부를 알아보는 데 도움이 됩니다.</li>
-					<li data-site-copy="guideStep3">각질과 당김은 하루만의 경험보다 최근 2주간의 빈도를 기준으로 답합니다. 계절, 실내 습도, 세안 습관에 따라 피부 느낌은 달라질 수 있습니다.</li>
-					<li data-site-copy="guideStep4">나이대는 선택 항목이며 타입 계산에 반영되지 않습니다. 고민은 여러 개를 선택할 수 있고, 결과의 관리 제안에 활용됩니다.</li>
-				</ol>
-				<h3 data-site-copy="methodTitle">결과는 어떻게 계산하나요?</h3>
-				<p data-site-copy="methodText">이 도구는 답변을 바탕으로 한 간단한 규칙 기반 자가 체크입니다. T존과 볼 모두 유분이 있으면 지성, T존에 유분이 있고 볼은 보송하면 복합성으로 분류합니다. 이 조건에 해당하지 않을 때 당김·각질이 두드러지면 건성, 그렇지 않으면 중성으로 표시합니다. 따가움/붉어짐 답변은 민감도 안내에만 사용하며 피부 타입 계산에는 포함하지 않습니다. 이는 임상적으로 검증된 진단이나 의학적 평가가 아닙니다.</p>
-			</section>
+			<details class="editorial-section" id="how-it-works">
+				<summary><span class="editorial-kicker" data-site-copy="guideKicker">사용 가이드</span><h2 id="guide-title" data-site-copy="guideTitle">더 일관된 피부 체크를 위한 안내</h2></summary>
+				<div class="editorial-content">
+					<p data-site-copy="guideIntro">이 체크는 특정 날짜의 피부 상태가 아니라 최근 상태의 경향을 살펴보도록 설계했습니다. 결과를 더 유용하게 활용하려면 아래 기준에 따라 답해 주세요.</p>
+					<ol>
+						<li data-site-copy="guideStep1">순한 세안 후 아무 제품도 바르지 않고 30~60분 기다립니다. 운동, 더위, 샤워 직후처럼 피부 상태가 달라질 수 있는 상황은 피하세요.</li>
+						<li data-site-copy="guideStep2">이마와 코(T존), 양 볼을 나누어 살핍니다. 얼굴 전체가 아니라 기름기가 나타나는 부위를 구분하는 것이 복합성 피부를 알아보는 데 도움이 됩니다.</li>
+						<li data-site-copy="guideStep3">각질과 당김은 하루만의 경험보다 최근 2주간의 빈도를 기준으로 답합니다. 계절, 실내 습도, 세안 습관에 따라 피부 느낌은 달라질 수 있습니다.</li>
+						<li data-site-copy="guideStep4">나이대는 선택 항목이며 타입 계산에 반영되지 않습니다. 고민은 여러 개를 선택할 수 있고, 결과의 관리 제안에 활용됩니다.</li>
+					</ol>
+					<h3 data-site-copy="methodTitle">결과는 어떻게 계산하나요?</h3>
+					<p data-site-copy="methodText">이 도구는 답변을 바탕으로 한 간단한 규칙 기반 자가 체크입니다. T존과 볼 모두 유분이 있으면 지성, T존에 유분이 있고 볼은 보송하면 복합성으로 분류합니다. 이 조건에 해당하지 않을 때 당김·각질이 두드러지면 건성, 그렇지 않으면 중성으로 표시합니다. 따가움/붉어짐 답변은 민감도 안내에만 사용하며 피부 타입 계산에는 포함하지 않습니다. 이는 임상적으로 검증된 진단이나 의학적 평가가 아닙니다.</p>
+				</div>
+			</details>
 
-			<section class="editorial-section" id="routine-guide" aria-labelledby="routine-title">
-				<p class="editorial-kicker" data-site-copy="routineKicker">기초 관리 원칙</p>
-				<h2 id="routine-title" data-site-copy="routineTitle">피부 타입별로 루틴을 조절하는 방법</h2>
-				<p data-site-copy="routineIntro">피부 타입은 고정된 라벨이 아닙니다. 계절과 환경에 따라 달라질 수 있으므로, 강한 세정이나 여러 활성 성분을 한꺼번에 추가하기보다 피부 반응을 보며 조절하세요.</p>
-				<ul>
-					<li data-site-copy="routineOily"><strong>지성 피부:</strong> 과도한 세안으로 유분을 없애려 하기보다 순한 세안과 가벼운 보습, 매일 자외선 차단을 기본으로 합니다.</li>
-					<li data-site-copy="routineCombination"><strong>복합성 피부:</strong> 이마·코와 볼의 차이를 고려해 보습량을 부위별로 조절합니다. 모든 부위에 같은 강도의 제품을 사용할 필요는 없습니다.</li>
-					<li data-site-copy="routineDry"><strong>건성 피부:</strong> 뜨거운 물과 잦은 각질 제거를 줄이고, 세안 후 피부가 마르기 전에 보습제를 발라 수분 손실을 줄이는 데 집중합니다.</li>
-					<li data-site-copy="routineNormal"><strong>중성 피부:</strong> 현재 잘 맞는 단순한 루틴을 유지하고, 특별한 문제가 없다면 불필요하게 제품 수나 각질 제거 빈도를 늘리지 않습니다.</li>
-				</ul>
-				<h3 data-site-copy="recommendationTitle">제품 추천을 읽는 방법</h3>
-				<p data-site-copy="recommendationText">추천은 선택한 피부 타입과 고민에 맞춰 제품의 일반적인 용도와 성분 정보를 연결한 참고 자료입니다. 실시간 판매 순위나 개인별 효과를 보장하지 않고, 특정 브랜드의 후원·승인을 의미하지 않습니다. 성분에 대한 개인 반응은 다를 수 있으므로 전성분과 사용법을 확인하고, 새 제품은 한 번에 하나씩 소량으로 시험하세요. 통증, 부종, 지속적인 발진이 있으면 사용을 중단하고 의료 전문가와 상담하세요.</p>
-			</section>
+			<details class="editorial-section" id="routine-guide">
+				<summary><span class="editorial-kicker" data-site-copy="routineKicker">기초 관리 원칙</span><h2 id="routine-title" data-site-copy="routineTitle">피부 타입별로 루틴을 조절하는 방법</h2></summary>
+				<div class="editorial-content">
+					<p data-site-copy="routineIntro">피부 타입은 고정된 라벨이 아닙니다. 계절과 환경에 따라 달라질 수 있으므로, 강한 세정이나 여러 활성 성분을 한꺼번에 추가하기보다 피부 반응을 보며 조절하세요.</p>
+					<ul>
+						<li data-site-copy="routineOily"><strong>지성 피부:</strong> 과도한 세안으로 유분을 없애려 하기보다 순한 세안과 가벼운 보습, 매일 자외선 차단을 기본으로 합니다.</li>
+						<li data-site-copy="routineCombination"><strong>복합성 피부:</strong> 이마·코와 볼의 차이를 고려해 보습량을 부위별로 조절합니다. 모든 부위에 같은 강도의 제품을 사용할 필요는 없습니다.</li>
+						<li data-site-copy="routineDry"><strong>건성 피부:</strong> 뜨거운 물과 잦은 각질 제거를 줄이고, 세안 후 피부가 마르기 전에 보습제를 발라 수분 손실을 줄이는 데 집중합니다.</li>
+						<li data-site-copy="routineNormal"><strong>중성 피부:</strong> 현재 잘 맞는 단순한 루틴을 유지하고, 특별한 문제가 없다면 불필요하게 제품 수나 각질 제거 빈도를 늘리지 않습니다.</li>
+					</ul>
+					<h3 data-site-copy="recommendationTitle">제품 추천을 읽는 방법</h3>
+					<p data-site-copy="recommendationText">추천은 선택한 피부 타입과 고민에 맞춰 제품의 일반적인 용도와 성분 정보를 연결한 참고 자료입니다. 실시간 판매 순위나 개인별 효과를 보장하지 않고, 특정 브랜드의 후원·승인을 의미하지 않습니다. 성분에 대한 개인 반응은 다를 수 있으므로 전성분과 사용법을 확인하고, 새 제품은 한 번에 하나씩 소량으로 시험하세요. 통증, 부종, 지속적인 발진이 있으면 사용을 중단하고 의료 전문가와 상담하세요.</p>
+				</div>
+			</details>
 
-			<section class="editorial-section" id="faq" aria-labelledby="faq-title">
-				<p class="editorial-kicker" data-site-copy="faqKicker">자주 묻는 질문</p>
-				<h2 id="faq-title" data-site-copy="faqTitle">체크 결과에 대해</h2>
-				<details><summary data-site-copy="faqQ1">피부 타입은 시간이 지나도 바뀌지 않나요?</summary><p data-site-copy="faqA1">바뀔 수 있습니다. 계절, 호르몬 변화, 환경, 스킨케어 습관, 약물 등에 따라 당김과 유분감이 달라질 수 있으므로 필요할 때 다시 체크하되 하루의 일시적인 변화만으로 결론 내리지 마세요.</p></details>
-				<details><summary data-site-copy="faqQ2">결과가 피부 질환을 진단하나요?</summary><p data-site-copy="faqA2">아니요. 이 결과는 일반적인 관리 정보를 위한 자가 체크이며 여드름, 주사, 습진 등 피부 질환을 판별하지 않습니다. 증상이 심하거나 지속되면 피부과 전문의에게 진료를 받으세요.</p></details>
-				<details><summary data-site-copy="faqQ3">설문 답변은 저장되거나 전송되나요?</summary><p data-site-copy="faqA3">이 페이지의 설문 계산은 브라우저에서 수행되며, 답변을 서버로 보내거나 이 페이지에 저장하지 않습니다. 광고 스크립트는 별도로 Google에서 제공합니다. 자세한 처리 안내는 아래 개인정보·광고 고지를 확인하세요.</p></details>
-			</section>
+			<details class="editorial-section" id="faq">
+				<summary><span class="editorial-kicker" data-site-copy="faqKicker">자주 묻는 질문</span><h2 id="faq-title" data-site-copy="faqTitle">체크 결과에 대해</h2></summary>
+				<div class="editorial-content">
+					<details><summary data-site-copy="faqQ1">피부 타입은 시간이 지나도 바뀌지 않나요?</summary><p data-site-copy="faqA1">바뀔 수 있습니다. 계절, 호르몬 변화, 환경, 스킨케어 습관, 약물 등에 따라 당김과 유분감이 달라질 수 있으므로 필요할 때 다시 체크하되 하루의 일시적인 변화만으로 결론 내리지 마세요.</p></details>
+					<details><summary data-site-copy="faqQ2">결과가 피부 질환을 진단하나요?</summary><p data-site-copy="faqA2">아니요. 이 결과는 일반적인 관리 정보를 위한 자가 체크이며 여드름, 주사, 습진 등 피부 질환을 판별하지 않습니다. 증상이 심하거나 지속되면 피부과 전문의에게 진료를 받으세요.</p></details>
+					<details><summary data-site-copy="faqQ3">설문 답변은 저장되거나 전송되나요?</summary><p data-site-copy="faqA3">이 페이지의 설문 계산은 브라우저에서 수행되며, 답변을 서버로 보내거나 이 페이지에 저장하지 않습니다. 광고 스크립트는 별도로 Google에서 제공합니다. 자세한 처리 안내는 아래 개인정보·광고 고지를 확인하세요.</p></details>
+				</div>
+			</details>
 
-			<section class="editorial-section" id="about" aria-labelledby="about-title">
-				<p class="editorial-kicker" data-site-copy="aboutKicker">Skin notes</p>
-				<h2 id="about-title" data-site-copy="aboutTitle">사이트 소개와 편집 원칙</h2>
-				<p data-site-copy="aboutText">Skin notes는 세안 후 당김, 얼굴 부위별 유분감, 각질과 민감 반응을 사용자가 스스로 정리할 수 있도록 만든 무료 피부 체크 도구입니다. 짧은 설문에 대한 설명 가능한 규칙과 한국 스킨케어 제품 정보를 연결해, 다음에 살펴볼 관리 방향을 제안합니다. 결과는 개인 진단이 아니며 특정 제품의 효과를 보증하지 않습니다. 추천은 실시간 인기 순위가 아니라 피부 타입과 고민에 따른 편집상 선택입니다.</p>
-			</section>
+			<details class="editorial-section" id="about">
+				<summary><span class="editorial-kicker" data-site-copy="aboutKicker">Skin notes</span><h2 id="about-title" data-site-copy="aboutTitle">사이트 소개와 편집 원칙</h2></summary>
+				<div class="editorial-content">
+					<p data-site-copy="aboutText">Skin notes는 세안 후 당김, 얼굴 부위별 유분감, 각질과 민감 반응을 사용자가 스스로 정리할 수 있도록 만든 무료 피부 체크 도구입니다. 짧은 설문에 대한 설명 가능한 규칙과 한국 스킨케어 제품 정보를 연결해, 다음에 살펴볼 관리 방향을 제안합니다. 결과는 개인 진단이 아니며 특정 제품의 효과를 보증하지 않습니다. 추천은 실시간 인기 순위가 아니라 피부 타입과 고민에 따른 편집상 선택입니다.</p>
+				</div>
+			</details>
 
-			<section class="editorial-section" id="privacy" aria-labelledby="privacy-title">
-				<p class="editorial-kicker" data-site-copy="privacyKicker">투명한 데이터 안내</p>
-				<h2 id="privacy-title" data-site-copy="privacyTitle">개인정보 및 광고 안내</h2>
-				<p data-site-copy="privacySurvey">설문 답변은 이 페이지에서 브라우저 내 계산에만 사용되며, 페이지 자체는 이름·이메일·나이대·응답을 수집하거나 서버에 저장하지 않습니다. 계정 가입이나 설문 제출 서버도 없습니다.</p>
-				<p data-site-copy="privacyAds">이 사이트는 Google AdSense 광고 스크립트를 불러옵니다. Google 및 그 파트너는 광고 게재·측정, 사기 방지 또는 관련 법률에 따른 동의 설정을 위해 쿠키나 기기 정보를 사용할 수 있습니다. 이 처리는 설문 응답 계산과 별도로 이루어지며 Google의 개인정보 보호 안내 및 사용자의 광고 설정에 따릅니다.</p>
-				<p data-site-copy="privacyConsent">관련 법률이나 Google 게시자 정책에 따라 인증된 동의 관리 플랫폼(CMP) 구성이 필요한 지역이 있습니다. 이 사이트는 CMP 연동 여부를 별도로 확인해야 하며, 광고 설정은 AdSense 계정에서 관리됩니다.</p>
-				<p><a id="google-privacy-link" href="https://policies.google.com/privacy?hl=ko" target="_blank" rel="noopener noreferrer" data-site-copy="googlePrivacy">Google 개인정보처리방침</a> · <a id="google-ads-link" href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" data-site-copy="googleAds">Google 광고 설정</a></p>
-			</section>
+			<details class="editorial-section" id="privacy">
+				<summary><span class="editorial-kicker" data-site-copy="privacyKicker">투명한 데이터 안내</span><h2 id="privacy-title" data-site-copy="privacyTitle">개인정보 및 광고 안내</h2></summary>
+				<div class="editorial-content">
+					<p data-site-copy="privacySurvey">설문 답변은 이 페이지에서 브라우저 내 계산에만 사용되며, 페이지 자체는 이름·이메일·나이대·응답을 수집하거나 서버에 저장하지 않습니다. 계정 가입이나 설문 제출 서버도 없습니다.</p>
+					<p data-site-copy="privacyAds">이 사이트는 Google AdSense 광고 스크립트를 불러옵니다. Google 및 그 파트너는 광고 게재·측정, 사기 방지 또는 관련 법률에 따른 동의 설정을 위해 쿠키나 기기 정보를 사용할 수 있습니다. 이 처리는 설문 응답 계산과 별도로 이루어지며 Google의 개인정보 보호 안내 및 사용자의 광고 설정에 따릅니다.</p>
+					<p data-site-copy="privacyConsent">관련 법률이나 Google 게시자 정책에 따라 인증된 동의 관리 플랫폼(CMP) 구성이 필요한 지역이 있습니다. 이 사이트는 CMP 연동 여부를 별도로 확인해야 하며, 광고 설정은 AdSense 계정에서 관리됩니다.</p>
+					<p><a id="google-privacy-link" href="https://policies.google.com/privacy?hl=ko" target="_blank" rel="noopener noreferrer" data-site-copy="googlePrivacy">Google 개인정보처리방침</a> · <a id="google-ads-link" href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" data-site-copy="googleAds">Google 광고 설정</a></p>
+				</div>
+			</details>
 
-			<section class="editorial-section" id="contact" aria-labelledby="contact-title">
-				<p class="editorial-kicker" data-site-copy="contactKicker">피드백</p>
-				<h2 id="contact-title" data-site-copy="contactTitle">문의 및 오류 제보</h2>
-				<p data-site-copy="contactText">문항, 번역, 접근성 또는 추천 내용에 대한 의견은 공개 GitHub 이슈로 보내주세요. 이슈는 공개될 수 있으므로 피부 상태, 연락처 등 민감한 개인정보를 적지 마세요.</p>
-				<p><a href="https://github.com/fmjkim/Kskinrecs/issues" target="_blank" rel="noopener noreferrer" data-site-copy="contactLink">GitHub에서 의견 보내기</a></p>
-			</section>
+			<details class="editorial-section" id="contact">
+				<summary><span class="editorial-kicker" data-site-copy="contactKicker">피드백</span><h2 id="contact-title" data-site-copy="contactTitle">문의 및 오류 제보</h2></summary>
+				<div class="editorial-content">
+					<p data-site-copy="contactText">문항, 번역, 접근성 또는 추천 내용에 대한 의견은 공개 GitHub 이슈로 보내주세요. 이슈는 공개될 수 있으므로 피부 상태, 연락처 등 민감한 개인정보를 적지 마세요.</p>
+					<p><a href="https://github.com/fmjkim/Kskinrecs/issues" target="_blank" rel="noopener noreferrer" data-site-copy="contactLink">GitHub에서 의견 보내기</a></p>
+				</div>
+			</details>
 		</div>
 
 		<footer class="site-footer">
@@ -1476,6 +1490,20 @@
 
 			renderRecommendations(type, concernIndexes);
 		}
+
+		function openEditorialTarget() {
+			const target = document.getElementById(window.location.hash.slice(1));
+			if (target instanceof HTMLDetailsElement && target.classList.contains("editorial-section")) target.open = true;
+		}
+
+		document.querySelectorAll('.site-nav a[href^="#"], .site-footer nav a[href^="#"]').forEach((link) => {
+			link.addEventListener("click", () => {
+				const target = document.getElementById(link.hash.slice(1));
+				if (target instanceof HTMLDetailsElement && target.classList.contains("editorial-section")) target.open = true;
+			});
+		});
+		window.addEventListener("hashchange", openEditorialTarget);
+		openEditorialTarget();
 
 		languagePicker.addEventListener("click", (event) => {
 			const button = event.target.closest("[data-language]");
