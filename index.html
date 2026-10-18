@@ -27,6 +27,13 @@
 		gtag('js', new Date());
 		gtag('config', 'G-6393BX5Q9G');
 	</script>
+	<script type="text/javascript">
+		(function(c,l,a,r,i,t,y){
+			c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+			t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+			y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+		})(window, document, "clarity", "script", "yzuho4ioyw");
+	</script>
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2329589081228374"
 		crossorigin="anonymous"></script>
 	<style>
@@ -63,9 +70,8 @@
 
 		.masthead {
 			display: grid;
-			grid-template-columns: 1fr auto;
+			grid-template-columns: minmax(150px, auto) minmax(0, 1fr);
 			align-items: center;
-			justify-content: space-between;
 			gap: 20px;
 			padding-bottom: 18px;
 			border-bottom: 1px solid var(--line);
@@ -78,12 +84,14 @@
 		.brand-name { color: var(--green-dark); font-size: 14px; font-weight: 800; letter-spacing: .16em; }
 		.brand-edition { color: var(--muted); font-size: 10px; font-weight: 650; letter-spacing: .12em; }
 		#duration { color: var(--muted); font-size: 11px; font-weight: 550; letter-spacing: .08em; text-transform: none; }
-		.masthead-right { display: flex; align-items: center; }
-		.language-picker { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px; max-width: 390px; color: var(--muted); font-size: 12px; letter-spacing: 0; text-transform: none; }
-		.language-picker button { min-height: 30px; padding: 0 9px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-size: 12px; font-weight: 600; white-space: nowrap; transition: border-color .16s ease, background .16s ease, color .16s ease; }
-		.language-picker button:hover { transform: none; border-color: var(--green); background: var(--soft-green); color: var(--green-dark); }
-		.language-picker button[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: white; }
-		.language-picker button:focus-visible { outline: 3px solid rgba(211, 109, 86, .6); outline-offset: 2px; }
+		.masthead-right { display: flex; min-width: 0; justify-content: flex-end; }
+		.language-picker { display: grid; gap: 7px; width: min(100%, 500px); color: var(--muted); font-size: 11px; font-weight: 650; letter-spacing: .02em; text-transform: none; }
+		.language-picker-label { color: var(--muted); font-size: 10px; letter-spacing: .08em; text-align: end; text-transform: uppercase; }
+		.language-options { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+		.language-options button { min-width: 0; min-height: 33px; padding: 0 7px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255, 254, 250, .72); color: var(--muted); cursor: pointer; font: inherit; font-size: 11px; font-weight: 600; line-height: 1.2; white-space: nowrap; transition: border-color .16s ease, background .16s ease, color .16s ease, transform .16s ease; }
+		.language-options button:hover { transform: translateY(-1px); border-color: var(--green); background: var(--soft-green); color: var(--green-dark); }
+		.language-options button[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: var(--white); }
+		.language-options button:focus-visible { outline: 3px solid rgba(211, 109, 86, .5); outline-offset: 2px; }
 		.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 		.site-nav { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 13px 0; border-bottom: 1px solid var(--line); }
 		.site-nav a, .site-footer a { color: var(--green-dark); font-size: 12px; font-weight: 650; text-decoration-thickness: 1px; text-underline-offset: 3px; }
@@ -117,6 +125,8 @@
 		}
 
 		html[lang="en"] h1 { max-width: 520px; font-family: "Georgia", "Times New Roman", serif; font-size: clamp(42px, 8vw, 64px); font-weight: 500; line-height: 1.06; letter-spacing: -.045em; }
+		html[lang="es"] h1 { max-width: 620px; }
+		html[lang="he"] h1, html[lang="it"] h1 { font-weight: 750; }
 
 		.intro-copy {
 			max-width: 580px;
@@ -298,14 +308,20 @@
 
 		@keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
+		@media (max-width: 640px) and (min-width: 561px) {
+			.language-options { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+		}
+
 		@media (max-width: 560px) {
 			.page { width: min(100% - 32px, 760px); padding-top: 28px; }
-			.masthead { grid-template-columns: 1fr; gap: 12px; padding-bottom: 14px; }
+			.masthead { grid-template-columns: 1fr; gap: 14px; padding-bottom: 14px; }
 			.brand-name { font-size: 13px; }
 			.brand-edition { font-size: 9px; }
 			.masthead-right { justify-content: flex-start; }
-			.language-picker { justify-content: flex-start; max-width: none; gap: 3px; }
-			.language-picker button { min-height: 28px; padding: 0 7px; font-size: 11px; }
+			.language-picker { width: 100%; max-width: none; }
+			.language-picker-label { text-align: start; }
+			.language-options { grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 6px; }
+			.language-options button { min-height: 36px; padding-inline: 5px; font-size: 11px; }
 			.intro { padding-top: 34px; }
 			h1 { font-size: clamp(34px, 10vw, 48px); }
 			html[lang="en"] h1 { max-width: 420px; font-size: clamp(42px, 12vw, 58px); }
@@ -340,14 +356,22 @@
 				<span id="duration" data-i18n="duration">2분 피부 체크</span>
 			</div>
 			<div class="masthead-right">
-				<div class="language-picker" id="language-picker" role="group" aria-label="언어 선택">
-					<button type="button" data-language="ko" lang="ko" aria-pressed="true">한국어</button>
-					<button type="button" data-language="en" lang="en" aria-pressed="false">English</button>
-					<button type="button" data-language="fr" lang="fr" aria-pressed="false">Français</button>
-					<button type="button" data-language="it" lang="it" aria-pressed="false">Italiano</button>
-					<button type="button" data-language="ja" lang="ja" aria-pressed="false">日本語</button>
-					<button type="button" data-language="zh" lang="zh" aria-pressed="false">中文</button>
-					<button type="button" data-language="ar" lang="ar" aria-pressed="false">العربية</button>
+				<div class="language-picker" id="language-picker" role="group" aria-labelledby="language-picker-label">
+					<span class="language-picker-label" id="language-picker-label" data-i18n="languageLabel">언어 선택</span>
+					<div class="language-options">
+						<button type="button" data-language="ko" lang="ko" aria-pressed="true">한국어</button>
+						<button type="button" data-language="ar" lang="ar" aria-pressed="false">العربية</button>
+						<button type="button" data-language="zh" lang="zh" aria-pressed="false">中文</button>
+						<button type="button" data-language="en" lang="en" aria-pressed="false">English</button>
+						<button type="button" data-language="fr" lang="fr" aria-pressed="false">Français</button>
+						<button type="button" data-language="he" lang="he" aria-pressed="false">עברית</button>
+						<button type="button" data-language="hi" lang="hi" aria-pressed="false">हिन्दी</button>
+						<button type="button" data-language="it" lang="it" aria-pressed="false">Italiano</button>
+						<button type="button" data-language="ja" lang="ja" aria-pressed="false">日本語</button>
+						<button type="button" data-language="fa" lang="fa" aria-pressed="false">فارسی</button>
+						<button type="button" data-language="es" lang="es" aria-pressed="false">Español</button>
+						<button type="button" data-language="sw" lang="sw" aria-pressed="false">Kiswahili</button>
+					</div>
 				</div>
 			</div>
 		</header>
@@ -844,6 +868,203 @@
 			}
 		};
 
+		Object.assign(translations, {
+			hi: {
+				...translations.en,
+				lang: "hi", title: "त्वचा का प्रकार जाँचें | Skin Note", description: "चेहरा धोने के बाद खिंचाव और T-ज़ोन व गालों की तैलीयता के आधार पर 2 मिनट में अपनी त्वचा का प्रकार जानें।", duration: "2 मिनट की त्वचा जाँच",
+				languageLabel: "भाषा चुनें", eyebrow: "आपकी त्वचा, आपकी ज़रूरतें", pageTitle: "2 मिनट में अपनी त्वचा का प्रकार\nऔर उसकी ज़रूरतें जानें",
+				intro: "चेहरे के किन हिस्सों में खिंचाव या तैलीयपन होता है, इससे त्वचा का प्रकार समझने में मदद मिलती है। हाल की त्वचा स्थिति के आधार पर जवाब दें।",
+				guideTitle: "जवाब कैसे दें", guide: "चेहरा धोने के 30–60 मिनट बाद, बिना कोई उत्पाद लगाए, और सामान्य दिन के दौरान त्वचा की स्थिति सोचें। पिछले दो हफ्तों की औसत स्थिति सबसे उपयोगी है।",
+				q1: "चेहरा धोने के 30–60 मिनट बाद त्वचा कैसी लगती है?", q1Hint: "स्किनकेयर लगाने से पहले की स्थिति चुनें।",
+				q2: "दिन में माथे और नाक पर कितना तेल आता है?", q2Hint: "धोने के तुरंत बाद नहीं, सामान्य दोपहर की स्थिति सोचें।",
+				q3: "दिन में गालों पर कितना तेल आता है?", q3Hint: "गाल की हड्डियों के नीचे वाले हिस्से पर ध्यान दें।",
+				q4: "क्या हाल में त्वचा खुरदरी या परतदार हुई है?",
+				q5: "क्या उत्पाद लगाने पर जलन होती है या त्वचा आसानी से लाल हो जाती है?", q5Hint: "उन उत्पादों और सामान्य परिस्थितियों के बारे में सोचें जो आमतौर पर आपको सूट करते हैं।",
+				ageQuestion: "आपकी उम्र का समूह क्या है?", optional: "वैकल्पिक", ageHint: "इससे त्वचा के प्रकार का नतीजा नहीं बदलता; यह केवल संदर्भ के लिए दिखता है।",
+				concernQuestion: "हाल में त्वचा को लेकर आपकी मुख्य चिंताएँ क्या हैं?", concernHint: "लागू होने वाले सभी विकल्प चुनें।",
+				concernNote: "ये चिंताएँ किसी भी त्वचा प्रकार के साथ हो सकती हैं।",
+				requiredNote: "नतीजा देखने के लिए प्रश्न 01–05 के जवाब दें।", submitLabel: "मेरा नतीजा देखें",
+				formError: "कुछ ज़रूरी सवालों के जवाब नहीं दिए गए हैं। कृपया जाँचें।", resultKicker: "आपकी त्वचा का सार",
+				recTitle: "आपकी त्वचा के प्रकार के लिए उत्पाद", mustCategory: "त्वचा प्रकार के लिए ज़रूरी", alsoCategory: "अन्य विकल्प",
+				footer: "यह प्रश्नावली सामान्य जानकारी के लिए है, त्वचा रोग का निदान नहीं। जलन या सूजन बार-बार हो या बनी रहे तो त्वचा विशेषज्ञ से सलाह लें।",
+				choices: {
+					tightness: ["आरामदायक, खिंचाव नहीं", "कभी-कभी थोड़ा खिंचाव", "अक्सर खिंचाव या असहजता"],
+					oil: ["बहुत कम, त्वचा मैट", "थोड़ी चमक", "स्पष्ट चमक"],
+					frequency: ["लगभग कभी नहीं", "कभी-कभी", "अक्सर या स्पष्ट रूप से"],
+					age: ["19 या उससे कम", "20–29", "30–39", "40–49", "50–59", "60 या अधिक"],
+					concerns: ["दाने / बंद रोमछिद्र", "लालिमा / संवेदनशीलता", "रूखापन / परतें", "रोमछिद्र / तैलीयपन", "बेजान त्वचा / दाग", "लचीलापन / महीन रेखाएँ"]
+				},
+				notSelected: "नहीं चुना", noteDryness: "रूखापन या परतें हो सकती हैं। नमी और त्वचा की सुरक्षा पर ध्यान दें।",
+				noteSensitivityStrong: "संवेदनशीलता बार-बार हो तो बिना खुशबू वाले उत्पाद चुनें और पहले थोड़ी जगह पर जाँचें।",
+				noteSensitivityMild: "त्वचा संवेदनशील हो सकती है; नए उत्पाद पहले थोड़ी जगह पर जाँचें।",
+				noteNoSymptoms: "आपने खास रूखापन या संवेदनशीलता नहीं बताई।",
+				ageLabel: "उम्र समूह", concernLabel: "चुनी गई चिंताएँ", noConcern: "त्वचा संबंधी कोई चिंता नहीं चुनी गई।",
+				skinTypes: { oily: "तैलीय त्वचा", combination: "मिश्रित त्वचा", dry: "शुष्क त्वचा", normal: "संतुलित त्वचा" },
+				descriptions: {
+					oily: "माथे, नाक और गालों पर तेल आने की प्रवृत्ति है। हल्की नमी और सौम्य सफ़ाई पर ध्यान दें।",
+					combination: "माथा और नाक चमकते हैं, जबकि गाल अपेक्षाकृत मैट रहते हैं। अलग-अलग हिस्सों के अनुसार नमी दें।",
+					dry: "खिंचाव या परतें शुष्क त्वचा का संकेत हो सकती हैं। सौम्य सफ़ाई और मॉइस्चराइज़र से त्वचा की सुरक्षा करें।",
+					normal: "तेलीयपन या रूखापन की स्पष्ट प्रवृत्ति नहीं दिखती। संतुलित दिनचर्या त्वचा को बनाए रखने में मदद कर सकती है।"
+				}
+			},
+			es: {
+				...translations.en,
+				lang: "es", title: "Test de tipo de piel | Skin Note", description: "Descubre tu tipo de piel en 2 minutos según la tirantez después de lavar el rostro y la grasa en la zona T y las mejillas. Incluye consejos de cuidado.", duration: "Test de piel en 2 min",
+				languageLabel: "Elegir idioma", eyebrow: "TU PIEL, EN CONTEXTO", pageTitle: "Descubre tu tipo de piel\ny lo que necesita en 2 minutos",
+				intro: "Observar en qué zonas notas tirantez o grasa ayuda a identificar tu tipo de piel. Responde según cómo ha estado últimamente.",
+				guideTitle: "Cómo responder", guide: "Piensa en tu piel 30–60 minutos después de limpiarla, sin aplicar productos, y durante un día habitual. El promedio de las últimas dos semanas es lo más útil.",
+				q1: "¿Cómo sientes la piel 30–60 minutos después de limpiarla?", q1Hint: "Elige cómo está antes de aplicar productos.",
+				q2: "¿Cuánta grasa aparece en la frente y la nariz durante el día?", q2Hint: "Piensa en un mediodía habitual, no justo después de limpiarte.",
+				q3: "¿Cuánta grasa aparece en las mejillas durante el día?", q3Hint: "Fíjate en la zona debajo de los pómulos.",
+				q4: "¿Has notado la piel áspera o descamada últimamente?",
+				q5: "¿Los productos te escuecen o la piel se enrojece con facilidad?", q5Hint: "Piensa en productos que normalmente te sientan bien y en situaciones cotidianas.",
+				ageQuestion: "¿Cuál es tu grupo de edad?", optional: "Opcional", ageHint: "No afecta al resultado del tipo de piel; solo se muestra como referencia.",
+				concernQuestion: "¿Qué preocupaciones de la piel tienes últimamente?", concernHint: "Selecciona todas las opciones que correspondan.",
+				concernNote: "Estas preocupaciones pueden aparecer con cualquier tipo de piel.",
+				requiredNote: "Responde las preguntas 01–05 para ver el resultado.", submitLabel: "Ver mi resultado",
+				formError: "Faltan respuestas obligatorias. Revisa tus respuestas.", resultKicker: "RESUMEN DE TU PIEL",
+				recTitle: "Productos para tu tipo de piel", mustCategory: "Básicos para tu tipo de piel", alsoCategory: "Otras opciones",
+				footer: "Este cuestionario es orientativo y no diagnostica afecciones cutáneas. Consulta con dermatología si la irritación o inflamación se repite o persiste.",
+				choices: {
+					tightness: ["Cómoda, sin tirantez", "Algo tirante a veces", "Tirante o incómoda con frecuencia"],
+					oil: ["Casi nada, aspecto mate", "Un poco brillante", "Brillo evidente"],
+					frequency: ["Casi nunca", "A veces", "A menudo o de forma visible"],
+					age: ["19 o menos", "20–29", "30–39", "40–49", "50–59", "60 o más"],
+					concerns: ["Granitos / poros obstruidos", "Rojeces / sensibilidad", "Sequedad / descamación", "Poros / grasa", "Falta de luminosidad / manchas", "Firmeza / líneas finas"]
+				},
+				notSelected: "Sin seleccionar", noteDryness: "Podrías notar sequedad o descamación. Prioriza la hidratación y el cuidado de la barrera cutánea.",
+				noteSensitivityStrong: "Si la sensibilidad es frecuente, elige productos sin perfume y pruébalos primero en una zona pequeña.",
+				noteSensitivityMild: "Tu piel podría ser sensible; prueba los productos nuevos primero en una zona pequeña.",
+				noteNoSymptoms: "No indicas sequedad ni sensibilidad destacables.",
+				ageLabel: "Grupo de edad", concernLabel: "Preocupaciones seleccionadas", noConcern: "No has seleccionado preocupaciones de la piel.",
+				skinTypes: { oily: "Piel grasa", combination: "Piel mixta", dry: "Piel seca", normal: "Piel equilibrada" },
+				descriptions: {
+					oily: "La frente, la nariz y las mejillas tienden a acumular grasa. Prueba una hidratación ligera y una limpieza suave.",
+					combination: "La frente y la nariz brillan, mientras las mejillas suelen estar más mates. Ajusta la hidratación por zonas.",
+					dry: "La tirantez o la descamación sugieren una piel seca. Protege la barrera con limpieza suave e hidratante.",
+					normal: "No señalas una tendencia marcada a la grasa o la sequedad. Una rutina equilibrada puede ayudar a mantener la piel."
+				}
+			},
+			he: {
+				...translations.en,
+				lang: "he", title: "בדיקת סוג העור | Skin Note", description: "גלו את סוג העור בתוך שתי דקות לפי תחושת מתיחה אחרי ניקוי ולפי שומניות באזור ה־T ובלחיים. כולל שיטת בדיקה והמלצות לטיפוח.", duration: "בדיקת עור ב־2 דקות",
+				languageLabel: "בחירת שפה", eyebrow: "העור שלך, בהקשר הנכון", pageTitle: "גלו את סוג העור שלכם\nואת הצרכים שלו בתוך שתי דקות",
+				intro: "התבוננות באזורים שבהם העור מרגיש מתוח או נעשה שומני עוזרת לזהות את סוג העור. ענו לפי מצב העור בתקופה האחרונה.",
+				guideTitle: "איך לענות", guide: "חשבו על העור 30–60 דקות לאחר הניקוי, בלי למרוח מוצרים, וגם במהלך יום רגיל. המצב הממוצע בשבועיים האחרונים הוא המדד המועיל ביותר.",
+				q1: "איך העור מרגיש 30–60 דקות לאחר הניקוי?", q1Hint: "בחרו את התחושה לפני מריחת מוצרי טיפוח.",
+				q2: "עד כמה המצח והאף נעשים שומניים במהלך היום?", q2Hint: "חשבו על אמצע יום רגיל, לא מיד לאחר הניקוי.",
+				q3: "עד כמה הלחיים נעשות שומניות במהלך היום?", q3Hint: "התמקדו באזור שמתחת לעצמות הלחיים.",
+				q4: "האם העור הרגיש מחוספס או מתקלף לאחרונה?",
+				q5: "האם מוצרים גורמים לעקצוץ או שהעור מאדִים בקלות?", q5Hint: "חשבו על מוצרים שבדרך כלל מתאימים לכם ועל מצבים יומיומיים.",
+				ageQuestion: "מה טווח הגיל שלכם?", optional: "לא חובה", ageHint: "הגיל אינו משפיע על תוצאת סוג העור ומוצג למידע בלבד.",
+				concernQuestion: "מהם החששות העיקריים שלכם לגבי העור לאחרונה?", concernHint: "בחרו את כל האפשרויות המתאימות.",
+				concernNote: "חששות אלה יכולים להופיע בכל סוג עור.",
+				requiredNote: "ענו על שאלות 01–05 כדי לראות את התוצאה.", submitLabel: "הצגת התוצאה",
+				formError: "חסרות תשובות לשאלות חובה. בדקו את התשובות.", resultKicker: "תמונת מצב של העור",
+				recTitle: "מוצרים לפי סוג העור", mustCategory: "מוצרים בסיסיים לסוג העור", alsoCategory: "אפשרויות נוספות",
+				footer: "השאלון מיועד למידע כללי ואינו מאבחן מחלות עור. אם גירוי או דלקת חוזרים או נמשכים, פנו לרופא עור.",
+				choices: {
+					tightness: ["נוח, ללא תחושת מתיחה", "מתיחה קלה לפעמים", "תחושת מתיחה או אי־נוחות לעיתים קרובות"],
+					oil: ["כמעט ללא שומן, מראה מאט", "מעט ברק", "ברק בולט"],
+					frequency: ["כמעט אף פעם", "לפעמים", "לעיתים קרובות או באופן בולט"],
+					age: ["19 ומטה", "20–29", "30–39", "40–49", "50–59", "60 ומעלה"],
+					concerns: ["פצעונים / נקבוביות סתומות", "אדמומיות / רגישות", "יובש / קילוף", "נקבוביות / שומניות", "עמימות / כתמים כהים", "מיצוק / קמטוטים"]
+				},
+				notSelected: "לא נבחר", noteDryness: "ייתכן שיש יובש או קילוף. התמקדו בלחות ובתמיכה במחסום העור.",
+				noteSensitivityStrong: "אם הרגישות חוזרת לעיתים קרובות, בחרו מוצרים ללא בישום ובדקו אותם תחילה באזור קטן.",
+				noteSensitivityMild: "ייתכן שהעור רגיש; בדקו מוצרים חדשים תחילה באזור קטן.",
+				noteNoSymptoms: "לא דווח על יובש או רגישות בולטים.",
+				ageLabel: "טווח גיל", concernLabel: "החששות שנבחרו", noConcern: "לא נבחרו חששות לגבי העור.",
+				skinTypes: { oily: "עור שמן", combination: "עור מעורב", dry: "עור יבש", normal: "עור מאוזן" },
+				descriptions: {
+					oily: "המצח, האף והלחיים נוטים להיות שומניים. מומלץ להתמקד בלחות קלילה ובניקוי עדין.",
+					combination: "המצח והאף נעשים מבריקים בעוד שהלחיים נשארות מאט יחסית. התאימו את הלחות לאזורים השונים.",
+					dry: "תחושת מתיחה או קילוף עשויים להעיד על נטייה ליובש. הגנו על מחסום העור באמצעות ניקוי עדין ולחות.",
+					normal: "לא דווחה נטייה בולטת לשומניות או ליובש. שגרת טיפוח מאוזנת עשויה לעזור לשמור על העור."
+				}
+			},
+			fa: {
+				...translations.en,
+				lang: "fa", title: "آزمون نوع پوست | Skin Note", description: "با توجه به احساس کشیدگی پس از شست‌وشو و چربی ناحیه T و گونه‌ها، نوع پوست خود را در دو دقیقه بشناسید. همراه با روش ارزیابی و راهنمای مراقبت.", duration: "ارزیابی پوست در ۲ دقیقه",
+				languageLabel: "انتخاب زبان", eyebrow: "پوست شما، با توجه به نیازهایش", pageTitle: "نوع پوست و نیازهای آن را\nدر دو دقیقه بشناسید",
+				intro: "توجه به نواحی‌ای که دچار کشیدگی یا چربی می‌شوند به تشخیص نوع پوست کمک می‌کند. بر اساس وضعیت پوست در روزهای اخیر پاسخ دهید.",
+				guideTitle: "روش پاسخ‌دادن", guide: "وضعیت پوست را ۳۰ تا ۶۰ دقیقه پس از شست‌وشو و پیش از استفاده از محصولات، و نیز در طول یک روز معمولی در نظر بگیرید. میانگین دو هفته گذشته معیار مفیدتری است.",
+				q1: "پوست شما ۳۰ تا ۶۰ دقیقه پس از شست‌وشو چه حسی دارد؟", q1Hint: "وضعیت پوست پیش از استفاده از محصولات مراقبتی را انتخاب کنید.",
+				q2: "در طول روز پیشانی و بینی چقدر چرب می‌شوند؟", q2Hint: "یک ظهر معمولی را در نظر بگیرید، نه بلافاصله پس از شست‌وشو.",
+				q3: "در طول روز گونه‌ها چقدر چرب می‌شوند؟", q3Hint: "به ناحیه زیر استخوان گونه توجه کنید.",
+				q4: "آیا پوستتان اخیراً زبر یا پوسته‌پوسته شده است؟",
+				q5: "آیا محصولات باعث سوزش می‌شوند یا پوستتان زود قرمز می‌شود؟", q5Hint: "محصولاتی را در نظر بگیرید که معمولاً با پوستتان سازگارند و شرایط روزمره را بسنجید.",
+				ageQuestion: "در چه گروه سنی هستید؟", optional: "اختیاری", ageHint: "این مورد بر نتیجه نوع پوست اثر ندارد و فقط برای اطلاع نمایش داده می‌شود.",
+				concernQuestion: "این روزها مهم‌ترین دغدغه‌های پوستی شما چیست؟", concernHint: "همه گزینه‌های مرتبط را انتخاب کنید.",
+				concernNote: "این دغدغه‌ها ممکن است با هر نوع پوستی همراه باشند.",
+				requiredNote: "برای دیدن نتیجه به پرسش‌های ۰۱ تا ۰۵ پاسخ دهید.", submitLabel: "دیدن نتیجه",
+				formError: "به برخی پرسش‌های ضروری پاسخ نداده‌اید. پاسخ‌ها را بررسی کنید.", resultKicker: "نمای کلی وضعیت پوست",
+				recTitle: "محصولات متناسب با نوع پوست", mustCategory: "محصولات پایه برای نوع پوست", alsoCategory: "گزینه‌های دیگر",
+				footer: "این پرسش‌نامه برای آگاهی عمومی است و بیماری‌های پوستی را تشخیص نمی‌دهد. اگر التهاب یا تحریک پوستی تکرار شد یا ادامه یافت، با متخصص پوست مشورت کنید.",
+				choices: {
+					tightness: ["راحت و بدون کشیدگی", "گاهی کمی کشیده", "اغلب کشیده یا ناراحت"],
+					oil: ["تقریباً بدون چربی و مات", "کمی براق", "به‌وضوح براق"],
+					frequency: ["تقریباً هرگز", "گاهی", "اغلب یا به‌طور واضح"],
+					age: ["۱۹ سال یا کمتر", "۲۰ تا ۲۹", "۳۰ تا ۳۹", "۴۰ تا ۴۹", "۵۰ تا ۵۹", "۶۰ سال به بالا"],
+					concerns: ["جوش / منافذ بسته", "قرمزی / حساسیت", "خشکی / پوسته‌ریزی", "منافذ / چربی", "کدری / لک", "قوام / خطوط ریز"]
+				},
+				notSelected: "انتخاب نشده", noteDryness: "ممکن است پوست خشک یا پوسته‌پوسته باشد. بر رطوبت‌رسانی و پشتیبانی از سد دفاعی پوست تمرکز کنید.",
+				noteSensitivityStrong: "اگر حساسیت تکرار می‌شود، محصولات بدون عطر انتخاب کنید و ابتدا روی بخش کوچکی امتحان کنید.",
+				noteSensitivityMild: "ممکن است پوست حساسی داشته باشید؛ محصولات جدید را ابتدا روی بخش کوچکی امتحان کنید.",
+				noteNoSymptoms: "خشکی یا حساسیت قابل‌توجهی گزارش نشده است.",
+				ageLabel: "گروه سنی", concernLabel: "دغدغه‌های انتخاب‌شده", noConcern: "هیچ دغدغه پوستی انتخاب نشده است.",
+				skinTypes: { oily: "پوست چرب", combination: "پوست مختلط", dry: "پوست خشک", normal: "پوست متعادل" },
+				descriptions: {
+					oily: "پیشانی، بینی و گونه‌ها مستعد چربی هستند. رطوبت‌رسانی سبک و پاک‌سازی ملایم را در اولویت بگذارید.",
+					combination: "پیشانی و بینی براق می‌شوند، درحالی‌که گونه‌ها نسبتاً مات می‌مانند. رطوبت‌رسانی را برای هر ناحیه تنظیم کنید.",
+					dry: "کشیدگی یا پوسته‌ریزی می‌تواند نشانه تمایل به خشکی باشد. با پاک‌سازی ملایم و مرطوب‌کننده از سد پوستی محافظت کنید.",
+					normal: "تمایل چشمگیری به چربی یا خشکی گزارش نشده است. یک برنامه متعادل می‌تواند به حفظ وضعیت پوست کمک کند."
+				}
+			}
+		});
+
+		Object.assign(translations, {
+			sw: {
+				...translations.en,
+				lang: "sw", title: "Jua Aina ya Ngozi Yako | Skin Note", description: "Jua aina ya ngozi yako ndani ya dakika 2 kwa kuzingatia ukavu baada ya kuosha uso na mafuta kwenye paji la uso, pua na mashavu. Pata pia mwongozo wa utunzaji wa ngozi.",
+				duration: "Tathmini ya ngozi ya dakika 2", languageLabel: "Chagua lugha", eyebrow: "NGOZI YAKO, KWA MUKTADHA",
+				pageTitle: "Fahamu aina ya ngozi yako\nna mahitaji yake",
+				intro: "Angalia sehemu za uso zinazokauka au kuwa na mafuta ili kuelewa aina ya ngozi yako. Jibu kulingana na hali ya ngozi yako hivi karibuni.",
+				guideTitle: "Jinsi ya kujibu", guide: "Fikiria hali ya ngozi dakika 30–60 baada ya kuosha uso bila kupaka bidhaa, na wakati wa siku ya kawaida. Hali ya wastani ya wiki mbili zilizopita ndiyo muhimu zaidi.",
+				q1: "Ngozi yako huhisije dakika 30–60 baada ya kuosha uso?", q1Hint: "Chagua hali ya ngozi kabla ya kupaka bidhaa za utunzaji.",
+				q2: "Paji la uso na pua huwa na mafuta kiasi gani mchana?", q2Hint: "Fikiria hali ya kawaida ya mchana, si mara tu baada ya kuosha.",
+				q3: "Mashavu huwa na mafuta kiasi gani mchana?", q3Hint: "Zingatia eneo la mashavu chini ya mifupa ya mashavu.",
+				q4: "Je, ngozi yako imekuwa yenye ukwaruzo au magamba hivi karibuni?",
+				q5: "Je, bidhaa husababisha kuwasha au ngozi yako huwa nyekundu kwa urahisi?", q5Hint: "Fikiria bidhaa zinazokufaa kwa kawaida na hali za kila siku.",
+				ageQuestion: "Una umri wa kundi gani?", optional: "Si lazima", ageHint: "Jibu hili haliathiri matokeo ya aina ya ngozi; linaonyeshwa kwa marejeo tu.",
+				concernQuestion: "Ni changamoto gani za ngozi zinazokusumbua hivi karibuni?", concernHint: "Chagua yote yanayokuhusu.",
+				concernNote: "Changamoto hizi zinaweza kutokea kwa aina yoyote ya ngozi.",
+				requiredNote: "Jibu maswali 01–05 ili kuona matokeo.", submitLabel: "Ona matokeo yangu",
+				formError: "Baadhi ya maswali ya lazima hayajajibiwa. Tafadhali kagua majibu yako.", resultKicker: "MUHTASARI WA NGOZI YAKO",
+				recTitle: "Bidhaa za aina ya ngozi yako", mustCategory: "Bidhaa muhimu kwa aina ya ngozi yako", alsoCategory: "Bidhaa nyingine za kuzingatia",
+				footer: "Dodoso hili ni la mwongozo wa jumla na haligundui magonjwa ya ngozi. Wasiliana na daktari wa ngozi ikiwa muwasho au uvimbe unajirudia au unaendelea.",
+				choices: {
+					tightness: ["Laini, bila kuvutika", "Huvutika kidogo wakati mwingine", "Huvutika au kukosa raha mara nyingi"],
+					oil: ["Karibu hakuna mafuta, ngozi ni matte", "Kung'aa kidogo", "Kung'aa kwa dhahiri"],
+					frequency: ["Karibu kamwe", "Wakati mwingine", "Mara nyingi au kwa dhahiri"],
+					age: ["Miaka 19 au chini", "Miaka 20–29", "Miaka 30–39", "Miaka 40–49", "Miaka 50–59", "Miaka 60 au zaidi"],
+					concerns: ["Vipele / vinyweleo vilivyoziba", "Wekundu / hisia kali", "Ukavu / magamba", "Vinyweleo / mafuta", "Ngozi iliyofifia / madoa", "Uimara / mistari midogo"]
+				},
+				notSelected: "Haijachaguliwa", noteDryness: "Huenda ngozi yako ina ukavu au magamba. Zingatia kuongeza unyevu na kusaidia kinga ya ngozi.",
+				noteSensitivityStrong: "Ikiwa ngozi huhisi kali mara kwa mara, chagua bidhaa zisizo na manukato na ujaribu kwanza sehemu ndogo.",
+				noteSensitivityMild: "Huenda ngozi yako ni nyeti; jaribu bidhaa mpya kwanza sehemu ndogo.",
+				noteNoSymptoms: "Hujaripoti ukavu au hisia kali zinazoonekana wazi.",
+				ageLabel: "Kundi la umri", concernLabel: "Changamoto zilizochaguliwa", noConcern: "Hakuna changamoto ya ngozi iliyochaguliwa.",
+				skinTypes: { oily: "Ngozi yenye mafuta", combination: "Ngozi mchanganyiko", dry: "Ngozi kavu", normal: "Ngozi sawia" },
+				descriptions: {
+					oily: "Paji la uso, pua na mashavu huwa na mafuta. Jaribu unyevunyevu mwepesi na usafishaji wa upole.",
+					combination: "Paji la uso na pua hung'aa huku mashavu yakibaki makavu zaidi. Rekebisha unyevunyevu kulingana na eneo.",
+					dry: "Kuvutika au magamba kunaweza kuashiria ngozi kavu. Linda kinga ya ngozi kwa usafishaji wa upole na unyevunyevu.",
+					normal: "Hujaripoti tabia kubwa ya ukavu au mafuta. Utaratibu sawia unaweza kusaidia kudumisha hali ya ngozi."
+				}
+			}
+		});
+
 		const siteContent = {
 			ko: {
 				navLabel: "페이지 안내", navSurvey: "피부 체크", navGuide: "검사 방법", navRoutines: "타입별 관리", navAbout: "사이트 소개", navPrivacy: "개인정보·광고", navContact: "문의·피드백",
@@ -868,12 +1089,12 @@
 				faqQ2: "결과가 피부 질환을 진단하나요?",
 				faqA2: "아니요. 이 결과는 일반적인 관리 정보를 위한 자가 체크이며 여드름, 주사, 습진 등 피부 질환을 판별하지 않습니다. 증상이 심하거나 지속되면 피부과 전문의에게 진료를 받으세요.",
 				faqQ3: "설문 답변은 저장되거나 전송되나요?",
-				faqA3: "이 페이지의 설문 계산은 브라우저에서 수행되며, 답변을 서버로 보내거나 이 페이지에 저장하지 않습니다. Google Analytics와 광고 스크립트는 사이트 이용·광고 측정을 위해 별도로 데이터를 처리할 수 있습니다. 자세한 내용은 아래 개인정보·광고 고지를 확인하세요.",
+				faqA3: "이 페이지의 설문 계산은 브라우저에서 수행되며, 답변을 서버로 보내거나 이 페이지에 저장하지 않습니다. Google Analytics, Microsoft Clarity 및 광고 스크립트는 사이트 이용·광고 측정을 위해 별도로 데이터를 처리할 수 있습니다. 자세한 내용은 아래 개인정보·광고 고지를 확인하세요.",
 				aboutKicker: "Skin notes", aboutTitle: "사이트 소개와 편집 원칙",
 				aboutText: "Skin notes는 세안 후 당김, 얼굴 부위별 유분감, 각질과 민감 반응을 사용자가 스스로 정리할 수 있도록 만든 무료 피부 체크 도구입니다. 짧은 설문에 대한 설명 가능한 규칙과 한국 스킨케어 제품 정보를 연결해, 다음에 살펴볼 관리 방향을 제안합니다. 결과는 개인 진단이 아니며 특정 제품의 효과를 보증하지 않습니다. 추천은 실시간 인기 순위가 아니라 피부 타입과 고민에 따른 편집상 선택입니다.",
 				privacyKicker: "투명한 데이터 안내", privacyTitle: "개인정보 및 광고 안내",
 				privacySurvey: "설문 답변은 이 페이지에서 브라우저 내 계산에만 사용되며, 페이지 자체는 이름·이메일·나이대·응답을 수집하거나 서버에 저장하지 않습니다. 계정 가입이나 설문 제출 서버도 없습니다.",
-				privacyAds: "이 사이트는 Google AdSense 광고 및 Google Analytics 측정 스크립트를 사용합니다. Google 및 그 파트너는 광고·사이트 이용 측정, 사기 방지 또는 관련 법률에 따른 동의 설정을 위해 쿠키, 기기 정보, 이용 데이터를 처리할 수 있습니다. 이는 브라우저에서만 계산되는 설문 응답과 별개이며 Google의 개인정보 보호 안내 및 사용자의 광고 설정에 따릅니다.",
+				privacyAds: "이 사이트는 Google AdSense 광고, Google Analytics 및 Microsoft Clarity 측정 스크립트를 사용합니다. Google과 Microsoft 및 각 파트너는 쿠키, 기기 정보, 페이지 이용·상호작용 데이터를 수집해 사이트 이용과 광고를 측정하고 세션 재생·히트맵을 제공하거나 사기 방지 및 법적 동의 설정에 사용할 수 있습니다. 이는 브라우저에서만 계산되는 설문 응답과 별개이며, 각 서비스의 개인정보 안내와 사용자의 설정 및 적용되는 동의 요건에 따릅니다.",
 				privacyConsent: "관련 법률이나 Google 게시자 정책에 따라 인증된 동의 관리 플랫폼(CMP) 구성이 필요한 지역이 있습니다. 이 사이트는 CMP 연동 여부를 별도로 확인해야 하며, 광고 설정은 AdSense 계정에서 관리됩니다.",
 				googlePrivacy: "Google 개인정보처리방침", googleAds: "Google 광고 설정",
 				contactKicker: "피드백", contactTitle: "문의 및 댓글",
@@ -906,12 +1127,12 @@
 				faqQ2: "Does this result diagnose a skin condition?",
 				faqA2: "No. This self-check offers general care information and cannot identify acne, rosacea, eczema, or other skin conditions. See a dermatologist for severe or persistent symptoms.",
 				faqQ3: "Are my survey answers stored or sent?",
-				faqA3: "This page calculates your answers in your browser and does not send them to a server or save them on this page. Google Analytics and advertising scripts may separately process data to measure site use and ads. See the privacy and advertising notice below for details.",
+				faqA3: "This page calculates your answers in your browser and does not send them to a server or save them on this page. Google Analytics, Microsoft Clarity, and advertising scripts may separately process usage data to measure site use and ads. See the privacy and advertising notice below for details.",
 				aboutKicker: "Skin notes", aboutTitle: "About this site and its editorial approach",
 				aboutText: "Skin notes is a free self-check to help you reflect on post-cleansing tightness, oil by facial area, flaking, and sensitivity. It pairs a short survey with an explainable set of rules and information about Korean skin-care products to suggest possible next steps. Results are not a personal diagnosis and do not guarantee a product's effects. Product suggestions are editorial selections based on skin type and concerns, not real-time popularity rankings.",
 				privacyKicker: "Data transparency", privacyTitle: "Privacy and advertising",
 				privacySurvey: "Survey answers are used only for calculations in your browser. This page itself does not collect or store your name, email, age range, or responses on a server. There is no account or survey-submission backend.",
-				privacyAds: "This site uses Google AdSense advertising and Google Analytics measurement scripts. Google and its partners may process cookies, device information, and usage data to measure site use and ads, prevent fraud, or apply consent settings required by law. This is separate from survey answers, which are calculated only in your browser, and is governed by Google's privacy information and your ad settings.",
+				privacyAds: "This site uses Google AdSense advertising, Google Analytics, and Microsoft Clarity measurement scripts. Google and Microsoft and their respective partners may collect cookies, device information, and page-use or interaction data to measure site use and ads, provide session replay and heatmaps, prevent fraud, or apply legally required consent settings. This is separate from survey answers, which are calculated only in your browser, and is subject to each service's privacy information, your settings, and applicable consent requirements.",
 				privacyConsent: "Some regions require a Google-certified consent management platform (CMP) under applicable law or publisher policies. The site owner should verify CMP integration separately; ad settings are managed in the AdSense account.",
 				googlePrivacy: "Google Privacy Policy", googleAds: "Google Ad Settings",
 				contactKicker: "Feedback", contactTitle: "Contact and comments",
@@ -944,12 +1165,12 @@
 				faqQ2: "Le résultat diagnostique-t-il une maladie de peau ?",
 				faqA2: "Non. Cet auto-bilan fournit des informations générales et ne peut pas identifier l’acné, la rosacée, l’eczéma ou une autre affection. Consultez un dermatologue si les symptômes sont importants ou persistants.",
 				faqQ3: "Mes réponses sont-elles enregistrées ou envoyées ?",
-				faqA3: "Cette page calcule vos réponses dans votre navigateur ; elle ne les envoie pas à un serveur et ne les enregistre pas sur cette page. Google Analytics et les scripts publicitaires peuvent traiter séparément des données pour mesurer l’audience et les annonces. Consultez l’avis de confidentialité et de publicité ci-dessous.",
+				faqA3: "Cette page calcule vos réponses dans votre navigateur ; elle ne les envoie pas à un serveur et ne les enregistre pas sur cette page. Google Analytics, Microsoft Clarity et les scripts publicitaires peuvent traiter séparément des données d’utilisation pour mesurer l’audience et les annonces. Consultez l’avis de confidentialité et de publicité ci-dessous.",
 				aboutKicker: "Skin notes", aboutTitle: "À propos du site et de sa démarche éditoriale",
 				aboutText: "Skin notes est un outil gratuit d’auto-bilan pour réfléchir aux tiraillements après le nettoyage, au sébum selon les zones du visage, aux squames et à la sensibilité. Il associe un court questionnaire à des règles explicables et à des informations sur des soins coréens pour suggérer des pistes. Le résultat n’est pas un diagnostic individuel et ne garantit pas l’efficacité d’un produit. Les suggestions sont des choix éditoriaux selon le type de peau et les préoccupations, pas des classements de popularité en temps réel.",
 				privacyKicker: "Transparence des données", privacyTitle: "Confidentialité et publicité",
 				privacySurvey: "Les réponses servent uniquement au calcul dans votre navigateur. Cette page ne recueille ni n’enregistre sur un serveur votre nom, votre adresse e-mail, votre âge ou vos réponses. Il n’y a ni compte ni serveur de soumission.",
-				privacyAds: "Ce site utilise les scripts de publicité Google AdSense et de mesure Google Analytics. Google et ses partenaires peuvent traiter des cookies, des informations sur l’appareil et des données d’utilisation pour mesurer l’audience et les annonces, prévenir la fraude ou appliquer les choix de consentement requis par la loi. Ces données sont distinctes des réponses au questionnaire, calculées uniquement dans votre navigateur, et relèvent des informations de confidentialité de Google et de vos paramètres publicitaires.",
+				privacyAds: "Ce site utilise Google AdSense pour la publicité, ainsi que Google Analytics et Microsoft Clarity pour la mesure. Google, Microsoft et leurs partenaires respectifs peuvent recueillir des cookies, des informations sur l’appareil et des données d’utilisation ou d’interaction avec les pages afin de mesurer l’audience et les annonces, de fournir des relectures de session et des cartes de chaleur, de prévenir la fraude ou d’appliquer les consentements requis par la loi. Ces données sont distinctes des réponses au questionnaire, calculées uniquement dans votre navigateur, et relèvent des informations de confidentialité de chaque service, de vos paramètres et des règles de consentement applicables.",
 				privacyConsent: "Certaines régions exigent une plateforme de gestion du consentement (CMP) certifiée par Google, selon la loi ou les règles applicables aux éditeurs. Le propriétaire du site doit vérifier séparément son intégration ; les paramètres publicitaires se gèrent dans AdSense.",
 				googlePrivacy: "Règles de confidentialité de Google", googleAds: "Paramètres des annonces Google",
 				contactKicker: "Votre avis", contactTitle: "Contact et commentaires",
@@ -982,12 +1203,12 @@
 				faqQ2: "Il risultato diagnostica una condizione della pelle?",
 				faqA2: "No. È un auto-check per informazioni generali e non identifica acne, rosacea, eczema o altre condizioni. Consulta un dermatologo per sintomi intensi o persistenti.",
 				faqQ3: "Le risposte vengono salvate o inviate?",
-				faqA3: "La pagina calcola le risposte nel browser e non le invia a un server né le salva qui. Google Analytics e gli script pubblicitari possono trattare separatamente dati per misurare l’uso del sito e gli annunci. Leggi l’informativa privacy e annunci qui sotto.",
+				faqA3: "La pagina calcola le risposte nel browser e non le invia a un server né le salva qui. Google Analytics, Microsoft Clarity e gli script pubblicitari possono trattare separatamente dati di utilizzo per misurare il sito e gli annunci. Leggi l’informativa privacy e annunci qui sotto.",
 				aboutKicker: "Skin notes", aboutTitle: "Informazioni sul sito e criteri editoriali",
 				aboutText: "Skin notes è uno strumento gratuito di auto-check per riflettere su tensione dopo la detersione, sebo nelle diverse zone del viso, desquamazione e sensibilità. Abbina un breve questionario a regole spiegabili e informazioni sui prodotti coreani per suggerire possibili passi successivi. Il risultato non è una diagnosi personale e non garantisce l’efficacia dei prodotti. I consigli sono selezioni editoriali in base a tipo di pelle ed esigenze, non classifiche di popolarità in tempo reale.",
 				privacyKicker: "Trasparenza dei dati", privacyTitle: "Privacy e pubblicità",
 				privacySurvey: "Le risposte sono usate solo per il calcolo nel browser. Questa pagina non raccoglie né salva su un server nome, e-mail, fascia d’età o risposte. Non ci sono account né un server per l’invio del questionario.",
-				privacyAds: "Questo sito usa gli script Google AdSense per la pubblicità e Google Analytics per le misurazioni. Google e i partner possono trattare cookie, informazioni sul dispositivo e dati di utilizzo per misurare l’uso del sito e gli annunci, prevenire frodi o applicare le scelte di consenso previste dalla legge. Questi dati sono distinti dalle risposte al questionario, calcolate solo nel browser, e sono regolati dalle informazioni sulla privacy di Google e dalle impostazioni degli annunci.",
+				privacyAds: "Questo sito usa Google AdSense per la pubblicità e Google Analytics e Microsoft Clarity per le misurazioni. Google, Microsoft e i rispettivi partner possono raccogliere cookie, informazioni sul dispositivo e dati di utilizzo o interazione con le pagine per misurare il sito e gli annunci, fornire riproduzioni delle sessioni e mappe di calore, prevenire frodi o applicare i consensi richiesti dalla legge. Questi dati sono distinti dalle risposte al questionario, calcolate solo nel browser, e sono soggetti alle informative dei singoli servizi, alle tue impostazioni e alle norme di consenso applicabili.",
 				privacyConsent: "In alcune aree, le leggi o le norme per gli editori richiedono una piattaforma di gestione del consenso (CMP) certificata da Google. Il gestore del sito deve verificarne separatamente l’integrazione; le impostazioni pubblicitarie si gestiscono in AdSense.",
 				googlePrivacy: "Informativa sulla privacy di Google", googleAds: "Impostazioni annunci Google",
 				contactKicker: "Feedback", contactTitle: "Contatti e commenti",
@@ -1020,12 +1241,12 @@
 				faqQ2: "結果で皮膚疾患を診断できますか？",
 				faqA2: "いいえ。一般的なケア情報のためのセルフチェックであり、ニキビ、酒さ、湿疹などの皮膚疾患を診断しません。症状が強い、または続く場合は皮膚科専門医に相談してください。",
 				faqQ3: "回答は保存・送信されますか？",
-				faqA3: "回答はブラウザー内で計算され、このページからサーバーに送信したり保存したりしません。Google Analyticsと広告スクリプトは、サイト利用や広告の測定のために別途データを処理する場合があります。詳しくは下記のプライバシー・広告案内をご覧ください。",
+				faqA3: "回答はブラウザー内で計算され、このページからサーバーに送信したり保存したりしません。Google Analytics、Microsoft Clarity、広告スクリプトは、サイト利用や広告の測定のために別途データを処理する場合があります。詳しくは下記のプライバシー・広告案内をご覧ください。",
 				aboutKicker: "Skin notes", aboutTitle: "サイトと編集方針について",
 				aboutText: "Skin notesは、洗顔後のつっぱり、顔の部位ごとの皮脂、皮むけ、敏感反応を振り返るための無料セルフチェックです。短い質問と説明可能なルール、韓国スキンケア製品の情報を組み合わせ、次に検討できるケアを提案します。結果は個別診断ではなく、製品の効果を保証しません。商品提案は肌タイプと悩みに基づく編集上の選択で、リアルタイムの人気順位ではありません。",
 				privacyKicker: "データの透明性", privacyTitle: "プライバシーと広告について",
 				privacySurvey: "回答はブラウザー内の計算にのみ使用されます。このページ自体は、名前、メールアドレス、年齢層、回答を収集したりサーバーに保存したりしません。アカウント登録や回答送信サーバーもありません。",
-				privacyAds: "このサイトではGoogle AdSense広告とGoogle Analytics測定のスクリプトを使用します。Googleとパートナーは、サイト利用や広告の測定、不正防止、法律上必要な同意設定のため、Cookie・端末情報・利用データを処理する場合があります。これらはブラウザー内だけで計算されるアンケート回答とは別のデータであり、Googleのプライバシー情報と広告設定に従います。",
+				privacyAds: "このサイトではGoogle AdSense広告、Google Analytics、Microsoft Clarityの測定スクリプトを使用します。Google、Microsoftおよび各パートナーは、サイト利用や広告の測定、セッション再生・ヒートマップの提供、不正防止、法令上必要な同意設定のため、Cookie・端末情報・ページ利用や操作データを収集する場合があります。これらはブラウザー内だけで計算されるアンケート回答とは別のデータであり、各サービスのプライバシー情報、利用者の設定、適用される同意要件に従います。",
 				privacyConsent: "地域の法律やGoogleのパブリッシャーポリシーにより、Google認定の同意管理プラットフォーム（CMP）が必要となる場合があります。サイト運営者はCMPの連携状況を別途確認してください。広告設定はAdSenseアカウントで管理します。",
 				googlePrivacy: "Googleプライバシーポリシー", googleAds: "Google広告設定",
 				contactKicker: "フィードバック", contactTitle: "お問い合わせ・コメント",
@@ -1058,12 +1279,12 @@
 				faqQ2: "结果可以诊断皮肤疾病吗？",
 				faqA2: "不可以。这项自测仅提供一般护理参考，不能诊断痤疮、玫瑰痤疮、湿疹或其他皮肤疾病。如症状严重或持续，请咨询皮肤科医生。",
 				faqQ3: "问卷答案会被保存或发送吗？",
-				faqA3: "本页面在浏览器内计算答案，不会将答案发送到服务器或保存在此页面。Google Analytics和广告脚本可能会单独处理数据，用于统计网站访问和广告效果。详情请阅读下方的隐私与广告说明。",
+				faqA3: "本页面在浏览器内计算答案，不会将答案发送到服务器或保存在此页面。Google Analytics、Microsoft Clarity和广告脚本可能会单独处理使用数据，用于统计网站访问和广告效果。详情请阅读下方的隐私与广告说明。",
 				aboutKicker: "Skin notes", aboutTitle: "关于本站与内容原则",
 				aboutText: "Skin notes是一款免费的肌肤自测工具，帮助用户梳理洁面后的紧绷感、不同面部区域的出油、起皮和敏感反应。我们将简短问卷、可解释的判断规则与韩国护肤产品信息结合，提供后续护理参考。结果不是个人诊断，也不保证产品效果。产品推荐依据肤质与困扰进行编辑筛选，并非实时人气排名。",
 				privacyKicker: "数据透明说明", privacyTitle: "隐私与广告说明",
 				privacySurvey: "问卷答案仅在浏览器内用于计算。本页面本身不会收集或在服务器保存姓名、邮箱、年龄段或答案，也没有账户或问卷提交服务器。",
-				privacyAds: "本网站使用Google AdSense广告和Google Analytics统计脚本。Google及其合作伙伴可能处理Cookie、设备信息和使用数据，以统计网站访问与广告效果、防止欺诈或应用法律要求的同意设置。这些数据与仅在浏览器中计算的问卷答案分开，并受Google隐私说明及你的广告设置约束。",
+				privacyAds: "本网站使用Google AdSense广告、Google Analytics和Microsoft Clarity统计脚本。Google、Microsoft及其各自合作伙伴可能收集Cookie、设备信息以及页面使用或交互数据，用于统计网站访问与广告效果、提供会话回放和热图、防止欺诈或应用法律要求的同意设置。这些数据与仅在浏览器中计算的问卷答案分开，并受各服务的隐私说明、你的设置及适用的同意要求约束。",
 				privacyConsent: "部分地区的法律或Google发布商政策要求使用Google认证的同意管理平台（CMP）。网站所有者应另行确认CMP集成情况；广告设置由AdSense账户管理。",
 				googlePrivacy: "Google隐私权政策", googleAds: "Google广告设置",
 				contactKicker: "反馈", contactTitle: "咨询与评论",
@@ -1096,12 +1317,12 @@
 				faqQ2: "هل تشخّص النتيجة مرضًا جلديًا؟",
 				faqA2: "لا. هذا فحص ذاتي لمعلومات العناية العامة ولا يشخّص حب الشباب أو الوردية أو الإكزيما أو غيرها. استشيري طبيب جلدية إذا كانت الأعراض شديدة أو مستمرة.",
 				faqQ3: "هل تُحفظ إجاباتي أو تُرسل؟",
-				faqA3: "تحسب هذه الصفحة الإجابات داخل المتصفح ولا ترسلها إلى خادم أو تحفظها في الصفحة. قد تعالج نصوص Google Analytics والإعلانات بيانات منفصلة لقياس استخدام الموقع والإعلانات. راجعي إشعار الخصوصية والإعلانات أدناه للتفاصيل.",
+				faqA3: "تحسب هذه الصفحة الإجابات داخل المتصفح ولا ترسلها إلى خادم أو تحفظها في الصفحة. قد تعالج نصوص Google Analytics وMicrosoft Clarity والإعلانات بيانات استخدام منفصلة لقياس استخدام الموقع والإعلانات. راجعي إشعار الخصوصية والإعلانات أدناه للتفاصيل.",
 				aboutKicker: "Skin notes", aboutTitle: "عن الموقع ونهج المحتوى",
 				aboutText: "Skin notes أداة مجانية للفحص الذاتي تساعدك على ملاحظة الشد بعد الغسل والدهون في مناطق الوجه والتقشر والحساسية. تجمع استبيانًا قصيرًا مع قواعد واضحة ومعلومات عن منتجات العناية الكورية لاقتراح خطوات يمكن استكشافها. النتيجة ليست تشخيصًا شخصيًا ولا تضمن فعالية منتج. التوصيات اختيارات تحريرية وفق نوع البشرة والمشكلات وليست ترتيبًا آنيًا للشعبية.",
 				privacyKicker: "شفافية البيانات", privacyTitle: "الخصوصية والإعلانات",
 				privacySurvey: "تُستخدم الإجابات للحساب داخل المتصفح فقط. لا تجمع هذه الصفحة نفسها الاسم أو البريد الإلكتروني أو الفئة العمرية أو الإجابات ولا تحفظها على خادم. لا يوجد حساب مستخدم أو خادم لإرسال الاستبيان.",
-				privacyAds: "يستخدم هذا الموقع نصوص Google AdSense للإعلانات وGoogle Analytics للقياس. قد تعالج Google وشركاؤها ملفات تعريف الارتباط ومعلومات الجهاز وبيانات الاستخدام لقياس استخدام الموقع والإعلانات ومنع الاحتيال أو تطبيق خيارات الموافقة المطلوبة قانونًا. هذه البيانات منفصلة عن إجابات الاستبيان التي تُحسب في المتصفح فقط، وتخضع لمعلومات الخصوصية من Google وإعدادات الإعلانات لديك.",
+				privacyAds: "يستخدم هذا الموقع Google AdSense للإعلانات وGoogle Analytics وMicrosoft Clarity للقياس. قد تجمع Google وMicrosoft وشركاؤهما ملفات تعريف الارتباط ومعلومات الجهاز وبيانات استخدام الصفحات أو التفاعل معها لقياس استخدام الموقع والإعلانات وتوفير إعادة تشغيل الجلسات والخرائط الحرارية ومنع الاحتيال أو تطبيق إعدادات الموافقة المطلوبة قانونًا. هذه البيانات منفصلة عن إجابات الاستبيان التي تُحسب في المتصفح فقط، وتخضع لإشعارات الخصوصية لكل خدمة وإعداداتك ومتطلبات الموافقة السارية.",
 				privacyConsent: "تتطلب بعض المناطق منصة لإدارة الموافقة (CMP) معتمدة من Google بموجب القوانين أو سياسات الناشرين. ينبغي لمالك الموقع التحقق من إعداد CMP بشكل منفصل؛ وتُدار إعدادات الإعلانات من حساب AdSense.",
 				googlePrivacy: "سياسة خصوصية Google", googleAds: "إعدادات إعلانات Google",
 				contactKicker: "ملاحظاتك", contactTitle: "التواصل والتعليقات",
@@ -1112,8 +1333,158 @@
 			}
 		};
 
+		Object.assign(siteContent, {
+			hi: {
+				...siteContent.en,
+				navLabel: "पृष्ठ नेविगेशन", navSurvey: "त्वचा जाँच", navGuide: "जाँच कैसे काम करती है", navRoutines: "देखभाल दिनचर्या", navAbout: "हमारे बारे में", navPrivacy: "गोपनीयता और विज्ञापन", navContact: "संपर्क",
+				guideKicker: "उपयोग मार्गदर्शिका", guideTitle: "अधिक उपयोगी त्वचा-जाँच के लिए", guideIntro: "यह जाँच हाल की त्वचा की प्रवृत्तियों को देखती है, किसी एक दिन के बदलाव को नहीं। बेहतर संदर्भ के लिए इन चरणों का पालन करें।",
+				guideStep1: "सौम्य सफ़ाई के बाद 30–60 मिनट तक कुछ न लगाएँ। व्यायाम, गर्मी या स्नान के तुरंत बाद जाँच न करें।",
+				guideStep2: "माथे और नाक (T-ज़ोन) तथा दोनों गालों को अलग-अलग देखें। तैलीयपन कहाँ है, यह मिश्रित त्वचा पहचानने में मदद करता है।",
+				guideStep3: "खुरदरापन और खिंचाव का जवाब पिछले दो हफ्तों की सामान्य आवृत्ति के आधार पर दें। मौसम, नमी और सफ़ाई की आदतें त्वचा को प्रभावित कर सकती हैं।",
+				guideStep4: "उम्र वैकल्पिक है और त्वचा-प्रकार की गणना में शामिल नहीं होती। कई चिंताएँ चुन सकते हैं; इनसे देखभाल सुझाव तैयार होते हैं।",
+				methodTitle: "नतीजे की गणना कैसे होती है?", methodText: "यह जवाबों पर आधारित सरल नियमों वाली स्व-जाँच है। T-ज़ोन और गाल दोनों तैलीय हों तो तैलीय, केवल T-ज़ोन तैलीय हो तो मिश्रित त्वचा दिखाई जाती है। अन्यथा, बार-बार खिंचाव या परतें हों तो शुष्क, नहीं तो संतुलित त्वचा दिखाई जाती है। जलन या लालिमा वाले जवाब केवल संवेदनशीलता संबंधी संदेश के लिए हैं। यह चिकित्सकीय जाँच या निदान नहीं है।",
+				routineKicker: "रोज़मर्रा की देखभाल", routineTitle: "त्वचा के प्रकार के अनुसार दिनचर्या",
+				routineIntro: "त्वचा का प्रकार मौसम और वातावरण के साथ बदल सकता है। कई सक्रिय सामग्री या तेज़ सफ़ाई एक साथ शुरू करने के बजाय त्वचा की प्रतिक्रिया देखकर बदलाव करें।",
+				routineOily: "तैलीय त्वचा: बार-बार धोकर तेल हटाने के बजाय सौम्य सफ़ाई, हल्का मॉइस्चराइज़र और रोज़ाना धूप से सुरक्षा अपनाएँ।",
+				routineCombination: "मिश्रित त्वचा: माथे-नाक और गालों की ज़रूरत के अनुसार मॉइस्चराइज़र की मात्रा बदलें।",
+				routineDry: "शुष्क त्वचा: गर्म पानी और बार-बार एक्सफ़ोलिएशन से बचें। सफ़ाई के बाद त्वचा पूरी तरह सूखने से पहले मॉइस्चराइज़र लगाएँ।",
+				routineNormal: "संतुलित त्वचा: सरल, अनुकूल दिनचर्या जारी रखें। किसी विशेष समस्या के बिना उत्पाद या एक्सफ़ोलिएशन बढ़ाने की ज़रूरत नहीं।",
+				recommendationTitle: "उत्पाद सुझाव कैसे समझें", recommendationText: "सुझाव त्वचा के प्रकार, चुनी गई चिंताओं और उत्पादों के सामान्य उपयोग व सामग्री की जानकारी पर आधारित हैं। ये बिक्री रैंकिंग, व्यक्तिगत परिणाम की गारंटी या ब्रांड समर्थन नहीं हैं। सामग्री और उपयोग-विधि जाँचें तथा नए उत्पाद एक-एक करके थोड़ी मात्रा में आज़माएँ। दर्द, सूजन या लगातार दाने हों तो उपयोग रोककर विशेषज्ञ से सलाह लें।",
+				faqKicker: "अक्सर पूछे जाने वाले प्रश्न", faqTitle: "जाँच के बारे में",
+				faqQ1: "क्या समय के साथ त्वचा का प्रकार बदलता है?", faqA1: "हाँ। मौसम, हार्मोन, वातावरण, देखभाल की आदतें और दवाएँ त्वचा को प्रभावित कर सकती हैं। ज़रूरत पड़ने पर दोबारा जाँचें; एक दिन के बदलाव से निष्कर्ष न निकालें।",
+				faqQ2: "क्या यह नतीजा त्वचा रोग का निदान करता है?", faqA2: "नहीं। यह सामान्य देखभाल की जानकारी के लिए है और मुहाँसे, रोसैशिया या एक्ज़िमा जैसे रोगों का निदान नहीं करता। गंभीर या लगातार लक्षण हों तो त्वचा विशेषज्ञ से मिलें।",
+				faqQ3: "क्या मेरे जवाब सहेजे या भेजे जाते हैं?", faqA3: "जवाब इसी ब्राउज़र में गणना होते हैं और यह पृष्ठ उन्हें सर्वर पर नहीं भेजता या सहेजता। Analytics, Clarity और विज्ञापन सेवाएँ उपयोग-मापन के लिए अलग डेटा संसाधित कर सकती हैं।",
+				aboutKicker: "Skin notes", aboutTitle: "इस साइट और संपादकीय नीति के बारे में", aboutText: "Skin Note एक मुफ़्त स्व-जाँच है जो सफ़ाई के बाद खिंचाव, चेहरे के अलग-अलग हिस्सों में तेल, परतों और संवेदनशीलता पर ध्यान देने में मदद करती है। स्पष्ट नियम और कोरियाई स्किनकेयर उत्पादों की जानकारी से देखभाल के अगले कदम सुझाए जाते हैं। नतीजा व्यक्तिगत निदान नहीं है और उत्पाद के असर की गारंटी नहीं देता।",
+				privacyKicker: "डेटा पारदर्शिता", privacyTitle: "गोपनीयता और विज्ञापन", privacySurvey: "जवाब केवल ब्राउज़र में गणना के लिए उपयोग होते हैं। यह पृष्ठ नाम, ईमेल, उम्र समूह या जवाब एकत्र या सर्वर पर सहेजता नहीं है।",
+				privacyAds: "यह साइट Google AdSense, Google Analytics और Microsoft Clarity का उपयोग करती है। ये सेवाएँ कुकी, डिवाइस और पृष्ठ-उपयोग डेटा को विज्ञापन व उपयोग मापने के लिए संसाधित कर सकती हैं। यह सर्वे जवाबों से अलग है।",
+				privacyConsent: "कुछ क्षेत्रों के कानून या Google की नीतियाँ प्रमाणित सहमति प्रबंधन प्लेटफ़ॉर्म (CMP) माँग सकती हैं। विज्ञापन सेटिंग AdSense खाते में प्रबंधित होती हैं।",
+				googlePrivacy: "Google की गोपनीयता नीति", googleAds: "Google विज्ञापन सेटिंग",
+				contactKicker: "प्रतिक्रिया", contactTitle: "संपर्क और सुझाव", contactText: "प्रश्न, अनुवाद, पहुँच-सुलभता या उत्पाद सुझाव भेजें। जवाब चाहिए तो ईमेल दें। संदेश Formspree के माध्यम से भेजा जाता है; संवेदनशील निजी जानकारी न भेजें।",
+				contactNameLabel: "नाम (वैकल्पिक)", contactEmailLabel: "ईमेल (जवाब के लिए वैकल्पिक)", contactMessageLabel: "संदेश (ज़रूरी)", contactSubmit: "संदेश भेजें",
+				qualityHelp: "Google AdSense: उच्च गुणवत्ता वाली साइटें", lastUpdated: "जानकारी की समीक्षा: अक्टूबर 2026। उत्पाद और नीतियाँ बदल सकती हैं; नवीनतम लेबल और आधिकारिक जानकारी देखें।"
+			},
+			es: {
+				...siteContent.en,
+				navLabel: "Navegación", navSurvey: "Test de piel", navGuide: "Cómo funciona", navRoutines: "Rutinas", navAbout: "Acerca de", navPrivacy: "Privacidad y anuncios", navContact: "Contacto",
+				guideKicker: "Guía de uso", guideTitle: "Cómo obtener una evaluación más consistente", guideIntro: "Esta evaluación busca tendencias recientes, no cambios de un solo día. Sigue estos pasos para que el resultado sea más útil.",
+				guideStep1: "Después de una limpieza suave, espera 30–60 minutos sin aplicar productos. Evita hacerlo tras ejercicio, calor o una ducha.",
+				guideStep2: "Observa por separado la frente y la nariz (zona T) y las mejillas. Las zonas con grasa ayudan a reconocer la piel mixta.",
+				guideStep3: "Responde sobre tirantez y descamación según su frecuencia en las últimas dos semanas. El clima, la humedad y la limpieza también influyen.",
+				guideStep4: "La edad es opcional y no afecta al cálculo. Puedes seleccionar varias preocupaciones; se usarán para orientar los consejos.",
+				methodTitle: "¿Cómo se calcula el resultado?", methodText: "Es una autoevaluación sencilla basada en reglas. Si la zona T y las mejillas son grasas, indica piel grasa; si solo lo es la zona T, indica piel mixta. En los demás casos, la tirantez o descamación frecuente indica piel seca; si no, equilibrada. Las respuestas sobre escozor o rojeces solo orientan el aviso de sensibilidad. No es un diagnóstico médico ni una prueba clínica.",
+				routineKicker: "Cuidado diario", routineTitle: "Ajusta la rutina a tu tipo de piel",
+				routineIntro: "El tipo de piel puede cambiar con las estaciones y el entorno. Ajusta la rutina observando la reacción de la piel, en vez de añadir muchos activos o una limpieza intensa de golpe.",
+				routineOily: "Piel grasa: prioriza una limpieza suave, hidratación ligera y protección solar diaria en lugar de lavarte repetidamente.",
+				routineCombination: "Piel mixta: adapta la cantidad de hidratante a las diferencias entre la zona T y las mejillas.",
+				routineDry: "Piel seca: evita el agua muy caliente y la exfoliación frecuente. Aplica hidratante después de limpiar, antes de que la piel se seque por completo.",
+				routineNormal: "Piel equilibrada: mantén una rutina sencilla que te funcione. No hace falta añadir productos o exfoliar más sin una necesidad concreta.",
+				recommendationTitle: "Cómo interpretar las recomendaciones", recommendationText: "Las sugerencias relacionan el tipo de piel y las preocupaciones elegidas con usos generales e información de ingredientes. No son una clasificación de ventas ni garantizan resultados individuales o patrocinio de marcas. Comprueba los ingredientes y las instrucciones; prueba los productos nuevos de uno en uno y en poca cantidad. Si hay dolor, hinchazón o erupción persistente, suspende su uso y consulta a un profesional.",
+				faqKicker: "Preguntas frecuentes", faqTitle: "Acerca del test",
+				faqQ1: "¿Puede cambiar mi tipo de piel?", faqA1: "Sí. Las estaciones, las hormonas, el entorno, los hábitos y los medicamentos pueden influir. Repite el test cuando lo necesites y no te bases en un cambio de un solo día.",
+				faqQ2: "¿El resultado diagnostica una afección?", faqA2: "No. Es una autoevaluación informativa y no diagnostica acné, rosácea, eccema ni otras afecciones. Consulta con dermatología si los síntomas son intensos o persistentes.",
+				faqQ3: "¿Se guardan o envían mis respuestas?", faqA3: "Este test calcula las respuestas en el navegador y no las envía ni guarda en un servidor. Analytics, Clarity y los servicios publicitarios pueden procesar otros datos de uso.",
+				aboutKicker: "Skin notes", aboutTitle: "Acerca del sitio y sus criterios", aboutText: "Skin Note es una herramienta gratuita para observar la tirantez tras la limpieza, la grasa por zonas, la descamación y la sensibilidad. Combina preguntas breves y reglas explicables con información sobre productos coreanos para sugerir cuidados. No es un diagnóstico ni garantiza resultados; las recomendaciones son editoriales, no una clasificación de popularidad.",
+				privacyKicker: "Transparencia de datos", privacyTitle: "Privacidad y anuncios", privacySurvey: "Las respuestas solo se calculan en el navegador. Esta página no recopila ni guarda en un servidor nombres, correos, edades o respuestas.",
+				privacyAds: "Este sitio usa Google AdSense, Google Analytics y Microsoft Clarity. Estos servicios pueden procesar cookies, información del dispositivo y datos de uso para medir el sitio y los anuncios. Estos datos son independientes de las respuestas del test.",
+				privacyConsent: "Las leyes o políticas de Google pueden exigir una plataforma de gestión del consentimiento (CMP) certificada en algunas regiones. Los ajustes de anuncios se administran desde AdSense.",
+				googlePrivacy: "Política de privacidad de Google", googleAds: "Configuración de anuncios de Google",
+				contactKicker: "Comentarios", contactTitle: "Contacto y sugerencias", contactText: "Envía comentarios sobre preguntas, traducciones, accesibilidad o productos. Deja tu correo si quieres una respuesta. El formulario usa Formspree; no incluyas información personal sensible.",
+				contactNameLabel: "Nombre (opcional)", contactEmailLabel: "Correo (opcional, si quieres respuesta)", contactMessageLabel: "Mensaje (obligatorio)", contactSubmit: "Enviar mensaje",
+				qualityHelp: "Google AdSense: crear sitios de calidad", lastUpdated: "Información revisada: octubre de 2026. Los productos y las políticas pueden cambiar; consulta las etiquetas y fuentes oficiales actuales."
+			},
+			he: {
+				...siteContent.en,
+				navLabel: "ניווט בעמוד", navSurvey: "בדיקת עור", navGuide: "איך זה עובד", navRoutines: "שגרת טיפוח", navAbout: "אודות", navPrivacy: "פרטיות ופרסומות", navContact: "יצירת קשר",
+				guideKicker: "מדריך שימוש", guideTitle: "איך לקבל הערכת עור עקבית יותר", guideIntro: "הבדיקה מחפשת דפוסים במצב העור לאחרונה, ולא שינוי ביום מסוים. פעלו לפי השלבים כדי להפיק ממנה יותר.",
+				guideStep1: "לאחר ניקוי עדין, המתינו 30–60 דקות בלי למרוח מוצרים. הימנעו מבדיקה מיד לאחר פעילות גופנית, חום או מקלחת.",
+				guideStep2: "בדקו בנפרד את המצח והאף (אזור ה־T) ואת הלחיים. מיקום השומניות עוזר לזהות עור מעורב.",
+				guideStep3: "ענו על קילוף ותחושת מתיחה לפי התדירות בשבועיים האחרונים. עונה, לחות והרגלי ניקוי משפיעים גם הם.",
+				guideStep4: "הגיל הוא רשות ואינו משפיע על החישוב. אפשר לבחור כמה חששות, והם ישמשו להכוונת ההמלצות.",
+				methodTitle: "איך מחושבת התוצאה?", methodText: "זוהי בדיקה עצמית פשוטה המבוססת על כללים. שומניות באזור ה־T ובלחיים מצביעה על עור שמן; שומניות רק באזור ה־T מצביעה על עור מעורב. במקרים אחרים, תחושת מתיחה או קילוף תכופים מצביעים על עור יבש, ובהיעדרם על עור מאוזן. תשובות על צריבה או אדמומיות משמשות רק להודעת רגישות. זו אינה בדיקה קלינית או אבחנה רפואית.",
+				routineKicker: "טיפוח יומיומי", routineTitle: "התאמת השגרה לסוג העור",
+				routineIntro: "סוג העור עשוי להשתנות לפי עונות השנה והסביבה. שנו את השגרה בהתאם לתגובת העור, במקום להוסיף בבת אחת חומרים פעילים רבים או ניקוי אגרסיבי.",
+				routineOily: "עור שמן: העדיפו ניקוי עדין, לחות קלילה והגנה יומיומית מהשמש במקום שטיפות חוזרות.",
+				routineCombination: "עור מעורב: התאימו את כמות קרם הלחות להבדלים בין אזור ה־T ללחיים.",
+				routineDry: "עור יבש: הימנעו ממים חמים ומפילינג תכוף. מרחו קרם לחות לאחר הניקוי, לפני שהעור מתייבש לגמרי.",
+				routineNormal: "עור מאוזן: שמרו על שגרה פשוטה שמתאימה לכם. אין צורך להוסיף מוצרים או פילינג ללא צורך מסוים.",
+				recommendationTitle: "איך לקרוא את המלצות המוצרים", recommendationText: "ההמלצות מקשרות בין סוג העור והחששות שנבחרו לבין שימושים כלליים ומידע על רכיבים. הן אינן דירוג מכירות, הבטחה לתוצאה אישית או חסות של מותג. בדקו את רשימת הרכיבים והוראות השימוש, ונסו מוצרים חדשים אחד בכל פעם ובכמות קטנה. במקרה של כאב, נפיחות או פריחה מתמשכת, הפסיקו את השימוש ופנו לייעוץ מקצועי.",
+				faqKicker: "שאלות נפוצות", faqTitle: "על הבדיקה",
+				faqQ1: "האם סוג העור יכול להשתנות?", faqA1: "כן. עונות השנה, הורמונים, סביבה, הרגלי טיפוח ותרופות עשויים להשפיע. בדקו שוב לפי הצורך ואל תסיקו מסקנות משינוי של יום אחד.",
+				faqQ2: "האם התוצאה מאבחנת מחלת עור?", faqA2: "לא. זו בדיקה עצמית למידע כללי, והיא אינה מאבחנת אקנה, רוזציאה, אקזמה או מחלות אחרות. פנו לרופא עור אם התסמינים חמורים או נמשכים.",
+				faqQ3: "האם התשובות נשמרות או נשלחות?", faqA3: "הבדיקה מחשבת את התשובות בדפדפן ואינה שולחת או שומרת אותן בשרת. Analytics, Clarity ושירותי פרסום עשויים לעבד נתוני שימוש נפרדים.",
+				aboutKicker: "Skin notes", aboutTitle: "על האתר ועל עקרונות העריכה", aboutText: "Skin Note הוא כלי חינמי לבדיקה עצמית של תחושת מתיחה לאחר ניקוי, שומניות באזורים שונים, קילוף ורגישות. הוא משלב שאלון קצר עם כללים ברורים ומידע על מוצרי טיפוח קוריאניים כדי להציע כיוונים לטיפול. התוצאה אינה אבחנה ואינה מבטיחה יעילות של מוצר; ההמלצות הן בחירות עריכה ולא דירוג פופולריות.",
+				privacyKicker: "שקיפות נתונים", privacyTitle: "פרטיות ופרסומות", privacySurvey: "התשובות מחושבות בדפדפן בלבד. העמוד אינו אוסף או שומר בשרת שמות, כתובות דוא״ל, גיל או תשובות.",
+				privacyAds: "האתר משתמש ב־Google AdSense, ב־Google Analytics וב־Microsoft Clarity. השירותים עשויים לעבד קובצי Cookie, מידע על המכשיר ונתוני שימוש לצורך מדידת האתר והפרסומות. נתונים אלה נפרדים מתשובות הבדיקה.",
+				privacyConsent: "חוקים או מדיניות Google עשויים לחייב פלטפורמת ניהול הסכמה (CMP) מאושרת באזורים מסוימים. הגדרות הפרסום מנוהלות בחשבון AdSense.",
+				googlePrivacy: "מדיניות הפרטיות של Google", googleAds: "הגדרות הפרסום של Google",
+				contactKicker: "משוב", contactTitle: "יצירת קשר ומשוב", contactText: "שלחו הערות על השאלות, התרגום, הנגישות או המוצרים. השאירו כתובת דוא״ל אם תרצו תשובה. הטופס נשלח דרך Formspree; אל תשלחו מידע אישי רגיש.",
+				contactNameLabel: "שם (רשות)", contactEmailLabel: "דוא״ל (רשות, אם תרצו תשובה)", contactMessageLabel: "הודעה (חובה)", contactSubmit: "שליחת הודעה",
+				qualityHelp: "Google AdSense: יצירת אתרים איכותיים", lastUpdated: "המידע נבדק באוקטובר 2026. מוצרים ומדיניות עשויים להשתנות; בדקו את התוויות והמקורות הרשמיים העדכניים."
+			},
+			fa: {
+				...siteContent.en,
+				navLabel: "راهنمای صفحه", navSurvey: "آزمون پوست", navGuide: "روش ارزیابی", navRoutines: "برنامه مراقبت", navAbout: "درباره ما", navPrivacy: "حریم خصوصی و تبلیغات", navContact: "تماس",
+				guideKicker: "راهنمای استفاده", guideTitle: "چطور ارزیابی دقیق‌تری داشته باشیم", guideIntro: "این ارزیابی الگوهای اخیر پوست را بررسی می‌کند، نه تغییرات یک روز را. برای نتیجه مفیدتر این مراحل را دنبال کنید.",
+				guideStep1: "پس از شست‌وشوی ملایم، ۳۰ تا ۶۰ دقیقه چیزی روی پوست نزنید. پس از ورزش، گرما یا حمام بلافاصله ارزیابی نکنید.",
+				guideStep2: "پیشانی و بینی (ناحیه T) را جدا از گونه‌ها بررسی کنید. محل چربی به شناسایی پوست مختلط کمک می‌کند.",
+				guideStep3: "بر اساس تکرار خشکی و کشیدگی در دو هفته گذشته پاسخ دهید. فصل، رطوبت محیط و عادت‌های شست‌وشو نیز بر پوست اثر دارند.",
+				guideStep4: "سن اختیاری است و در محاسبه نوع پوست نقشی ندارد. می‌توانید چند دغدغه را انتخاب کنید تا در پیشنهاد مراقبت لحاظ شوند.",
+				methodTitle: "نتیجه چگونه محاسبه می‌شود؟", methodText: "این یک خودارزیابی ساده بر پایه قواعد است. چربی در ناحیه T و گونه‌ها به پوست چرب و چربی فقط در ناحیه T به پوست مختلط اشاره می‌کند. در موارد دیگر، کشیدگی یا پوسته‌ریزی مکرر به پوست خشک و در غیر این صورت به پوست متعادل اشاره دارد. پاسخ‌های سوزش یا قرمزی فقط برای پیام حساسیت‌اند. این ارزیابی تشخیص پزشکی یا آزمون بالینی نیست.",
+				routineKicker: "مراقبت روزانه", routineTitle: "تنظیم برنامه بر اساس نوع پوست",
+				routineIntro: "نوع پوست ممکن است با فصل و محیط تغییر کند. به‌جای افزودن هم‌زمان مواد فعال متعدد یا پاک‌سازی قوی، با توجه به واکنش پوست برنامه را تنظیم کنید.",
+				routineOily: "پوست چرب: به‌جای شست‌وشوی مکرر، پاک‌سازی ملایم، مرطوب‌کننده سبک و محافظت روزانه در برابر آفتاب را در اولویت بگذارید.",
+				routineCombination: "پوست مختلط: میزان مرطوب‌کننده را با توجه به تفاوت ناحیه T و گونه‌ها تنظیم کنید.",
+				routineDry: "پوست خشک: از آب داغ و لایه‌برداری مکرر پرهیز کنید. پس از شست‌وشو و پیش از خشک‌شدن کامل پوست مرطوب‌کننده بزنید.",
+				routineNormal: "پوست متعادل: برنامه ساده‌ای را که برایتان مناسب است ادامه دهید. بدون نیاز مشخص، محصولات یا لایه‌برداری را افزایش ندهید.",
+				recommendationTitle: "راهنمای پیشنهاد محصولات", recommendationText: "پیشنهادها نوع پوست و دغدغه‌های انتخابی را با کاربرد عمومی و اطلاعات ترکیبات محصولات مرتبط می‌کنند. این‌ها رتبه‌بندی فروش، تضمین نتیجه فردی یا تأیید برند نیستند. ترکیبات و روش مصرف را بررسی کنید و محصولات جدید را یکی‌یکی و با مقدار کم امتحان کنید. در صورت درد، تورم یا بثورات ماندگار، مصرف را قطع و با متخصص مشورت کنید.",
+				faqKicker: "پرسش‌های رایج", faqTitle: "درباره ارزیابی",
+				faqQ1: "آیا نوع پوست با گذشت زمان تغییر می‌کند؟", faqA1: "بله. فصل‌ها، هورمون‌ها، محیط، عادت‌های مراقبتی و داروها می‌توانند اثر بگذارند. در صورت نیاز دوباره ارزیابی کنید و بر اساس تغییر یک‌روزه نتیجه‌گیری نکنید.",
+				faqQ2: "آیا نتیجه بیماری پوستی را تشخیص می‌دهد؟", faqA2: "خیر. این خودارزیابی برای اطلاعات عمومی مراقبت است و آکنه، روزاسه، اگزما یا بیماری‌های دیگر را تشخیص نمی‌دهد. اگر علائم شدید یا ماندگارند با متخصص پوست مشورت کنید.",
+				faqQ3: "آیا پاسخ‌ها ذخیره یا ارسال می‌شوند؟", faqA3: "پاسخ‌ها در مرورگر محاسبه می‌شوند و این صفحه آن‌ها را به سرور نمی‌فرستد یا ذخیره نمی‌کند. Analytics، Clarity و سرویس‌های تبلیغاتی ممکن است داده‌های استفاده جداگانه‌ای پردازش کنند.",
+				aboutKicker: "Skin notes", aboutTitle: "درباره سایت و رویکرد تحریریه", aboutText: "Skin Note ابزاری رایگان برای بررسی کشیدگی پس از شست‌وشو، چربی نواحی صورت، پوسته‌ریزی و حساسیت است. این ابزار پرسش‌های کوتاه و قواعد روشن را با اطلاعات محصولات مراقبت پوست کره‌ای ترکیب می‌کند تا مسیرهای مراقبتی پیشنهاد دهد. نتیجه تشخیص فردی نیست و اثربخشی محصول را تضمین نمی‌کند؛ پیشنهادها انتخاب تحریریه‌اند، نه رتبه محبوبیت.",
+				privacyKicker: "شفافیت داده‌ها", privacyTitle: "حریم خصوصی و تبلیغات", privacySurvey: "پاسخ‌ها فقط در مرورگر محاسبه می‌شوند. این صفحه نام، ایمیل، گروه سنی یا پاسخ‌ها را جمع‌آوری یا در سرور ذخیره نمی‌کند.",
+				privacyAds: "این سایت از Google AdSense، Google Analytics و Microsoft Clarity استفاده می‌کند. این سرویس‌ها ممکن است کوکی‌ها، اطلاعات دستگاه و داده‌های استفاده از صفحه را برای سنجش سایت و تبلیغات پردازش کنند. این داده‌ها جدا از پاسخ‌های آزمون هستند.",
+				privacyConsent: "قوانین یا سیاست‌های Google ممکن است در برخی مناطق استفاده از پلتفرم مدیریت رضایت (CMP) تأییدشده را لازم کنند. تنظیمات تبلیغات در حساب AdSense مدیریت می‌شود.",
+				googlePrivacy: "سیاست حریم خصوصی Google", googleAds: "تنظیمات تبلیغات Google",
+				contactKicker: "بازخورد", contactTitle: "تماس و دیدگاه‌ها", contactText: "درباره پرسش‌ها، ترجمه، دسترس‌پذیری یا محصولات پیشنهادی پیام بفرستید. اگر پاسخ می‌خواهید ایمیل بگذارید. پیام از طریق Formspree ارسال می‌شود؛ اطلاعات شخصی حساس نفرستید.",
+				contactNameLabel: "نام (اختیاری)", contactEmailLabel: "ایمیل (اختیاری، برای دریافت پاسخ)", contactMessageLabel: "پیام (ضروری)", contactSubmit: "ارسال پیام",
+				qualityHelp: "Google AdSense: ساخت سایت‌های باکیفیت", lastUpdated: "بازبینی اطلاعات: اکتبر ۲۰۲۶. محصولات و سیاست‌ها ممکن است تغییر کنند؛ برچسب‌ها و منابع رسمی جدید را بررسی کنید."
+			},
+			sw: {
+				...siteContent.en,
+				navLabel: "Urambazaji wa ukurasa", navSurvey: "Ukaguzi wa ngozi", navGuide: "Jinsi ya kujipima", navRoutines: "Ratiba za utunzaji", navAbout: "Kuhusu", navPrivacy: "Faragha na matangazo", navContact: "Mawasiliano",
+				guideKicker: "Mwongozo wa matumizi", guideTitle: "Mwongozo wa kupata tathmini thabiti zaidi", guideIntro: "Tathmini hii huangalia mwenendo wa hivi karibuni wa ngozi, si mabadiliko ya siku moja. Fuata hatua hizi ili kutumia matokeo vizuri zaidi.",
+				guideStep1: "Baada ya kusafisha uso kwa upole, subiri dakika 30–60 bila kupaka bidhaa. Epuka kujipima mara tu baada ya mazoezi, joto au kuoga.",
+				guideStep2: "Chunguza paji la uso na pua (eneo la T) kando na mashavu. Kutambua sehemu zenye mafuta husaidia kuelewa ngozi mchanganyiko.",
+				guideStep3: "Jibu kuhusu ukwaruzo na kuvutika kwa kuzingatia mara ngapi kulitokea katika wiki mbili zilizopita. Msimu, unyevunyevu na tabia za kuosha pia huathiri ngozi.",
+				guideStep4: "Kundi la umri si lazima na haliathiri hesabu ya aina ya ngozi. Unaweza kuchagua changamoto kadhaa; zitatumika kutoa mapendekezo ya utunzaji.",
+				methodTitle: "Matokeo huhesabiwaje?",
+				methodText: "Huu ni ukaguzi rahisi wa kujitathmini unaotumia kanuni kulingana na majibu yako. Mafuta kwenye eneo la T na mashavu huashiria ngozi yenye mafuta; mafuta kwenye eneo la T pekee huashiria ngozi mchanganyiko. Vinginevyo, kuvutika au magamba ya mara kwa mara huashiria ngozi kavu, na bila hayo ngozi sawia. Majibu kuhusu kuwasha au wekundu hutumika kwa mwongozo wa hisia kali tu. Huu si utambuzi wa kitabibu au tathmini iliyothibitishwa kliniki.",
+				routineKicker: "Misingi ya utunzaji", routineTitle: "Jinsi ya kurekebisha ratiba kulingana na aina ya ngozi",
+				routineIntro: "Aina ya ngozi inaweza kubadilika kulingana na msimu na mazingira. Badala ya kuongeza viambato vingi vyenye nguvu au kusafisha kupita kiasi, rekebisha utaratibu kulingana na mwitikio wa ngozi.",
+				routineOily: "Ngozi yenye mafuta: tanguliza usafishaji wa upole, unyevunyevu mwepesi na kinga ya jua ya kila siku badala ya kuosha mara nyingi.",
+				routineCombination: "Ngozi mchanganyiko: rekebisha kiasi cha unyevunyevu kulingana na tofauti kati ya eneo la T na mashavu.",
+				routineDry: "Ngozi kavu: epuka maji ya moto na kuchubua ngozi mara kwa mara. Paka unyevunyevu baada ya kuosha kabla ngozi haijakauka kabisa.",
+				routineNormal: "Ngozi sawia: endelea na utaratibu rahisi unaokufaa. Usiongeze bidhaa au kuchubua ngozi bila sababu maalum.",
+				recommendationTitle: "Jinsi ya kuelewa mapendekezo ya bidhaa",
+				recommendationText: "Mapendekezo huhusisha aina ya ngozi, changamoto ulizochagua na matumizi ya kawaida pamoja na maelezo ya viambato. Si orodha ya mauzo, dhamana ya matokeo binafsi au uidhinishaji wa chapa. Kagua viambato na maelekezo ya matumizi; jaribu bidhaa mpya moja baada ya nyingine kwa kiasi kidogo. Acha kutumia na umshauri mtaalamu ikiwa kuna maumivu, uvimbe au vipele vinavyoendelea.",
+				faqKicker: "Maswali yanayoulizwa mara kwa mara", faqTitle: "Kuhusu tathmini",
+				faqQ1: "Je, aina ya ngozi hubadilika kadri muda unavyopita?", faqA1: "Ndiyo. Msimu, homoni, mazingira, tabia za utunzaji na dawa zinaweza kuathiri ngozi. Jipime tena inapohitajika; usihitimishe kutokana na mabadiliko ya siku moja.",
+				faqQ2: "Je, matokeo haya hutambua magonjwa ya ngozi?", faqA2: "Hapana. Huu ni mwongozo wa jumla wa utunzaji na hautambui chunusi, rosasia, ukurutu au magonjwa mengine. Muone daktari wa ngozi ikiwa dalili ni kali au zinaendelea.",
+				faqQ3: "Je, majibu yangu huhifadhiwa au kutumwa?", faqA3: "Majibu huhesabiwa kwenye kivinjari chako na ukurasa huu hauyatumii au kuyahifadhi kwenye seva. Analytics, Clarity na huduma za matangazo zinaweza kuchakata data tofauti kuhusu matumizi ya ukurasa.",
+				aboutKicker: "Skin notes", aboutTitle: "Kuhusu tovuti na sera ya uhariri", aboutText: "Skin Note ni ukaguzi wa bure wa kujitathmini unaokusaidia kuzingatia kuvutika baada ya kuosha, mafuta katika sehemu tofauti za uso, magamba na hisia kali. Kanuni zilizo wazi na maelezo kuhusu bidhaa za utunzaji wa ngozi za Korea hutumika kupendekeza hatua zinazofuata. Matokeo si utambuzi binafsi wala dhamana ya ufanisi wa bidhaa.",
+				privacyKicker: "Uwazi wa data", privacyTitle: "Faragha na matangazo", privacySurvey: "Majibu huhesabiwa kwenye kivinjari pekee. Ukurasa huu haukusanyi wala kuhifadhi kwenye seva jina, barua pepe, kundi la umri au majibu yako.",
+				privacyAds: "Tovuti hii hutumia Google AdSense, Google Analytics na Microsoft Clarity. Huduma hizi zinaweza kuchakata vidakuzi, maelezo ya kifaa na data ya matumizi ya ukurasa kwa ajili ya matangazo na vipimo vya matumizi. Data hii ni tofauti na majibu ya dodoso.",
+				privacyConsent: "Sheria za maeneo fulani au sera za Google zinaweza kuhitaji jukwaa lililoidhinishwa la usimamizi wa idhini (CMP). Mipangilio ya matangazo hudhibitiwa katika akaunti ya AdSense.",
+				googlePrivacy: "Sera ya Faragha ya Google", googleAds: "Mipangilio ya matangazo ya Google",
+				contactKicker: "Maoni", contactTitle: "Mawasiliano na maoni", contactText: "Tuma maswali au maoni kuhusu tafsiri, ufikivu au bidhaa zinazopendekezwa. Weka barua pepe ikiwa unahitaji jibu. Ujumbe hutumwa kupitia Formspree; usitume taarifa nyeti za kibinafsi.",
+				contactNameLabel: "Jina (si lazima)", contactEmailLabel: "Barua pepe (si lazima, kwa jibu)", contactMessageLabel: "Ujumbe (unahitajika)", contactSubmit: "Tuma ujumbe",
+				qualityHelp: "Google AdSense: Tovuti zenye ubora wa juu", lastUpdated: "Taarifa zimekaguliwa: Oktoba 2026. Bidhaa na sera zinaweza kubadilika; angalia lebo na maelezo rasmi ya sasa."
+			}
+		});
+
 		let currentLanguage = "ko";
-		const openGraphLocales = { ko: "ko_KR", en: "en_US", fr: "fr_FR", it: "it_IT", ja: "ja_JP", zh: "zh_CN", ar: "ar_SA" };
+		const openGraphLocales = { ko: "ko_KR", en: "en_US", fr: "fr_FR", it: "it_IT", ja: "ja_JP", zh: "zh_CN", ar: "ar_SA", hi: "hi_IN", es: "es_ES", he: "he_IL", fa: "fa_IR", sw: "sw_KE" };
 
 		function getMessages() {
 			return translations[currentLanguage] || translations.ko;
@@ -1124,7 +1495,7 @@
 			currentLanguage = Object.hasOwn(translations, language) ? language : "ko";
 			const messages = getMessages();
 			document.documentElement.lang = messages.lang;
-			document.documentElement.dir = messages.lang === "ar" ? "rtl" : "ltr";
+			document.documentElement.dir = ["ar", "he", "fa"].includes(messages.lang) ? "rtl" : "ltr";
 			document.title = messages.title;
 			document.querySelector("#page-description").content = messages.description;
 			document.querySelector("#page-og-title").content = messages.title;
@@ -1163,7 +1534,6 @@
 			});
 			document.querySelector("#google-privacy-link").href = `https://policies.google.com/privacy?hl=${messages.lang}`;
 			document.querySelector("#quality-help-link").href = `https://support.google.com/adsense/answer/10015918?hl=${messages.lang}`;
-			languagePicker.setAttribute("aria-label", messages.languageLabel);
 			languagePicker.querySelectorAll("[data-language]").forEach((button) => {
 				button.setAttribute("aria-pressed", String(button.dataset.language === currentLanguage));
 			});
@@ -1309,6 +1679,107 @@
 				type: { oily: "الدهنية", combination: "المختلطة", dry: "الجافة", normal: "العادية" }
 			}
 		};
+
+		Object.assign(recommendationUi, {
+			hi: {
+				...recommendationUi.en,
+				title: "आपकी त्वचा के प्रकार के लिए उत्पाद", basic: "त्वचा के प्रकार के लिए ज़रूरी उत्पाद", additional: "अन्य विकल्प",
+				concerns: "चुनी गई चिंताओं के लिए उत्पाद", open: "सुझाव का कारण और सामग्री की भूमिका जानने के लिए उत्पाद चुनें।",
+				scienceDisclaimer: "ये सामग्री के सामान्य गुण हैं, तैयार उत्पादों के चिकित्सकीय प्रभाव का प्रमाण नहीं। मौजूदा सामग्री-सूची जाँचें।",
+				moisturizerEvidence: "मॉइस्चराइज़र पर समीक्षा", vitaminCEvidence: "त्वचा पर विटामिन C पर समीक्षा",
+				noConcernEvidence: "उत्पाद विवरण सामग्री की भूमिका और उपलब्ध प्रमाण की सीमाएँ बताते हैं।",
+				fit: "चुनी गई चिंता ({concerns}) और {skinType} त्वचा को ध्यान में रखकर सुझाव। {benefit} पहले थोड़ी जगह पर जाँचें; जलन या लालिमा हो तो उपयोग रोकें।",
+				noConcern: "{skinType} त्वचा के लिए सुझाव। {benefit} पहले थोड़ी जगह पर जाँचें; जलन या लालिमा हो तो उपयोग रोकें।",
+				evidence: [
+					"मुहाँसों और बंद रोमछिद्रों के लिए सैलिसिलिक एसिड, बेंज़ॉयल पेरॉक्साइड और रेटिनॉइड जैसे प्रमाणित उपचार घटक उपयोग होते हैं। नीचे के उत्पाद सहायक देखभाल हैं, मुहाँसों का उपचार नहीं।",
+					"संवेदनशीलता और लालिमा में जलन कम करना और नमी बनाए रखना महत्वपूर्ण है। सेरामाइड मॉइस्चराइज़र त्वचा की सुरक्षा में मदद कर सकते हैं; वनस्पति अर्क के प्रमाण फ़ॉर्मूले के अनुसार बदलते हैं।",
+					"रूखेपन और परतों में हायलूरोनिक एसिड या ग्लिसरीन नमी खींचते हैं; त्वचा-अवरोध लिपिड वाली क्रीम नमी के नुकसान को घटा सकती हैं। सीरम के ऊपर क्रीम लगाएँ।",
+					"रोमछिद्र और तेल के लिए सैलिसिलिक एसिड जैसे एक्सफ़ोलिएंट उपयोग होते हैं। यहाँ के सुझावों में मॉइस्चराइज़र या क्लींजर हो सकते हैं; सामग्री-सूची जाँचें। कोई उत्पाद रोमछिद्र स्थायी रूप से छोटा नहीं करता।",
+					"बेजान त्वचा और दागों के लिए विटामिन C के प्रमाण उसके प्रकार, मात्रा और फ़ॉर्मूले पर निर्भर करते हैं। UV से होने वाले असर को सीमित करने के लिए रोज़ाना सनस्क्रीन उपयोगी है।",
+					"महीन रेखाओं पर कॉस्मेटिक पेप्टाइड के प्रमाण सीमित और फ़ॉर्मूले पर निर्भर हैं। मॉइस्चराइज़र रूखेपन की रेखाएँ अस्थायी रूप से कम दिखा सकता है; धूप से सुरक्षा महत्वपूर्ण है।"
+				],
+				type: { oily: "तैलीय", combination: "मिश्रित", dry: "शुष्क", normal: "संतुलित" }
+			},
+			es: {
+				...recommendationUi.en,
+				title: "Productos para tu tipo de piel", basic: "Imprescindibles para tu piel", additional: "Otras opciones",
+				concerns: "Productos para tus preocupaciones", open: "Selecciona un producto para ver por qué se sugiere y cómo actúan sus ingredientes.",
+				scienceDisclaimer: "Son mecanismos generales de los ingredientes, no pruebas clínicas del producto terminado. Comprueba la lista de ingredientes actual.",
+				moisturizerEvidence: "Revisión sobre hidratantes", vitaminCEvidence: "Revisión sobre vitamina C tópica",
+				noConcernEvidence: "Las descripciones explican la función de los ingredientes y los límites de la evidencia disponible.",
+				fit: "Sugerido teniendo en cuenta ({concerns}) y la piel {skinType}. {benefit} Prueba los productos nuevos en una zona pequeña y suspende su uso si hay irritación o rojeces.",
+				noConcern: "Sugerido para la piel {skinType}. {benefit} Prueba los productos nuevos en una zona pequeña y suspende su uso si hay irritación o rojeces.",
+				evidence: [
+					"Para granitos y poros obstruidos, los activos con evidencia contra el acné incluyen ácido salicílico, peróxido de benzoilo y retinoides. Los productos hidratantes y calmantes de abajo son un apoyo, no tratamientos para el acné.",
+					"Para sensibilidad y rojeces, conviene reducir los irritantes y mantener la hidratación. Las cremas con ceramidas pueden apoyar la barrera; la evidencia de los extractos vegetales depende de la fórmula.",
+					"Para sequedad y descamación, humectantes como el ácido hialurónico o la glicerina atraen agua y las cremas con lípidos pueden reducir su pérdida. Aplica una crema sobre el sérum hidratante.",
+					"Para poros y grasa se usan exfoliantes como el ácido salicílico. Según el tipo de piel, los productos sugeridos pueden ser hidratantes o limpiadores y no contenerlo. Comprueba los ingredientes; ningún producto reduce los poros permanentemente.",
+					"Para manchas y falta de luminosidad, la evidencia de la vitamina C tópica varía según el derivado, la concentración y la fórmula. El protector solar diario ayuda a limitar el daño UV.",
+					"La evidencia de los péptidos cosméticos para líneas finas varía y sigue siendo limitada. La hidratación puede suavizar temporalmente las líneas por sequedad y la protección solar ayuda a prevenir el fotoenvejecimiento."
+				],
+				type: { oily: "grasa", combination: "mixta", dry: "seca", normal: "equilibrada" }
+			},
+			he: {
+				...recommendationUi.en,
+				title: "מוצרים לפי סוג העור", basic: "מוצרים בסיסיים לסוג העור", additional: "אפשרויות נוספות",
+				concerns: "מוצרים לחששות שנבחרו", open: "בחרו מוצר כדי לראות מדוע הוצע ומה תפקיד הרכיבים שלו.",
+				scienceDisclaimer: "אלה מנגנונים כלליים של רכיבים, ולא הוכחה קלינית להשפעה של המוצר המוגמר. בדקו את רשימת הרכיבים העדכנית.",
+				moisturizerEvidence: "סקירה על מנגנוני קרמי לחות", vitaminCEvidence: "סקירה על ויטמין C לשימוש חיצוני",
+				noConcernEvidence: "תיאורי המוצרים מסבירים את תפקיד הרכיבים ואת מגבלות הראיות הקיימות.",
+				fit: "המלצה המתחשבת בחשש ({concerns}) ובעור {skinType}. {benefit} נסו מוצרים חדשים תחילה באזור קטן והפסיקו אם מופיעים גירוי או אדמומיות.",
+				noConcern: "המלצה לעור {skinType}. {benefit} נסו מוצרים חדשים תחילה באזור קטן והפסיקו אם מופיעים גירוי או אדמומיות.",
+				evidence: [
+					"לטיפול בפצעונים ובנקבוביות סתומות משתמשים בחומרים עם ראיות לאקנה, כגון חומצה סליצילית, בנזואיל פרוקסיד ורטינואידים. המוצרים המרגיעים והמלחלחים שלהלן הם טיפול תומך ולא טיפול באקנה.",
+					"ברגישות ובאדמומיות חשוב להפחית גירויים ולשמור על לחות. קרמים עם סרמידים עשויים לתמוך במחסום העור; הראיות לתמציות צמחים תלויות בנוסחה.",
+					"ביובש ובקילוף, חומרים מושכי לחות כמו חומצה היאלורונית או גליצרין מושכים מים, וקרמים עם שומני מחסום עשויים להפחית אובדן לחות. מרחו קרם מעל סרום לחות.",
+					"לטיפול בנקבוביות ובשומניות משתמשים בחומצה סליצילית ובחומרים אחרים. ההמלצות עשויות להיות גם קרם לחות או ניקוי שאינם מכילים אותה. בדקו את הרכיבים; אין מוצר שמקטין נקבוביות לצמיתות.",
+					"ויטמין C לשימוש חיצוני עשוי לסייע נגד חמצון ולהשפיע על פיגמנטציה, אך הראיות תלויות בנגזרת, בריכוז ובנוסחה. הגנה יומיומית מהשמש חשובה.",
+					"הראיות לפפטידים קוסמטיים נגד קמטוטים משתנות ומוגבלות. לחות עשויה לרכך זמנית קמטוטי יובש, והגנה מהשמש מסייעת במניעת הזדקנות מחשיפה לשמש."
+				],
+				type: { oily: "שמן", combination: "מעורב", dry: "יבש", normal: "מאוזן" }
+			},
+			fa: {
+				...recommendationUi.en,
+				title: "محصولات متناسب با نوع پوست", basic: "محصولات پایه برای نوع پوست", additional: "گزینه‌های دیگر",
+				concerns: "محصولات برای دغدغه‌های انتخاب‌شده", open: "برای دیدن دلیل پیشنهاد و نقش ترکیبات، محصول را انتخاب کنید.",
+				scienceDisclaimer: "این‌ها سازوکارهای کلی ترکیبات‌اند، نه اثبات اثر بالینی محصول نهایی. فهرست ترکیبات فعلی را بررسی کنید.",
+				moisturizerEvidence: "مروری بر سازوکار مرطوب‌کننده‌ها", vitaminCEvidence: "مروری بر ویتامین C موضعی",
+				noConcernEvidence: "توضیحات محصول نقش ترکیبات و محدودیت شواهد موجود را بیان می‌کنند.",
+				fit: "پیشنهاد با توجه به دغدغه ({concerns}) و پوست {skinType}. {benefit} محصولات جدید را ابتدا روی بخش کوچکی امتحان کنید و در صورت تحریک یا قرمزی مصرف را قطع کنید.",
+				noConcern: "پیشنهاد برای پوست {skinType}. {benefit} محصولات جدید را ابتدا روی بخش کوچکی امتحان کنید و در صورت تحریک یا قرمزی مصرف را قطع کنید.",
+				evidence: [
+					"برای جوش و منافذ بسته، ترکیبات دارای شواهد درمان آکنه شامل سالیسیلیک اسید، بنزوئیل پروکساید و رتینوئیدها هستند. محصولات آرام‌بخش و مرطوب‌کننده زیر مراقبت کمکی‌اند، نه درمان آکنه.",
+					"برای حساسیت و قرمزی، کاهش عوامل محرک و حفظ رطوبت مهم است. مرطوب‌کننده‌های دارای سرامید می‌توانند از سد پوستی پشتیبانی کنند؛ شواهد عصاره‌های گیاهی به فرمول بستگی دارد.",
+					"برای خشکی و پوسته‌ریزی، موادی مانند هیالورونیک اسید یا گلیسیرین آب جذب می‌کنند و کرم‌های دارای چربی‌های سد پوستی ممکن است اتلاف آب را کم کنند. پس از سرم، کرم بزنید.",
+					"برای منافذ و چربی از موادی مانند سالیسیلیک اسید استفاده می‌شود. با توجه به نوع پوست، پیشنهادها ممکن است مرطوب‌کننده یا شوینده باشند و این ماده را نداشته باشند. ترکیبات را بررسی کنید؛ محصولی منافذ را برای همیشه کوچک نمی‌کند.",
+					"ویتامین C موضعی ممکن است اثر آنتی‌اکسیدانی داشته باشد و بر مسیرهای رنگدانه اثر بگذارد، اما شواهد به مشتق، غلظت و فرمول وابسته است. ضدآفتاب روزانه مهم است.",
+					"شواهد پپتیدهای آرایشی برای خطوط ریز محدود و وابسته به فرمول‌اند. مرطوب‌کننده ممکن است خطوط ناشی از خشکی را موقتاً کمتر نشان دهد؛ محافظت در برابر آفتاب به پیشگیری از پیری نوری کمک می‌کند."
+				],
+				type: { oily: "چرب", combination: "مختلط", dry: "خشک", normal: "متعادل" }
+			}
+		});
+
+		Object.assign(recommendationUi, {
+			sw: {
+				...recommendationUi.en,
+				title: "Bidhaa zinazofaa aina ya ngozi yako", basic: "Bidhaa muhimu kwa aina ya ngozi", additional: "Nyingine za kuzingatia",
+				concerns: "Bidhaa za changamoto ulizochagua", open: "Chagua jina la bidhaa ili kuona sababu ya pendekezo na jinsi viambato vyake vinavyofanya kazi kwenye ngozi.",
+				scienceDisclaimer: "Haya ni maelezo ya jumla kuhusu viambato, si uthibitisho wa athari za kitabibu za bidhaa nzima. Kagua orodha na viwango vya sasa vya viambato.",
+				moisturizerEvidence: "Mapitio kuhusu jinsi vilainishi hufanya kazi", vitaminCEvidence: "Mapitio kuhusu vitamini C ya kupaka",
+				noConcernEvidence: "Maelezo ya bidhaa yanaeleza kazi za viambato na mipaka ya ushahidi uliopo.",
+				fit: "Pendekezo limezingatia changamoto uliyochagua ({concerns}) na ngozi {skinType}. {benefit} Jaribu bidhaa mpya kwanza kwenye eneo dogo na uache kuitumia ukipata muwasho au wekundu.",
+				noConcern: "Pendekezo la ngozi {skinType}. {benefit} Jaribu bidhaa mpya kwanza kwenye eneo dogo na uache kuitumia ukipata muwasho au wekundu.",
+				evidence: [
+					"Kwa vipele na vinyweleo vilivyoziba, viambato vyenye ushahidi wa kutibu chunusi ni pamoja na salicylic acid, benzoyl peroxide na retinoids. Bidhaa za kutuliza na kuongeza unyevu hapa chini ni za utunzaji wa kusaidia, si tiba ya chunusi.",
+					"Kwa hisia kali na wekundu, punguza vitu vinavyokera na dumisha unyevunyevu. Vilainishi vyenye ceramides vinaweza kusaidia kinga ya ngozi iliyodhoofishwa na ukavu; ushahidi wa dondoo za mimea hutofautiana kulingana na fomula.",
+					"Kwa ukavu na magamba, viambato vinavyovuta unyevu kama hyaluronic acid au glycerin huvuta maji kwenye tabaka la nje la ngozi; krimu zenye lipidi za kinga zinaweza kupunguza upotevu wa maji. Paka krimu juu ya seramu ya kuongeza unyevu.",
+					"Kwa vinyweleo na mafuta, viambato vya kuchubua kama salicylic acid hutumika kusaidia kusafisha mianya ya vinyweleo. Mapendekezo yanaweza kuwa vilainishi au visafishaji na yasiwe na salicylic acid; kagua viambato. Hakuna bidhaa inayopunguza vinyweleo kabisa.",
+					"Kwa ngozi iliyofifia na madoa, vitamini C ya kupaka inaweza kuwa na athari ya kuzuia oksidishaji na kuathiri michakato ya rangi ya ngozi, lakini ushahidi hutegemea aina, kiwango na fomula. Kinga ya jua ya kila siku husaidia kuzuia madoa kuwa mabaya zaidi.",
+					"Kwa mistari midogo na kupungua kwa uimara, ushahidi wa peptidi za vipodozi hutofautiana na bado ni mdogo. Unyevunyevu unaweza kupunguza kwa muda mwonekano wa mistari inayotokana na ukavu; kinga ya jua ni muhimu."
+				],
+				type: { oily: "yenye mafuta", combination: "mchanganyiko", dry: "kavu", normal: "sawia" }
+			}
+		});
 
 		const productCatalog = {
 			dokdo: {
@@ -1521,6 +1992,93 @@
 			}
 		};
 
+		const localizedProductBenefits = {
+			hi: {
+				dokdo: "इस क्लींजर के सर्फ़ैक्टेंट तेल और गंदगी साफ़ करते हैं; हायलूरोनिक एसिड और सेरामाइड के असर का समय और फ़ॉर्मूले पर निर्भर होना संभव है।",
+				drg: "यह क्रीम नमी और आराम के लिए प्रस्तुत की जाती है। इससे यह सिद्ध नहीं होता कि यह मुहाँसों या लगातार लालिमा का उपचार करती है।",
+				anua: "इस टोनर में 77% हार्टलीफ़ का दावा है। अर्क के प्रयोगशाला निष्कर्ष तैयार उत्पाद के चिकित्सकीय लाभ का प्रमाण नहीं; इसे हल्की नमी का चरण समझें।",
+				torriden: "हायलूरोनिक एसिड त्वचा की ऊपरी परत में पानी खींचकर रूखेपन का एहसास अस्थायी रूप से कम कर सकता है। नमी बनाए रखने के लिए ऊपर मॉइस्चराइज़र लगाएँ।",
+				aestura: "सेरामाइड जैसे लिपिड वाला मॉइस्चराइज़र त्वचा की सुरक्षा और नमी बनाए रखने में मदद कर सकता है; संवेदनशीलता हर व्यक्ति में अलग होती है।",
+				illiyoon: "सेरामाइड त्वचा की सुरक्षा परत के लिपिड हैं। यह क्रीम रूखे हिस्सों को मॉइस्चराइज़ कर सकती है, लेकिन त्वचा रोग का उपचार नहीं है।",
+				boj: "सही मात्रा में समान रूप से लगाई गई सनस्क्रीन UV से सुरक्षा देती है; बाहर रहने पर दोबारा लगाएँ। चावल के तत्व UV फ़िल्टर नहीं हैं।",
+				birch: "यह मॉइस्चराइज़र बर्च सैप को प्रमुखता देता है। सैप के विशिष्ट प्रमाण सीमित हैं; उत्पाद को उसकी पूरी मॉइस्चराइज़िंग फ़ॉर्मूला के आधार पर चुनें।",
+				medicubePad: "रोमछिद्रों के लिए पैड में सैलिसिलिक एसिड है या नहीं, मौजूदा सामग्री-सूची जाँचें। अधिक उपयोग से जलन हो सकती है; अन्य एक्सफ़ोलिएंट साथ न जोड़ें।",
+				goodal: "यह सीरम ग्रीन टेंजरिन और विटामिन C घटकों को प्रस्तुत करता है। असर फ़ॉर्मूले पर निर्भर है; दागों की देखभाल में सनस्क्रीन भी ज़रूरी है।",
+				numbuzin: "यह विटामिन सीरम दागों और रंगत की देखभाल के लिए प्रस्तुत है। सामग्री और प्रमाण अलग-अलग होते हैं; प्रभाव की गारंटी नहीं, सनस्क्रीन को प्राथमिकता दें।",
+				cosrx: "इस सीरम में कई पेप्टाइड हैं, लेकिन उनकी मौजूदगी अपने-आप कोलेजन या त्वचा के कसाव में सुधार सिद्ध नहीं करती। इसे सामान्य सीरम की तरह लें।",
+				medicubePdrn: "PDRN वाले कॉस्मेटिक सीरम के प्रमाण सीमित हैं; चिकित्सा या घाव-देखभाल के निष्कर्ष सीधे कॉस्मेटिक पर लागू नहीं होते। इसे मॉइस्चराइज़र चरण मानें।"
+			},
+			es: {
+				dokdo: "Los tensioactivos limpian grasa y suciedad; el efecto hidratante del ácido hialurónico y las ceramidas depende del tiempo de contacto y la fórmula.",
+				drg: "Se presenta como crema calmante e hidratante. Esto no demuestra que trate el acné ni el enrojecimiento persistente.",
+				anua: "El tónico destaca un 77 % de extracto de heartleaf. Los estudios de laboratorio no prueban el efecto clínico del producto terminado; considéralo un paso de hidratación ligera.",
+				torriden: "El ácido hialurónico atrae agua a la capa externa y puede aliviar temporalmente la sensación de sequedad. Aplica una crema encima para reducir la pérdida de agua.",
+				aestura: "Una crema con lípidos de barrera como ceramidas puede apoyar la hidratación y la barrera cutánea; la tolerancia varía según la persona.",
+				illiyoon: "Las ceramidas son lípidos de la barrera cutánea. Esta crema puede hidratar zonas secas, pero no equivale a un tratamiento médico.",
+				boj: "El protector solar reduce la exposición UV si se aplica la cantidad indicada y de forma uniforme; reaplica al aire libre. El arroz no es un filtro UV.",
+				birch: "Esta crema hidratante destaca la savia de abedul. La evidencia específica de la savia es limitada; valora la fórmula hidratante completa.",
+				medicubePad: "Comprueba si la lista actual incluye ácido salicílico. El uso excesivo puede irritar y debilitar la barrera; evita combinarlo con otros exfoliantes.",
+				goodal: "Este sérum destaca la mandarina verde y derivados de vitamina C. La evidencia depende de la fórmula; acompaña el cuidado de manchas con protector solar.",
+				numbuzin: "Se presenta como sérum vitamínico para marcas y tono. Los ingredientes y la evidencia varían; no se puede asegurar el efecto del producto. Usa protector solar.",
+				cosrx: "Este sérum contiene varios péptidos, pero su presencia no demuestra por sí sola un aumento de colágeno o firmeza. Considéralo un paso de sérum.",
+				medicubePdrn: "La evidencia del PDRN cosmético tópico es limitada; los estudios médicos no se trasladan directamente a un cosmético. Considéralo un paso hidratante."
+			},
+			he: {
+				dokdo: "חומרי הניקוי מסירים שומן ולכלוך; השפעת החומצה ההיאלורונית והסרמידים תלויה בזמן המגע ובנוסחה של מוצר שנשטף.",
+				drg: "הקרם מוצג כמוצר מרגיע ומלחלח. אין בכך הוכחה שהוא מטפל באקנה או באדמומיות מתמשכת.",
+				anua: "הטונר מציג 77% תמצית Heartleaf. ממצאי מעבדה אינם מוכיחים השפעה קלינית של המוצר המוגמר; אפשר לראות בו שלב לחות קליל.",
+				torriden: "חומצה היאלורונית מושכת מים לשכבת העור החיצונית ועשויה להקל זמנית על תחושת יובש. מרחו מעליה קרם לחות לצמצום איבוד מים.",
+				aestura: "קרם עם שומני מחסום כגון סרמידים עשוי לתמוך בלחות ובמחסום העור; הסבילות משתנה מאדם לאדם.",
+				illiyoon: "סרמידים הם שומנים במחסום העור. הקרם עשוי ללחלח אזורים יבשים, אך אינו תחליף לטיפול במחלת עור.",
+				boj: "מסנן קרינה מפחית חשיפה לקרינת UV כשמורחים את הכמות המסומנת באופן אחיד; יש לחדש מריחה בחוץ. רכיבי אורז אינם מסנני UV.",
+				birch: "קרם הלחות מדגיש מוהל ליבנה. הראיות הייחודיות למוהל מוגבלות; בחרו לפי נוסחת הלחות הכוללת.",
+				medicubePad: "בדקו אם רשימת הרכיבים העדכנית כוללת חומצה סליצילית. שימוש יתר עלול לגרום לגירוי ולפגוע במחסום העור; אל תשלבו פילינג נוסף.",
+				goodal: "הסרום מדגיש מנדרינה ירוקה ורכיבי ויטמין C. הראיות תלויות בנוסחה; שלבו הגנה מהשמש בטיפול בכתמים.",
+				numbuzin: "הסרום מוצג לטיפול בסימנים ובגוון העור. הרכיבים והראיות משתנים; אין בכך הוכחה להשפעת המוצר. הקפידו על מסנן קרינה.",
+				cosrx: "הסרום מכיל כמה פפטידים, אך עצם נוכחותם אינה מוכיחה עלייה בקולגן או שיפור במיצוק. התייחסו אליו כאל שלב סרום.",
+				medicubePdrn: "הראיות ל־PDRN קוסמטי לשימוש חיצוני מוגבלות; אין להשליך ישירות ממחקרים רפואיים על קוסמטיקה. התייחסו אליו כאל שלב לחות."
+			},
+			fa: {
+				dokdo: "پاک‌کننده‌ها چربی و آلودگی را می‌شویند؛ اثر هیالورونیک اسید و سرامید در محصول شستنی به زمان تماس و فرمول بستگی دارد.",
+				drg: "این کرم برای آرامش‌بخشی و رطوبت‌رسانی معرفی شده است؛ این موضوع اثبات نمی‌کند که آکنه یا قرمزی ماندگار را درمان می‌کند.",
+				anua: "این تونر بر ۷۷٪ عصاره هارتلیف تأکید دارد. یافته‌های آزمایشگاهی اثربخشی بالینی محصول نهایی را ثابت نمی‌کنند؛ آن را مرحله‌ای سبک برای رطوبت‌رسانی بدانید.",
+				torriden: "هیالورونیک اسید آب را به لایه بیرونی پوست جذب می‌کند و ممکن است خشکی را موقتاً کاهش دهد. برای کاهش از دست‌رفتن رطوبت، روی آن کرم بزنید.",
+				aestura: "مرطوب‌کننده دارای چربی‌های سد پوستی مانند سرامید ممکن است به حفظ رطوبت و سد پوست کمک کند؛ تحمل آن در افراد متفاوت است.",
+				illiyoon: "سرامیدها از چربی‌های سد پوستی هستند. این کرم می‌تواند نواحی خشک را مرطوب کند، اما درمان بیماری پوستی نیست.",
+				boj: "ضدآفتاب با مقدار درج‌شده و پوشش یکنواخت، تابش فرابنفش را کاهش می‌دهد؛ در فضای باز تمدید کنید. ترکیبات برنج فیلتر UV نیستند.",
+				birch: "این مرطوب‌کننده بر شیره توس تأکید دارد. شواهد اختصاصی شیره محدود است؛ محصول را بر اساس فرمول کامل مرطوب‌کننده بسنجید.",
+				medicubePad: "بررسی کنید فهرست ترکیبات فعلی حاوی سالیسیلیک اسید است یا نه. استفاده بیش از حد می‌تواند تحریک ایجاد کند؛ با لایه‌بردار دیگر ترکیب نکنید.",
+				goodal: "این سرم بر نارنگی سبز و ترکیبات ویتامین C تأکید دارد. شواهد به فرمول بستگی دارد؛ مراقبت از لک را با ضدآفتاب همراه کنید.",
+				numbuzin: "این سرم ویتامینی برای آثار جوش و یکنواختی رنگ پوست معرفی شده است. ترکیبات و شواهد متفاوت‌اند و اثربخشی محصول تضمین‌شده نیست؛ ضدآفتاب را در اولویت بگذارید.",
+				cosrx: "این سرم چند پپتید دارد، اما وجود پپتید به‌تنهایی افزایش کلاژن یا بهبود قوام را ثابت نمی‌کند. آن را یک مرحله سرم بدانید.",
+				medicubePdrn: "شواهد PDRN آرایشی موضعی محدود است؛ نتایج درمان‌های پزشکی را نمی‌توان مستقیماً به محصولات آرایشی تعمیم داد. آن را مرحله‌ای مرطوب‌کننده بدانید."
+			}
+		};
+
+		Object.assign(localizedProductBenefits, {
+			sw: {
+				dokdo: "Visafishaji huondoa mafuta na uchafu; athari ya hyaluronic acid na ceramides katika bidhaa ya kuoshwa hutegemea muda wa kugusana na fomula.",
+				drg: "Krimu hii imewasilishwa kwa kutuliza na kuongeza unyevu. Hilo halithibitishi kuwa inatibu chunusi au wekundu unaoendelea.",
+				anua: "Toner hii inaangazia 77% ya dondoo la heartleaf. Matokeo ya maabara hayathibitishi athari za kitabibu za bidhaa nzima; ichukulie kama hatua nyepesi ya kuongeza unyevu.",
+				torriden: "Hyaluronic acid huvuta maji kwenye tabaka la nje la ngozi na inaweza kupunguza kwa muda hisia ya ukavu. Paka krimu juu yake ili kupunguza upotevu wa maji.",
+				aestura: "Krimu yenye lipidi za kinga kama ceramides inaweza kusaidia unyevunyevu na kinga ya ngozi; kila mtu huitikia tofauti.",
+				illiyoon: "Ceramides ni lipidi zinazopatikana kwenye kinga ya ngozi. Krimu hii inaweza kuongeza unyevu kwenye maeneo makavu, lakini si tiba ya ugonjwa wa ngozi.",
+				boj: "Kinga ya jua hupunguza mionzi ya UV ikipakwa kiasi kilichoelekezwa na kwa usawa; paka tena ukiwa nje. Viambato vya mchele si vichujio vya UV.",
+				birch: "Kilainishi hiki kinaangazia utomvu wa mti wa birch. Ushahidi mahususi kuhusu utomvu huo ni mdogo; zingatia fomula nzima ya kuongeza unyevu.",
+				medicubePad: "Kagua orodha ya sasa ya viambato ili kuona kama ina salicylic acid. Matumizi kupita kiasi yanaweza kusababisha muwasho; usiichanganye na bidhaa nyingine za kuchubua.",
+				goodal: "Seramu hii inaangazia tangerine ya kijani na viambato vya vitamini C. Ushahidi hutegemea fomula; tumia kinga ya jua unaposhughulikia madoa.",
+				numbuzin: "Seramu hii ya vitamini imewasilishwa kwa utunzaji wa alama na rangi ya ngozi. Viambato na ushahidi hutofautiana; ufanisi wa bidhaa haujahakikishwa. Tanguliza kinga ya jua.",
+				cosrx: "Seramu hii ina peptidi kadhaa, lakini uwepo wake pekee hauthibitishi ongezeko la collagen au uimara wa ngozi. Ichukulie kama hatua ya seramu.",
+				medicubePdrn: "Ushahidi wa PDRN ya vipodozi inayopakwa ni mdogo; matokeo ya matibabu hayawezi kuhamishwa moja kwa moja kwa vipodozi. Ichukulie kama hatua ya kuongeza unyevu."
+			}
+		});
+
+		for (const [language, benefits] of Object.entries(localizedProductBenefits)) {
+			for (const [productId, benefit] of Object.entries(benefits)) {
+				productCatalog[productId].benefit[language] = benefit;
+			}
+		}
+
 		const skinTypeProducts = {
 			oily: { basic: ["dokdo", "drg", "boj"], additional: ["torriden", "anua"] },
 			combination: { basic: ["dokdo", "birch", "boj"], additional: ["anua", "aestura"] },
@@ -1583,8 +2141,8 @@
 			const renderProduct = (productId, concernLabel = selectedConcerns) => {
 				const product = productCatalog[productId];
 				if (!product) throw new Error(`Unknown recommendation product: ${productId}.`);
-				const name = product.name[currentLanguage];
-				const benefit = product.benefit[currentLanguage];
+				const name = product.name[currentLanguage] || product.name.en;
+				const benefit = product.benefit[currentLanguage] || product.benefit.en;
 				if (!name || !benefit) {
 					throw new Error(`Incomplete ${currentLanguage} product information for ${productId}.`);
 				}
