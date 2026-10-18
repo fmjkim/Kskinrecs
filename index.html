@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f5f4ee">
+	<title>피부 타입과 고민 해결하기</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--paper: #f5f4ee;
+			--ink: #242d28;
+			--muted: #66736c;
+			--line: #d9ddd5;
+			--green: #315e4c;
+			--green-dark: #244735;
+			--soft-green: #e4ece4;
+			--coral: #d36d56;
+			--white: #fffefa;
+			font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-width: 320px;
+			color: var(--ink);
+			background:
+				radial-gradient(ellipse at 86% 8%, rgba(214, 223, 204, .5), transparent 29rem),
+				var(--paper);
+		}
+
+		.page {
+			width: min(100% - 40px, 760px);
+			margin: 0 auto;
+			padding: 54px 0 72px;
+		}
+
+		.masthead {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding-bottom: 17px;
+			border-bottom: 1px solid var(--line);
+			color: var(--green);
+			font-size: 12px;
+			font-weight: 750;
+			letter-spacing: .12em;
+			text-transform: uppercase;
+		}
+
+		.masthead-right { display: flex; align-items: center; gap: 16px; }
+		#duration { color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+		.language-picker { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; letter-spacing: 0; text-transform: none; }
+		.language-picker select { max-width: 142px; min-height: 34px; padding: 4px 25px 4px 8px; border: 1px solid var(--line); border-radius: 0; background: var(--white); color: var(--ink); font: inherit; cursor: pointer; }
+		.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+		.intro { padding: 45px 0 28px; }
+
+		.eyebrow {
+			display: flex;
+			gap: 9px;
+			align-items: center;
+			margin: 0 0 14px;
+			color: var(--coral);
+			font-size: 12px;
+			font-weight: 750;
+			letter-spacing: .1em;
+		}
+
+		[dir="rtl"] .eyebrow { flex-direction: row-reverse; }
+		.eyebrow::before { width: 22px; height: 1px; background: currentColor; content: ""; }
+
+		h1 {
+			max-width: 620px;
+			margin: 0;
+			font-family: "Noto Serif KR", "Batang", serif;
+			font-size: clamp(32px, 7vw, 48px);
+			font-weight: 600;
+			line-height: 1.3;
+			letter-spacing: 0;
+			white-space: pre-line;
+		}
+
+		.intro-copy {
+			max-width: 580px;
+			margin: 15px 0 0;
+			color: var(--muted);
+			font-size: 15px;
+			line-height: 1.8;
+			word-break: keep-all;
+		}
+
+		.note {
+			display: flex;
+			gap: 12px;
+			align-items: flex-start;
+			margin: 19px 0 0;
+			padding: 13px 15px;
+			border-left: 2px solid var(--coral);
+			background: rgba(255, 254, 250, .62);
+			color: #59645e;
+			font-size: 13px;
+			line-height: 1.65;
+		}
+
+		[dir="rtl"] .note { border-left: none; border-right: 2px solid var(--coral); }
+		.note strong { flex: 0 0 auto; color: var(--ink); }
+
+		form { border-top: 1px solid var(--line); }
+
+		fieldset {
+			min-width: 0;
+			margin: 0;
+			padding: 27px 0 28px;
+			border: 0;
+			border-bottom: 1px solid var(--line);
+		}
+
+		legend {
+			display: flex;
+			width: 100%;
+			gap: 14px;
+			align-items: baseline;
+			padding: 0;
+			font-size: 17px;
+			font-weight: 730;
+			line-height: 1.55;
+		}
+
+		[dir="rtl"] legend { flex-direction: row-reverse; }
+
+		.number { color: var(--coral); font-size: 12px; font-weight: 800; letter-spacing: .06em; }
+		.hint { margin: 7px 0 15px 34px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+		[dir="rtl"] .hint { margin: 7px 34px 15px 0; }
+
+		.choices {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 9px;
+			margin-left: 34px;
+		}
+
+		[dir="rtl"] .choices { margin-left: 0; margin-right: 34px; }
+
+		.choice { position: relative; min-width: 0; }
+		.choice input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
+		.choice label {
+			display: flex;
+			min-height: 47px;
+			align-items: center;
+			justify-content: center;
+			padding: 10px 12px;
+			border: 1px solid var(--line);
+			background: rgba(255, 254, 250, .7);
+			color: #505c55;
+			cursor: pointer;
+			font-size: 13px;
+			line-height: 1.45;
+			text-align: center;
+			transition: border-color .16s ease, background .16s ease, color .16s ease;
+		}
+
+		.choice input:checked + label { border-color: var(--green); background: var(--soft-green); color: var(--green-dark); font-weight: 700; }
+		.choice input:focus-visible + label { outline: 3px solid rgba(211, 109, 86, .45); outline-offset: 2px; }
+
+		.concerns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+		.concerns .choice label { justify-content: flex-start; gap: 9px; text-align: left; }
+		[dir="rtl"] .concerns .choice label { text-align: right; }
+		.concerns .choice label::before { width: 14px; height: 14px; flex: 0 0 14px; border: 1px solid #aeb8af; content: ""; }
+		.concerns .choice input:checked + label::before { border-color: var(--green); background: var(--green); box-shadow: inset 0 0 0 3px var(--soft-green); }
+		.concern-note { margin: 10px 0 0 34px; color: var(--muted); font-size: 12px; }
+		[dir="rtl"] .concern-note { margin: 10px 34px 0 0; }
+
+		.submit-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 0; }
+		[dir="rtl"] .submit-row { flex-direction: row-reverse; }
+		.required-note { margin: 0; color: var(--muted); font-size: 12px; }
+
+		button {
+			min-height: 48px;
+			padding: 0 22px;
+			border: 0;
+			background: var(--green);
+			color: white;
+			cursor: pointer;
+			font: inherit;
+			font-size: 14px;
+			font-weight: 700;
+			transition: background .16s ease, transform .16s ease;
+		}
+
+		button:hover { background: var(--green-dark); transform: translateY(-1px); }
+		button:focus-visible { outline: 3px solid rgba(211, 109, 86, .6); outline-offset: 3px; }
+
+		.result {
+			display: none;
+			margin-top: 14px;
+			padding: 25px 27px 24px;
+			border-top: 3px solid var(--green);
+			background: var(--white);
+			animation: arrive .35s ease both;
+		}
+
+		.result.visible { display: block; }
+		.result-kicker { margin: 0 0 7px; color: var(--coral); font-size: 11px; font-weight: 800; letter-spacing: .12em; }
+		.result h2 { margin: 0; font-family: "Noto Serif KR", "Batang", serif; font-size: 27px; font-weight: 600; }
+		.result p { max-width: 630px; color: #59645e; font-size: 14px; line-height: 1.75; }
+		.result p:last-child { margin-bottom: 0; }
+		.result strong { color: var(--ink); }
+		.result-meta { padding-top: 13px; border-top: 1px solid var(--line); white-space: pre-line; margin-bottom: 24px; }
+
+		.recommendation-section { margin-top: 24px; padding-top: 20px; border-top: 1px dashed var(--line); }
+		.recommendation-section h3 { margin: 0 0 12px; font-size: 18px; color: var(--green-dark); }
+		.recommendation-note { margin: 0 0 16px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+		.rec-category { margin-bottom: 18px; }
+		.rec-category h4 { margin: 0 0 8px; font-size: 14px; color: var(--coral); letter-spacing: .06em; text-transform: uppercase; }
+		.rec-items { display: grid; gap: 8px; }
+		.rec-item { background: var(--soft-green); border-left: 3px solid var(--green); color: var(--ink); }
+		[dir="rtl"] .rec-item { border-left: none; border-right: 3px solid var(--green); }
+		.rec-item details { padding: 12px 14px; }
+		.rec-item summary { display: flex; justify-content: space-between; gap: 12px; align-items: center; color: var(--green-dark); cursor: pointer; font-size: 14px; font-weight: 700; line-height: 1.5; }
+		.rec-item summary::marker { color: var(--coral); }
+		.rec-item summary:focus-visible { outline: 3px solid rgba(211, 109, 86, .45); outline-offset: 3px; }
+		.rec-item details[open] summary { margin-bottom: 8px; }
+		.rec-item details p { margin: 0; color: #505c55; font-size: 13px; line-height: 1.7; }
+		.rec-item details a { display: inline-block; margin-top: 8px; color: var(--green-dark); font-size: 12px; font-weight: 700; }
+
+		.error { display: none; margin: 0; color: #a23e2c; font-size: 13px; }
+		.error.visible { display: block; }
+		footer { padding-top: 24px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+
+		@keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+		@media (max-width: 560px) {
+			.page { width: min(100% - 32px, 760px); padding-top: 28px; }
+			.masthead { gap: 12px; letter-spacing: .06em; }
+			.masthead-right { gap: 8px; }
+			#duration { display: none; }
+			.language-picker select { max-width: 122px; }
+			.intro { padding-top: 34px; }
+			.choices { grid-template-columns: 1fr; gap: 7px; margin-left: 0; margin-right: 0; }
+			.hint { margin-left: 0; margin-right: 0; }
+			.concern-note { margin-left: 0; margin-right: 0; }
+			.choice label { justify-content: flex-start; min-height: 43px; text-align: left; }
+			[dir="rtl"] .choice label { text-align: right; }
+			.concerns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.concerns .choice label { padding: 9px; font-size: 12px; }
+			.note { display: block; }
+			.note strong { display: block; margin-bottom: 3px; }
+			.submit-row { align-items: stretch; flex-direction: column; }
+			.submit-row button { width: 100%; }
+			.result { padding: 22px 18px; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<main class="page">
+		<header class="masthead">
+				<span data-i18n="brand">Skin notes</span>
+			<div class="masthead-right">
+				<span id="duration" data-i18n="duration">2분 셀프 체크</span>
+				<div class="language-picker">
+					<label class="sr-only" for="language-select" data-i18n="languageLabel">언어 선택</label>
+					<select id="language-select" aria-label="언어 선택">
+						<option value="ko">한국어</option>
+						<option value="en">English</option>
+						<option value="fr">Français</option>
+						<option value="it">Italiano</option>
+						<option value="ja">日本語</option>
+						<option value="zh">中文</option>
+						<option value="ar">العربية</option>
+					</select>
+				</div>
+			</div>
+		</header>
+
+		<section class="intro" aria-labelledby="page-title">
+			<p class="eyebrow" data-i18n="eyebrow">YOUR SKIN, IN CONTEXT</p>
+			<h1 id="page-title" data-i18n="pageTitle">내 피부 타입과<br>요즘 고민 해결하기</h1>
+			<p class="intro-copy" data-i18n="intro">피부 타입은 당김과 번들거림이 얼굴 어디에서 나타나는지 살펴보면 더 잘 구분할 수 있어요. 최근 피부 상태를 떠올리며 답해 주세요.</p>
+			<p class="note"><strong data-i18n="guideTitle">답변 기준</strong><span data-i18n="guide">세안 후 아무것도 바르지 않은 채 30~60분 지난 때와, 평소 낮 시간의 피부를 기준으로 해주세요. 최근 2주간의 평균적인 상태가 가장 정확합니다.</span></p>
+		</section>
+
+		<form id="skin-survey">
+			<fieldset>
+				<legend><span class="number">01</span><span data-i18n="q1">세안 후 30~60분, 피부가 어떤가요?</span></legend>
+				<p class="hint" data-i18n="q1Hint">스킨케어를 바르기 전 상태를 골라주세요.</p>
+				<div class="choices">
+					<div class="choice"><input type="radio" name="tightness" id="tight-0" value="0" required><label for="tight-0" data-choice-group="tightness" data-choice-index="0">편안하고 당기지 않음</label></div>
+					<div class="choice"><input type="radio" name="tightness" id="tight-1" value="1"><label for="tight-1" data-choice-group="tightness" data-choice-index="1">가끔 약간 당김</label></div>
+					<div class="choice"><input type="radio" name="tightness" id="tight-2" value="2"><label for="tight-2" data-choice-group="tightness" data-choice-index="2">자주 당기거나 불편함</label></div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend><span class="number">02</span><span data-i18n="q2">낮 동안 이마와 코에 유분이 얼마나 생기나요?</span></legend>
+				<p class="hint" data-i18n="q2Hint">세안 직후가 아닌, 평소 한낮을 기준으로 해주세요.</p>
+				<div class="choices">
+					<div class="choice"><input type="radio" name="tzone" id="tzone-0" value="0" required><label for="tzone-0" data-choice-group="oil" data-choice-index="0">거의 없고 보송함</label></div>
+					<div class="choice"><input type="radio" name="tzone" id="tzone-1" value="1"><label for="tzone-1" data-choice-group="oil" data-choice-index="1">조금 번들거림</label></div>
+					<div class="choice"><input type="radio" name="tzone" id="tzone-2" value="2"><label for="tzone-2" data-choice-group="oil" data-choice-index="2">눈에 띄게 번들거림</label></div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend><span class="number">03</span><span data-i18n="q3">낮 동안 양 볼에는 유분이 얼마나 생기나요?</span></legend>
+				<p class="hint" data-i18n="q3Hint">광대 아래 볼 부위를 생각하며 답해주세요.</p>
+				<div class="choices">
+					<div class="choice"><input type="radio" name="cheeks" id="cheeks-0" value="0" required><label for="cheeks-0" data-choice-group="oil" data-choice-index="0">거의 없고 보송함</label></div>
+					<div class="choice"><input type="radio" name="cheeks" id="cheeks-1" value="1"><label for="cheeks-1" data-choice-group="oil" data-choice-index="1">조금 번들거림</label></div>
+					<div class="choice"><input type="radio" name="cheeks" id="cheeks-2" value="2"><label for="cheeks-2" data-choice-group="oil" data-choice-index="2">눈에 띄게 번들거림</label></div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend><span class="number">04</span><span data-i18n="q4">최근 피부가 거칠거나 각질이 일어난 적이 있나요?</span></legend>
+				<div class="choices">
+					<div class="choice"><input type="radio" name="flaking" id="flake-0" value="0" required><label for="flake-0" data-choice-group="frequency" data-choice-index="0">거의 없음</label></div>
+					<div class="choice"><input type="radio" name="flaking" id="flake-1" value="1"><label for="flake-1" data-choice-group="frequency" data-choice-index="1">가끔 있음</label></div>
+					<div class="choice"><input type="radio" name="flaking" id="flake-2" value="2"><label for="flake-2" data-choice-group="frequency" data-choice-index="2">자주 있거나 눈에 띔</label></div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend><span class="number">05</span><span data-i18n="q5">화장품을 바를 때 따갑거나 쉽게 붉어지나요?</span></legend>
+				<p class="hint" data-i18n="q5Hint">평소 잘 맞던 제품이나 일상적인 환경에서도 그런지 답해주세요.</p>
+				<div class="choices">
+					<div class="choice"><input type="radio" name="sensitivity" id="sensitive-0" value="0" required><label for="sensitive-0" data-choice-group="frequency" data-choice-index="0">거의 없음</label></div>
+					<div class="choice"><input type="radio" name="sensitivity" id="sensitive-1" value="1"><label for="sensitive-1" data-choice-group="frequency" data-choice-index="1">가끔 있음</label></div>
+					<div class="choice"><input type="radio" name="sensitivity" id="sensitive-2" value="2"><label for="sensitive-2" data-choice-group="frequency" data-choice-index="2">자주 있거나 오래감</label></div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend><span class="number">06</span><span><span data-i18n="ageQuestion">나이대가 어떻게 되나요?</span> <span class="number" data-i18n="optional">선택</span></span></legend>
+				<p class="hint" data-i18n="ageHint">피부 타입 판정에는 반영되지 않고, 결과 참고 정보로만 표시돼요.</p>
+				<div class="choices concerns">
+					<div class="choice"><input type="radio" name="age" id="age-teen" value="0"><label for="age-teen" data-choice-group="age" data-choice-index="0">10대 이하</label></div>
+					<div class="choice"><input type="radio" name="age" id="age-20" value="1"><label for="age-20" data-choice-group="age" data-choice-index="1">20대</label></div>
+					<div class="choice"><input type="radio" name="age" id="age-30" value="2"><label for="age-30" data-choice-group="age" data-choice-index="2">30대</label></div>
+					<div class="choice"><input type="radio" name="age" id="age-40" value="3"><label for="age-40" data-choice-group="age" data-choice-index="3">40대</label></div>
+					<div class="choice"><input type="radio" name="age" id="age-50" value="4"><label for="age-50" data-choice-group="age" data-choice-index="4">50대</label></div>
+					<div class="choice"><input type="radio" name="age" id="age-60-plus" value="5"><label for="age-60-plus" data-choice-group="age" data-choice-index="5">60대 이상</label></div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend><span class="number">07</span><span data-i18n="concernQuestion">요즘 가장 신경 쓰이는 고민은 무엇인가요?</span></legend>
+				<p class="hint" data-i18n="concernHint">해당되는 항목을 모두 골라주세요.</p>
+				<div class="choices concerns">
+					<div class="choice"><input type="checkbox" name="concern" id="concern-acne" value="0"><label for="concern-acne" data-choice-group="concerns" data-choice-index="0">트러블·막힘</label></div>
+					<div class="choice"><input type="checkbox" name="concern" id="concern-redness" value="1"><label for="concern-redness" data-choice-group="concerns" data-choice-index="1">붉음·민감함</label></div>
+					<div class="choice"><input type="checkbox" name="concern" id="concern-dryness" value="2"><label for="concern-dryness" data-choice-group="concerns" data-choice-index="2">건조·각질</label></div>
+					<div class="choice"><input type="checkbox" name="concern" id="concern-pores" value="3"><label for="concern-pores" data-choice-group="concerns" data-choice-index="3">모공·피지</label></div>
+					<div class="choice"><input type="checkbox" name="concern" id="concern-tone" value="4"><label for="concern-tone" data-choice-group="concerns" data-choice-index="4">칙칙함·잡티</label></div>
+					<div class="choice"><input type="checkbox" name="concern" id="concern-lines" value="5"><label for="concern-lines" data-choice-group="concerns" data-choice-index="5">탄력·잔주름</label></div>
+				</div>
+				<p class="concern-note" data-i18n="concernNote">고민은 피부 타입과 별개로 함께 나타날 수 있어요.</p>
+			</fieldset>
+
+			<div class="submit-row">
+				<p class="required-note" data-i18n="requiredNote">01~05번은 결과를 위해 모두 답해주세요.</p>
+				<button type="submit"><span data-i18n="submitLabel">내 결과 보기</span> <span aria-hidden="true">→</span></button>
+			</div>
+			<p class="error" id="form-error" role="alert" data-i18n="formError">아직 답하지 않은 필수 문항이 있어요. 답변을 확인해주세요.</p>
+		</form>
+
+		<section class="result" id="result" aria-live="polite" aria-labelledby="result-title" tabindex="-1">
+			<p class="result-kicker" data-i18n="resultKicker">YOUR SKIN SNAPSHOT</p>
+			<h2 id="result-title"></h2>
+			<p id="result-description"></p>
+			<p class="result-meta" id="result-meta"></p>
+
+			<div class="recommendation-section" id="recommendation-section">
+				<h3 data-i18n="recTitle">피부 타입 맞춤 제품 추천</h3>
+				<p class="recommendation-note" id="recommendation-note"></p>
+				<div class="rec-category">
+					<h4 data-i18n="mustCategory">피부 타입 기본 추천</h4>
+					<div class="rec-items" id="rec-must-items"></div>
+				</div>
+
+				<div class="rec-category">
+					<h4 data-i18n="alsoCategory">함께 고려할 제품</h4>
+					<div class="rec-items" id="rec-also-items"></div>
+				</div>
+
+				<div class="rec-category" id="concern-recommendation-category" hidden>
+					<h4 id="concern-recommendation-title">선택한 고민에 맞춘 추천</h4>
+					<div class="rec-items" id="rec-concern-items"></div>
+				</div>
+			</div>
+		</section>
+
+		<footer data-i18n="footer">이 설문은 일상적인 피부 상태를 살펴보는 참고용이며, 피부 질환을 진단하지 않습니다. 자극이나 염증이 반복되거나 오래 지속된다면 피부과 전문의와 상담하세요.</footer>
+	</main>
+
+	<script>
+		const form = document.querySelector("#skin-survey");
+		const error = document.querySelector("#form-error");
+		const result = document.querySelector("#result");
+		const languageSelect = document.querySelector("#language-select");
+
+		const translations = {
+			ko: {
+				lang: "ko", title: "피부 타입과 고민 해결하기", brand: "Skin notes", duration: "2분 셀프 체크",
+				languageLabel: "언어 선택", eyebrow: "YOUR SKIN, IN CONTEXT", pageTitle: "내 피부 타입과\n요즘 고민 해결하기",
+				intro: "피부 타입은 당김과 번들거림이 얼굴 어디에서 나타나는지 살펴보면 더 잘 구분할 수 있어요. 최근 피부 상태를 떠올리며 답해 주세요.",
+				guideTitle: "답변 기준", guide: "세안 후 아무것도 바르지 않은 채 30~60분 지난 때와, 평소 낮 시간의 피부를 기준으로 해주세요. 최근 2주간의 평균적인 상태가 가장 정확합니다.",
+				q1: "세안 후 30~60분, 피부가 어떤가요?", q1Hint: "스킨케어를 바르기 전 상태를 골라주세요.",
+				q2: "낮 동안 이마와 코에 유분이 얼마나 생기나요?", q2Hint: "세안 직후가 아닌, 평소 한낮을 기준으로 해주세요.",
+				q3: "낮 동안 양 볼에는 유분이 얼마나 생기나요?", q3Hint: "광대 아래 볼 부위를 생각하며 답해주세요.",
+				q4: "최근 피부가 거칠거나 각질이 일어난 적이 있나요?",
+				q5: "화장품을 바를 때 따갑거나 쉽게 붉어지나요?", q5Hint: "평소 잘 맞던 제품이나 일상적인 환경에서도 그런지 답해주세요.",
+				ageQuestion: "나이대가 어떻게 되나요?", optional: "선택", ageHint: "피부 타입 판정에는 반영되지 않고, 결과 참고 정보로만 표시돼요.",
+				concernQuestion: "요즘 가장 신경 쓰이는 고민은 무엇인가요?", concernHint: "해당되는 항목을 모두 골라주세요.",
+				concernNote: "고민은 피부 타입과 별개로 함께 나타날 수 있어요.",
+				requiredNote: "01~05번은 결과를 위해 모두 답해주세요.", submitLabel: "내 결과 보기",
+				formError: "아직 답하지 않은 필수 문항이 있어요. 답변을 확인해주세요.", resultKicker: "YOUR SKIN SNAPSHOT",
+				recTitle: "피부 타입 맞춤 제품 추천", mustCategory: "피부 타입 기본 추천",
+				alsoCategory: "함께 고려할 제품",
+				footer: "이 설문은 일상적인 피부 상태를 살펴보는 참고용이며, 피부 질환을 진단하지 않습니다. 자극이나 염증이 반복되거나 오래 지속된다면 피부과 전문의와 상담하세요.",
+				choices: {
+					tightness: ["편안하고 당기지 않음", "가끔 약간 당김", "자주 당기거나 불편함"],
+					oil: ["거의 없고 보송함", "조금 번들거림", "눈에 띄게 번들거림"],
+					frequency: ["거의 없음", "가끔 있음", "자주 있거나 눈에 띔"],
+					age: ["10대 이하", "20대", "30대", "40대", "50대", "60대 이상"],
+					concerns: ["트러블·막힘", "붉음·민감함", "건조·각질", "모공·피지", "칙칙함·잡티", "탄력·잔주름"]
+				},
+				notSelected: "선택 안 함", noteDryness: "건조함이나 각질이 느껴질 수 있어 보습과 피부 장벽 관리에 신경 써주세요.",
+				noteSensitivityStrong: "민감 반응이 잦다면 향료가 적은 제품을 선택하고 새 제품은 먼저 소량으로 테스트해 보세요.",
+				noteSensitivityMild: "피부가 예민할 수 있으니 새로운 제품은 소량으로 먼저 테스트해 보세요.",
+				noteNoSymptoms: "뚜렷한 건조함이나 민감함은 없는 편이에요.",
+				ageLabel: "연령대", concernLabel: "선택한 고민", noConcern: "선택한 피부 고민이 없습니다.",
+				skinTypes: { oily: "지성 피부", combination: "복합성 피부", dry: "건성 피부", normal: "중성 피부" },
+				descriptions: {
+					oily: "이마·코와 볼 모두 유분이 생기는 편이에요. 가벼운 보습과 꼼꼼한 세안을 중심으로 관리해 보세요.",
+					combination: "이마·코는 번들거리지만 볼은 비교적 보송한 복합성 피부에 가까워요. 부위별로 보습 정도를 조절해 보세요.",
+					dry: "피부 당김이나 각질이 두드러지는 건성 피부에 가까워요. 순한 세안과 보습으로 피부 장벽을 보호해 주세요.",
+					normal: "유분과 건조함이 크게 두드러지지 않는 중성 피부에 가까워요. 현재 균형을 유지하는 관리가 좋아요."
+				}
+			},
+			en: {
+				lang: "en", title: "Understand Your Skin Type & Concerns", brand: "Skin notes", duration: "2-minute skin check",
+				languageLabel: "Choose language", eyebrow: "YOUR SKIN, IN CONTEXT", pageTitle: "Understand your skin type\nand what it needs",
+				intro: "You can better identify your skin type by noticing where your skin feels tight or gets oily. Answer based on how your skin has been lately.",
+				guideTitle: "How to answer", guide: "Think about your skin 30–60 minutes after cleansing, before applying anything, and during a typical afternoon. Your average skin over the past two weeks is most helpful.",
+				q1: "How does your skin feel 30–60 minutes after cleansing?", q1Hint: "Choose how your skin feels before applying skincare.",
+				q2: "How oily do your forehead and nose get during the day?", q2Hint: "Think about a typical midday, not right after cleansing.",
+				q3: "How oily do your cheeks get during the day?", q3Hint: "Focus on the cheek area below your cheekbones.",
+				q4: "Has your skin felt rough or flaky recently?",
+				q5: "Do products sting or make your skin turn red easily?", q5Hint: "Consider products that usually suit you and everyday conditions.",
+				ageQuestion: "What is your age range?", optional: "Optional", ageHint: "This does not affect your skin-type result; it is shown for reference only.",
+				concernQuestion: "What are your main skin concerns lately?", concernHint: "Select all that apply.",
+				concernNote: "Concerns can occur alongside any skin type.",
+				requiredNote: "Please answer questions 01–05 to see your result.", submitLabel: "See my result",
+				formError: "Some required questions are unanswered. Please check your answers.", resultKicker: "YOUR SKIN SNAPSHOT",
+				recTitle: "Products for your skin type", mustCategory: "Skin-type essentials",
+				alsoCategory: "More to consider",
+				footer: "This survey is for general reference and does not diagnose skin conditions. Consult a dermatologist if irritation or inflammation recurs or persists.",
+				choices: {
+					tightness: ["Comfortable, not tight", "A little tight sometimes", "Often tight or uncomfortable"],
+					oil: ["Barely oily, feels matte", "A little shiny", "Noticeably shiny"],
+					frequency: ["Rarely or never", "Sometimes", "Often or noticeable"],
+					age: ["19 or younger", "20s", "30s", "40s", "50s", "60+"],
+					concerns: ["Breakouts / clogged pores", "Redness / sensitivity", "Dryness / flaking", "Pores / oiliness", "Dullness / dark spots", "Loss of firmness / fine lines"]
+				},
+				notSelected: "Not selected", noteDryness: "You may be experiencing dryness or flaking. Focus on hydration and supporting your skin barrier.",
+				noteSensitivityStrong: "If sensitivity is frequent, choose fragrance-free products and patch-test new ones first.",
+				noteSensitivityMild: "Your skin may be sensitive, so patch-test new products first.",
+				noteNoSymptoms: "You report no notable dryness or sensitivity.",
+				ageLabel: "Age range", concernLabel: "Selected concerns", noConcern: "No skin concerns selected.",
+				skinTypes: { oily: "Oily skin", combination: "Combination skin", dry: "Dry skin", normal: "Balanced skin" },
+				descriptions: {
+					oily: "Your forehead, nose, and cheeks tend to get oily. Try focusing on lightweight hydration and thorough, gentle cleansing.",
+					combination: "Your forehead and nose get shiny while your cheeks stay relatively matte. Adjust hydration for different areas.",
+					dry: "Tightness or flaking suggests skin that leans dry. Protect your skin barrier with gentle cleansing and moisturizer.",
+					normal: "You report no strong tendency toward oiliness or dryness. A balanced routine can help maintain your skin."
+				}
+			},
+			fr: {
+				lang: "fr", title: "Comprendre votre type de peau et ses besoins", brand: "Skin notes", duration: "Bilan peau en 2 min",
+				languageLabel: "Choisir la langue", eyebrow: "VOTRE PEAU, EN CONTEXTE", pageTitle: "Comprendre votre type de peau\net ses besoins",
+				intro: "Pour mieux reconnaître votre type de peau, observez les zones qui tiraillent ou brillent. Répondez en pensant à l’état récent de votre peau.",
+				guideTitle: "Comment répondre", guide: "Pensez à votre peau 30 à 60 minutes après le nettoyage, sans avoir appliqué de produit, puis pendant une journée habituelle. La moyenne des deux dernières semaines est la plus utile.",
+				q1: "Comment est votre peau 30 à 60 minutes après le nettoyage ?", q1Hint: "Choisissez l’état de votre peau avant les soins.",
+				q2: "À quel point votre front et votre nez deviennent-ils gras dans la journée ?", q2Hint: "Pensez à une journée habituelle, pas juste après le nettoyage.",
+				q3: "À quel point vos joues deviennent-elles grasses dans la journée ?", q3Hint: "Pensez à la zone sous les pommettes.",
+				q4: "Votre peau a-t-elle été rugueuse ou squameuse récemment ?",
+				q5: "Les produits picotent-ils ou votre peau rougit-elle facilement ?", q5Hint: "Pensez aux produits qui vous conviennent habituellement et aux situations courantes.",
+				ageQuestion: "Quelle est votre tranche d’âge ?", optional: "Facultatif", ageHint: "Cela n’influence pas le résultat et sert uniquement de repère.",
+				concernQuestion: "Quelles sont vos préoccupations cutanées actuelles ?", concernHint: "Sélectionnez toutes les réponses applicables.",
+				concernNote: "Ces préoccupations peuvent accompagner tous les types de peau.",
+				requiredNote: "Répondez aux questions 01 à 05 pour voir le résultat.", submitLabel: "Voir mon résultat",
+				formError: "Certaines questions obligatoires sont sans réponse. Vérifiez vos réponses.", resultKicker: "APERÇU DE VOTRE PEAU",
+				recTitle: "Produits adaptés à votre peau", mustCategory: "Les essentiels selon votre type de peau",
+				alsoCategory: "Autres produits à envisager",
+				footer: "Ce questionnaire est fourni à titre indicatif et ne permet pas de diagnostiquer une affection cutanée. Consultez un dermatologue si une irritation ou une inflammation récidive ou persiste.",
+				choices: {
+					tightness: ["Confortable, sans tiraillement", "Légère sensation parfois", "Tiraillements fréquents ou gênants"],
+					oil: ["Presque pas, peau mate", "Légèrement brillante", "Nettement brillante"],
+					frequency: ["Presque jamais", "Parfois", "Souvent ou de façon visible"],
+					age: ["19 ans ou moins", "20–29 ans", "30–39 ans", "40–49 ans", "50–59 ans", "60 ans ou plus"],
+					concerns: ["Imperfections / pores obstrués", "Rougeurs / sensibilité", "Sécheresse / desquamation", "Pores / excès de sébum", "Teint terne / taches", "Fermeté / ridules"]
+				},
+				notSelected: "Non renseigné", noteDryness: "Votre peau peut manquer d’hydratation ou présenter des squames. Privilégiez l’hydratation et la barrière cutanée.",
+				noteSensitivityStrong: "En cas de sensibilité fréquente, préférez les produits sans parfum et testez-les d’abord sur une petite zone.",
+				noteSensitivityMild: "Votre peau peut être sensible ; testez les nouveaux produits sur une petite zone.",
+				noteNoSymptoms: "Vous ne signalez pas de sécheresse ni de sensibilité marquée.",
+				ageLabel: "Tranche d’âge", concernLabel: "Préoccupations choisies", noConcern: "Aucune préoccupation sélectionnée.",
+				skinTypes: { oily: "Peau grasse", combination: "Peau mixte", dry: "Peau sèche", normal: "Peau équilibrée" },
+				descriptions: {
+					oily: "Votre front, votre nez et vos joues ont tendance à briller. Privilégiez une hydratation légère et un nettoyage doux.",
+					combination: "Votre front et votre nez brillent tandis que vos joues restent plutôt mates. Adaptez l’hydratation selon les zones.",
+					dry: "Les tiraillements ou squames évoquent une peau sèche. Protégez la barrière cutanée avec un nettoyage doux et une crème hydratante.",
+					normal: "Vous ne signalez pas de tendance marquée à la sécheresse ou au sébum. Une routine équilibrée aidera à préserver votre peau."
+				}
+			},
+			it: {
+				lang: "it", title: "Scopri il tuo tipo di pelle e le sue esigenze", brand: "Skin notes", duration: "Check della pelle in 2 min",
+				languageLabel: "Scegli la lingua", eyebrow: "LA TUA PELLE, NEL SUO CONTESTO", pageTitle: "Scopri il tuo tipo di pelle\ne le sue esigenze",
+				intro: "Per capire meglio il tuo tipo di pelle, osserva dove senti tensione o noti lucidità. Rispondi pensando a come è stata la tua pelle di recente.",
+				guideTitle: "Come rispondere", guide: "Pensa alla pelle 30–60 minuti dopo la detersione, senza aver applicato prodotti, e durante una giornata normale. La media delle ultime due settimane è la più utile.",
+				q1: "Come senti la pelle 30–60 minuti dopo la detersione?", q1Hint: "Scegli come si sente la pelle prima di applicare i prodotti.",
+				q2: "Quanto diventano oleosi fronte e naso durante il giorno?", q2Hint: "Pensa a una giornata normale, non subito dopo la detersione.",
+				q3: "Quanto diventano oleose le guance durante il giorno?", q3Hint: "Considera la zona sotto gli zigomi.",
+				q4: "Di recente la pelle è stata ruvida o desquamata?",
+				q5: "I prodotti pizzicano o la pelle si arrossa facilmente?", q5Hint: "Pensa ai prodotti che usi di solito e alle situazioni quotidiane.",
+				ageQuestion: "Qual è la tua fascia d’età?", optional: "Facoltativo", ageHint: "Non influisce sul risultato del tipo di pelle; viene mostrata solo come riferimento.",
+				concernQuestion: "Quali sono le tue principali esigenze cutanee?", concernHint: "Seleziona tutte le opzioni pertinenti.",
+				concernNote: "Queste esigenze possono presentarsi con qualsiasi tipo di pelle.",
+				requiredNote: "Rispondi alle domande 01–05 per vedere il risultato.", submitLabel: "Vedi il risultato",
+				formError: "Mancano alcune risposte obbligatorie. Controlla le tue risposte.", resultKicker: "IL PROFILO DELLA TUA PELLE",
+				recTitle: "Prodotti per il tuo tipo di pelle", mustCategory: "Essenziali per il tuo tipo di pelle",
+				alsoCategory: "Altri prodotti da valutare",
+				footer: "Questo questionario è solo indicativo e non diagnostica patologie cutanee. Consulta un dermatologo se irritazioni o infiammazioni si ripetono o persistono.",
+				choices: {
+					tightness: ["Confortevole, senza tensione", "Leggermente tesa a volte", "Spesso tesa o a disagio"],
+					oil: ["Quasi per niente, opaca", "Leggermente lucida", "Visibilmente lucida"],
+					frequency: ["Quasi mai", "A volte", "Spesso o in modo evidente"],
+					age: ["19 anni o meno", "20–29 anni", "30–39 anni", "40–49 anni", "50–59 anni", "60 anni o più"],
+					concerns: ["Imperfezioni / pori ostruiti", "Rossori / sensibilità", "Secchezza / desquamazione", "Pori / sebo", "Colorito spento / macchie", "Elasticità / rughette"]
+				},
+				notSelected: "Non selezionata", noteDryness: "Potresti avere secchezza o desquamazione. Concentrati sull’idratazione e sulla barriera cutanea.",
+				noteSensitivityStrong: "Se la sensibilità è frequente, scegli prodotti senza profumo e provali prima su una piccola zona.",
+				noteSensitivityMild: "La pelle potrebbe essere sensibile: prova i nuovi prodotti prima su una piccola zona.",
+				noteNoSymptoms: "Non segnali particolare secchezza o sensibilità.",
+				ageLabel: "Fascia d’età", concernLabel: "Esigenze selezionate", noConcern: "Nessuna esigenza cutanea selezionata.",
+				skinTypes: { oily: "Pelle grassa", combination: "Pelle mista", dry: "Pelle secca", normal: "Pelle equilibrata" },
+				descriptions: {
+					oily: "Fronte, naso e guance tendono a diventare lucidi. Prova un’idratazione leggera e una detersione delicata.",
+					combination: "Fronte e naso diventano lucidi, mentre le guance restano più opache. Adatta l’idratazione alle diverse zone.",
+					dry: "Tensione o desquamazione indicano una pelle tendenzialmente secca. Proteggi la barriera con detersione delicata e idratante.",
+					normal: "Non segnali una forte tendenza alla secchezza o all’oleosità. Una routine equilibrata può aiutarti a mantenerla."
+				}
+			},
+			ja: {
+				lang: "ja", title: "肌タイプと肌悩みをチェック", brand: "Skin notes", duration: "2分セルフチェック",
+				languageLabel: "言語を選択", eyebrow: "肌の状態をチェック", pageTitle: "自分の肌タイプと\n今の肌悩みを知る",
+				intro: "つっぱりやテカリが顔のどこに出るかを見ると、肌タイプを判断しやすくなります。最近の肌状態を思い出して回答してください。",
+				guideTitle: "回答の基準", guide: "洗顔後、何も塗らずに30〜60分経ったときと、普段の日中の肌を基準にしてください。直近2週間の平均的な状態が参考になります。",
+				q1: "洗顔後30〜60分、肌はどんな状態ですか？", q1Hint: "スキンケアを塗る前の状態を選んでください。",
+				q2: "日中、額や鼻はどのくらい皮脂が出ますか？", q2Hint: "洗顔直後ではなく、普段の日中を基準にしてください。",
+				q3: "日中、頬はどのくらい皮脂が出ますか？", q3Hint: "頬骨の下あたりを考えて回答してください。",
+				q4: "最近、肌がざらついたり皮むけしたりしましたか？",
+				q5: "化粧品を塗るとしみたり、赤くなりやすかったりしますか？", q5Hint: "普段合っている製品や日常的な環境でも起きるか考えてください。",
+				ageQuestion: "年齢層を教えてください", optional: "任意", ageHint: "肌タイプの判定には影響せず、参考情報としてのみ表示されます。",
+				concernQuestion: "最近、特に気になる肌悩みは何ですか？", concernHint: "当てはまるものをすべて選んでください。",
+				concernNote: "肌悩みはどの肌タイプにも現れることがあります。",
+				requiredNote: "結果を見るには01〜05の質問すべてに回答してください。", submitLabel: "結果を見る",
+				formError: "未回答の必須項目があります。回答を確認してください。", resultKicker: "あなたの肌チェック結果",
+				recTitle: "肌タイプに合わせたおすすめ", mustCategory: "肌タイプ別の基本アイテム",
+				alsoCategory: "あわせて検討したいアイテム",
+				footer: "このアンケートは日常的な肌状態の参考情報であり、皮膚疾患を診断するものではありません。刺激や炎症が繰り返す、または長引く場合は皮膚科専門医にご相談ください。",
+				choices: {
+					tightness: ["快適でつっぱらない", "ときどき少しつっぱる", "よくつっぱる、または不快"],
+					oil: ["ほとんどなく、さらさら", "少しテカる", "目立ってテカる"],
+					frequency: ["ほとんどない", "ときどきある", "よくある、または目立つ"],
+					age: ["10代以下", "20代", "30代", "40代", "50代", "60代以上"],
+					concerns: ["肌荒れ・毛穴詰まり", "赤み・敏感", "乾燥・角質", "毛穴・皮脂", "くすみ・シミ", "ハリ不足・小じわ"]
+				},
+				notSelected: "未選択", noteDryness: "乾燥や皮むけがあるかもしれません。保湿と肌のバリア機能を意識しましょう。",
+				noteSensitivityStrong: "敏感な状態が続く場合は、香料の少ない製品を選び、新製品は少量で試してください。",
+				noteSensitivityMild: "肌が敏感な可能性があります。新しい製品は少量で試してください。",
+				noteNoSymptoms: "目立った乾燥や敏感さはないようです。",
+				ageLabel: "年齢層", concernLabel: "選択した肌悩み", noConcern: "肌悩みは選択されていません。",
+				skinTypes: { oily: "脂性肌", combination: "混合肌", dry: "乾燥肌", normal: "普通肌" },
+				descriptions: {
+					oily: "額・鼻・頬に皮脂が出やすい傾向です。軽い保湿とやさしい洗顔を中心にケアしましょう。",
+					combination: "額や鼻はテカりやすく、頬は比較的さらさらしています。部位ごとに保湿を調整しましょう。",
+					dry: "つっぱりや皮むけから、乾燥しやすい傾向がうかがえます。やさしい洗顔と保湿で肌を守りましょう。",
+					normal: "皮脂や乾燥が特に目立たない傾向です。バランスのよいケアを続けましょう。"
+				}
+			},
+			zh: {
+				lang: "zh", title: "了解你的肤质与肌肤困扰", brand: "Skin notes", duration: "2分钟肌肤自测",
+				languageLabel: "选择语言", eyebrow: "了解你的肌肤状态", pageTitle: "了解你的肤质\n与近期肌肤困扰",
+				intro: "观察脸部哪些部位容易紧绷或出油，可以更好地判断肤质。请根据近期的肌肤状态作答。",
+				guideTitle: "作答参考", guide: "请以洁面后30–60分钟、尚未涂抹护肤品时，以及平时白天的状态为准。近两周的平均状态最有参考价值。",
+				q1: "洁面后30–60分钟，肌肤感觉如何？", q1Hint: "请选择涂抹护肤品之前的状态。",
+				q2: "白天额头和鼻子会出多少油？", q2Hint: "请回想平时的中午，而不是刚洁面之后。",
+				q3: "白天脸颊会出多少油？", q3Hint: "请考虑颧骨下方的脸颊区域。",
+				q4: "最近肌肤是否粗糙或有起皮现象？",
+				q5: "涂抹化妆品时会刺痛或容易泛红吗？", q5Hint: "请考虑平时适合自己的产品和日常环境下是否也会如此。",
+				ageQuestion: "你的年龄段是？", optional: "选填", ageHint: "年龄不会影响肤质判断，仅作为结果参考。",
+				concernQuestion: "近期最在意哪些肌肤问题？", concernHint: "请选择所有符合的选项。",
+				concernNote: "任何肤质都可能同时存在这些肌肤困扰。",
+				requiredNote: "请回答第01–05题以查看结果。", submitLabel: "查看我的结果",
+				formError: "还有必答题未完成，请检查你的答案。", resultKicker: "你的肌肤状态",
+				recTitle: "适合你肤质的产品推荐", mustCategory: "适合该肤质的基础产品",
+				alsoCategory: "还可考虑的产品",
+				footer: "本问卷仅供日常肌肤状态参考，不用于诊断皮肤疾病。如刺激或炎症反复出现或持续不退，请咨询皮肤科医生。",
+				choices: {
+					tightness: ["舒适，不紧绷", "偶尔有些紧绷", "经常紧绷或不适"],
+					oil: ["几乎不出油，清爽", "有些泛油光", "明显泛油光"],
+					frequency: ["几乎没有", "偶尔有", "经常出现或明显"],
+					age: ["19岁及以下", "20多岁", "30多岁", "40多岁", "50多岁", "60岁及以上"],
+					concerns: ["痘痘 / 毛孔堵塞", "泛红 / 敏感", "干燥 / 起皮", "毛孔 / 出油", "暗沉 / 色斑", "弹性 / 细纹"]
+				},
+				notSelected: "未选择", noteDryness: "你可能有干燥或起皮的情况，可以加强保湿并注意维护肌肤屏障。",
+				noteSensitivityStrong: "如果敏感反应频繁，请选择少香精的产品，并先在小范围试用。",
+				noteSensitivityMild: "肌肤可能较敏感，尝试新产品前请先在小范围测试。",
+				noteNoSymptoms: "目前没有明显的干燥或敏感情况。",
+				ageLabel: "年龄段", concernLabel: "已选肌肤困扰", noConcern: "未选择肌肤困扰。",
+				skinTypes: { oily: "油性肌肤", combination: "混合性肌肤", dry: "干性肌肤", normal: "中性肌肤" },
+				descriptions: {
+					oily: "额头、鼻子和脸颊都比较容易出油。建议注重清爽保湿和温和洁面。",
+					combination: "额头和鼻子容易泛油光，而脸颊相对清爽。可以根据不同部位调整保湿。",
+					dry: "紧绷或起皮说明肌肤可能偏干。请用温和洁面和保湿产品帮助维护肌肤屏障。",
+					normal: "肌肤没有明显的出油或干燥倾向。保持均衡的护理有助于维持当前状态。"
+				}
+			},
+			ar: {
+				lang: "ar", title: "تعرّفي على نوع بشرتك واحتياجاتها", brand: "ملاحظات البشرة", duration: "فحص البشرة في دقيقتين",
+				languageLabel: "اختيار اللغة", eyebrow: "بشرتك كما هي", pageTitle: "تعرّفي على نوع بشرتك\nواحتياجاتها الحالية",
+				intro: "يساعدك الانتباه إلى مواضع الجفاف أو اللمعان في الوجه على تحديد نوع بشرتك. أجيبي وفق حالة بشرتك مؤخرًا.",
+				guideTitle: "طريقة الإجابة", guide: "فكّري في بشرتك بعد 30–60 دقيقة من غسلها من دون وضع أي منتج، وكذلك خلال النهار المعتاد. يُعد متوسط حالتها خلال الأسبوعين الماضيين الأكثر فائدة.",
+				q1: "كيف تشعر بشرتك بعد 30–60 دقيقة من غسلها؟", q1Hint: "اختاري حالة البشرة قبل وضع منتجات العناية.",
+				q2: "ما مقدار الدهون التي تظهر على الجبهة والأنف خلال النهار؟", q2Hint: "فكّري في منتصف يوم عادي، وليس مباشرة بعد غسل الوجه.",
+				q3: "ما مقدار الدهون التي تظهر على الخدين خلال النهار؟", q3Hint: "ركّزي على منطقة الخدين أسفل عظمتي الوجنتين.",
+				q4: "هل بدت بشرتك خشنة أو متقشرة مؤخرًا؟",
+				q5: "هل تسبب المستحضرات لسعًا أو احمرارًا بسهولة؟", q5Hint: "فكّري فيما إذا كان ذلك يحدث مع المنتجات المناسبة لك وفي الظروف اليومية.",
+				ageQuestion: "ما فئتك العمرية؟", optional: "اختياري", ageHint: "لا يؤثر ذلك في تحديد نوع البشرة، ويظهر للمعلومات فقط.",
+				concernQuestion: "ما أكثر مشكلات البشرة التي تشغل بالك مؤخرًا؟", concernHint: "اختاري كل ما ينطبق عليك.",
+				concernNote: "قد تظهر هذه المشكلات مع أي نوع من أنواع البشرة.",
+				requiredNote: "أجيبي عن الأسئلة 01–05 لعرض النتيجة.", submitLabel: "عرض نتيجتي",
+				formError: "هناك أسئلة إلزامية لم تتم الإجابة عنها. يُرجى مراجعة إجاباتك.", resultKicker: "ملخص حالة بشرتك",
+				recTitle: "منتجات تناسب نوع بشرتك", mustCategory: "الأساسيات المناسبة لنوع البشرة",
+				alsoCategory: "منتجات أخرى يمكن أخذها في الاعتبار",
+				footer: "هذا الاستبيان للاسترشاد بحالة البشرة اليومية ولا يشخّص الأمراض الجلدية. استشيري طبيبًا مختصًا إذا تكرر التهيج أو الالتهاب أو استمر.",
+				choices: {
+					tightness: ["مريحة ولا يوجد شد", "شد خفيف أحيانًا", "شد متكرر أو انزعاج"],
+					oil: ["قليل جدًا وتشعر بالانتعاش", "لمعان بسيط", "لمعان واضح"],
+					frequency: ["نادرًا أو أبدًا", "أحيانًا", "غالبًا أو بشكل ملحوظ"],
+					age: ["19 عامًا أو أقل", "العشرينات", "الثلاثينات", "الأربعينات", "الخمسينات", "60 عامًا أو أكثر"],
+					concerns: ["حبوب / انسداد المسام", "احمرار / حساسية", "جفاف / تقشر", "مسام / دهون", "بهتان / بقع داكنة", "مرونة / خطوط دقيقة"]
+				},
+				notSelected: "لم يتم الاختيار", noteDryness: "قد تعانين من الجفاف أو التقشر. اهتمي بالترطيب ودعم حاجز البشرة.",
+				noteSensitivityStrong: "إذا تكررت الحساسية، اختاري منتجات قليلة العطر واختبريها أولًا على مساحة صغيرة.",
+				noteSensitivityMild: "قد تكون بشرتك حساسة؛ اختبري المنتجات الجديدة أولًا على مساحة صغيرة.",
+				noteNoSymptoms: "لا تظهر لديك علامات واضحة للجفاف أو الحساسية.",
+				ageLabel: "الفئة العمرية", concernLabel: "المشكلات المختارة", noConcern: "لم يتم اختيار أي مشكلة للبشرة.",
+				skinTypes: { oily: "بشرة دهنية", combination: "بشرة مختلطة", dry: "بشرة جافة", normal: "بشرة متوازنة" },
+				descriptions: {
+					oily: "تميل الجبهة والأنف والخدان إلى إفراز الدهون. ركّزي على الترطيب الخفيف والتنظيف اللطيف.",
+					combination: "تميل الجبهة والأنف إلى اللمعان بينما يكون الخدان أكثر جفافًا. عدّلي الترطيب حسب المنطقة.",
+					dry: "يشير الشد أو التقشر إلى ميل البشرة للجفاف. احمي حاجز البشرة بالتنظيف اللطيف والترطيب.",
+					normal: "لا تلاحظين ميلًا واضحًا للجفاف أو الدهون. يساعد الروتين المتوازن على الحفاظ على البشرة."
+				}
+			}
+		};
+
+		let currentLanguage = languageSelect.value;
+
+		function getMessages() {
+			return translations[currentLanguage] || translations.ko;
+		}
+
+
+		function applyLanguage(language) {
+			currentLanguage = Object.hasOwn(translations, language) ? language : "ko";
+			languageSelect.value = currentLanguage;
+			const messages = getMessages();
+			document.documentElement.lang = messages.lang;
+			document.documentElement.dir = messages.lang === "ar" ? "rtl" : "ltr";
+			document.title = messages.title;
+			document.querySelectorAll("[data-i18n]").forEach((element) => {
+				const translation = messages[element.dataset.i18n];
+				if (typeof translation !== "string") {
+					throw new Error(`Missing ${currentLanguage} translation: ${element.dataset.i18n}`);
+				}
+				element.textContent = translation;
+			});
+			document.querySelectorAll("[data-choice-group]").forEach((element) => {
+				const options = messages.choices?.[element.dataset.choiceGroup];
+				if (!options || typeof options[Number(element.dataset.choiceIndex)] !== "string") {
+					throw new Error(`Missing ${currentLanguage} choice translation: ${element.dataset.choiceGroup}[${element.dataset.choiceIndex}]`);
+				}
+				element.textContent = options[Number(element.dataset.choiceIndex)];
+			});
+			languageSelect.setAttribute("aria-label", messages.languageLabel);
+			if (result.classList.contains("visible")) renderResult();
+		}
+
+		function selectedValue(name) {
+			return Number(form.querySelector(`input[name="${name}"]:checked`).value);
+		}
+
+		function classifySkin({ tightness, tzone, cheeks, flaking }) {
+			if (tzone >= 1 && cheeks >= 1) return "oily";
+			if (tzone >= 1 && cheeks === 0) return "combination";
+			if (tightness === 2 || flaking === 2 || (tightness === 1 && flaking >= 1)) return "dry";
+			return "normal";
+		}
+
+		const recommendationUi = {
+			ko: {
+				title: "피부 타입 맞춤 제품 추천", basic: "피부 타입 기본 추천", additional: "함께 고려할 제품",
+				concerns: "선택한 고민에 맞춘 제품", open: "제품명을 누르면 선택한 고민에 맞는 설명을 볼 수 있어요.",
+				fit: "선택한 고민({concerns})과 {skinType} 피부를 고려한 추천입니다. {benefit} 새로운 제품은 먼저 소량으로 테스트하고, 따가움이나 붉어짐이 생기면 사용을 중단하세요.",
+				noConcern: "선택하신 피부 타입에 맞춘 제품입니다. {benefit} 새로운 제품은 먼저 소량으로 테스트하고, 따가움이나 붉어짐이 생기면 사용을 중단하세요.",
+				type: { oily: "지성", combination: "복합성", dry: "건성", normal: "중성" }
+			},
+			en: {
+				title: "Products for your skin type", basic: "Skin-type essentials", additional: "More to consider",
+				concerns: "Products for your selected concerns", open: "Select a product name to see how it relates to your concerns.",
+				fit: "Suggested with your concern ({concerns}) and {skinType} skin in mind. {benefit} Patch-test new products first and stop use if irritation or redness occurs.",
+				noConcern: "Suggested for your {skinType} skin. {benefit} Patch-test new products first and stop use if irritation or redness occurs.",
+				type: { oily: "oily", combination: "combination", dry: "dry", normal: "balanced" }
+			},
+			fr: {
+				title: "Produits adaptés à votre peau", basic: "Les essentiels selon votre type de peau", additional: "Autres produits à envisager",
+				concerns: "Produits pour vos préoccupations", open: "Sélectionnez le nom d’un produit pour voir son lien avec vos préoccupations.",
+				fit: "Suggestion tenant compte de votre préoccupation ({concerns}) et de votre peau {skinType}. {benefit} Testez d’abord les nouveaux produits sur une petite zone et cessez en cas d’irritation ou de rougeur.",
+				noConcern: "Suggestion adaptée à votre peau {skinType}. {benefit} Testez d’abord les nouveaux produits sur une petite zone et cessez en cas d’irritation ou de rougeur.",
+				type: { oily: "grasse", combination: "mixte", dry: "sèche", normal: "équilibrée" }
+			},
+			it: {
+				title: "Prodotti per il tuo tipo di pelle", basic: "Essenziali per il tuo tipo di pelle", additional: "Altri prodotti da valutare",
+				concerns: "Prodotti per le esigenze selezionate", open: "Seleziona il nome di un prodotto per vedere come risponde alle tue esigenze.",
+				fit: "Consigliato considerando l’esigenza ({concerns}) e la pelle {skinType}. {benefit} Prova prima i nuovi prodotti su una piccola zona e interrompi in caso di irritazione o rossore.",
+				noConcern: "Consigliato per la pelle {skinType}. {benefit} Prova prima i nuovi prodotti su una piccola zona e interrompi in caso di irritazione o rossore.",
+				type: { oily: "grassa", combination: "mista", dry: "secca", normal: "equilibrata" }
+			},
+			ja: {
+				title: "肌タイプに合わせたおすすめ", basic: "肌タイプ別の基本アイテム", additional: "あわせて検討したいアイテム",
+				concerns: "選択した肌悩みに合わせたアイテム", open: "商品名を選ぶと、肌悩みに合わせた説明が表示されます。",
+				fit: "選択した悩み（{concerns}）と{skinType}肌を考慮したおすすめです。{benefit} 新しい製品は少量から試し、刺激や赤みが出た場合は使用を中止してください。",
+				noConcern: "{skinType}肌向けのおすすめです。{benefit} 新しい製品は少量から試し、刺激や赤みが出た場合は使用を中止してください。",
+				type: { oily: "脂性", combination: "混合", dry: "乾燥", normal: "普通" }
+			},
+			zh: {
+				title: "适合你肤质的产品推荐", basic: "适合该肤质的基础产品", additional: "还可考虑的产品",
+				concerns: "针对已选肌肤困扰的产品", open: "点击产品名称，查看它与所选肌肤困扰的关联。",
+				fit: "结合你选择的困扰（{concerns}）和{skinType}肤质推荐。{benefit} 首次使用新产品前请先小范围测试；如出现刺痛或泛红，请停止使用。",
+				noConcern: "根据你的{skinType}肤质推荐。{benefit} 首次使用新产品前请先小范围测试；如出现刺痛或泛红，请停止使用。",
+				type: { oily: "油性", combination: "混合性", dry: "干性", normal: "中性" }
+			},
+			ar: {
+				title: "منتجات تناسب نوع بشرتك", basic: "الأساسيات المناسبة لنوع البشرة", additional: "منتجات أخرى يمكن أخذها في الاعتبار",
+				concerns: "منتجات تناسب المشكلات التي اخترتها", open: "اختاري اسم المنتج لمعرفة صلته بمشكلات بشرتك.",
+				fit: "اقتراح يراعي المشكلة التي اخترتها ({concerns}) والبشرة {skinType}. {benefit} اختبري المنتجات الجديدة على مساحة صغيرة أولًا، وأوقفي استخدامها إذا ظهر تهيج أو احمرار.",
+				noConcern: "اقتراح مناسب للبشرة {skinType}. {benefit} اختبري المنتجات الجديدة على مساحة صغيرة أولًا، وأوقفي استخدامها إذا ظهر تهيج أو احمرار.",
+				type: { oily: "الدهنية", combination: "المختلطة", dry: "الجافة", normal: "العادية" }
+			}
+		};
+
+		const productCatalog = {
+			dokdo: {
+				name: {
+					ko: "라운드랩 1025 독도 클렌저", en: "ROUND LAB 1025 Dokdo Cleanser",
+					fr: "Nettoyant Dokdo 1025 ROUND LAB", it: "Detergente Dokdo 1025 ROUND LAB",
+					ja: "ROUND LAB 1025 独島クレンザー", zh: "ROUND LAB 1025 独岛洁面", ar: "ROUND LAB 1025 منظف دوكدو"
+				},
+				benefit: {
+					ko: "히알루론산과 세라마이드가 포함된 세안제로, 노폐물을 씻어내면서 세안 후 당김이 신경 쓰이는 루틴에 고려할 수 있어요.",
+					en: "A cleanser formulated with hyaluronic acid and ceramide; consider it when cleansing is needed without an overly stripped after-feel.",
+					fr: "Un nettoyant formulé avec de l’acide hyaluronique et des céramides, à envisager si vous souhaitez nettoyer sans sensation de peau trop décapée.",
+					it: "Un detergente con acido ialuronico e ceramide, da considerare per detergere evitando una sensazione di pelle eccessivamente secca.",
+					ja: "ヒアルロン酸とセラミドを配合した洗顔料です。洗顔後のつっぱりが気になる場合の洗顔ステップに取り入れられます。",
+					zh: "这款洁面含透明质酸和神经酰胺，可作为清洁步骤的选择，适合不希望洁面后有明显紧绷感的护理思路。",
+					ar: "غسول يحتوي على حمض الهيالورونيك والسيراميد؛ يمكن أخذه في الاعتبار عند الرغبة في التنظيف مع تقليل الإحساس بالجفاف بعد الغسل."
+				}
+			},
+			drg: {
+				name: {
+					ko: "닥터지 레드 블레미쉬 클리어 수딩 크림", en: "Dr.G Red Blemish Clear Soothing Cream",
+					fr: "Crème apaisante Red Blemish Clear Dr.G", it: "Crema lenitiva Red Blemish Clear Dr.G",
+					ja: "Dr.G レッドブレミッシュ クリアスージングクリーム", zh: "Dr.G Red Blemish 舒缓面霜", ar: "Dr.G Red Blemish كريم مهدئ"
+				},
+				benefit: {
+					ko: "브랜드가 진정·보습 크림으로 소개하는 제품으로, 붉음이나 트러블이 신경 쓰일 때 가벼운 보습 단계를 더하는 선택지예요.",
+					en: "Marketed as a soothing moisturizer; it is an option for adding a moisturizing step when visible redness or blemish-prone areas are a concern.",
+					fr: "Présentée comme une crème apaisante et hydratante, elle peut compléter l’hydratation lorsque les rougeurs ou les imperfections vous préoccupent.",
+					it: "Presentata come crema lenitiva e idratante, può aggiungere idratazione quando rossori o imperfezioni sono una preoccupazione.",
+					ja: "鎮静・保湿クリームとして紹介されている製品です。赤みや肌荒れが気になるときの保湿ステップとして検討できます。",
+					zh: "品牌将其定位为舒缓保湿面霜；在意泛红或易长痘部位时，可作为日常保湿步骤的选择。",
+					ar: "تُقدَّم ككريم مهدئ ومرطب؛ ويمكن النظر إليها كخطوة ترطيب عند الانشغال بالاحمرار الظاهر أو المناطق المعرضة للحبوب."
+				}
+			},
+			anua: {
+				name: {
+					ko: "아누아 어성초 77 수딩 토너", en: "Anua Heartleaf 77 Soothing Toner",
+					fr: "Tonique apaisant Heartleaf 77 Anua", it: "Tonico lenitivo Heartleaf 77 Anua",
+					ja: "Anua ドクダミ77 スージングトナー", zh: "Anua 鱼腥草77舒缓爽肤水", ar: "Anua تونر مهدئ بخلاصة الهارتليف 77"
+				},
+				benefit: {
+					ko: "어성초 추출물 77%를 내세운 토너로, 세안 후 수분을 보충하고 편안한 사용감을 원하는 루틴에 맞아요.",
+					en: "A toner featuring 77% heartleaf extract, suited to a routine seeking a light, hydrating step after cleansing.",
+					fr: "Un tonique mettant en avant 77 % d’extrait de houttuynia, adapté à une routine qui recherche une étape légère et hydratante après le nettoyage.",
+					it: "Un tonico che valorizza il 77% di estratto di heartleaf, adatto a una routine che cerca un passaggio leggero e idratante dopo la detersione.",
+					ja: "ドクダミエキス77%を特徴とする化粧水です。洗顔後に軽い水分補給を加えたいときに使えます。",
+					zh: "这款爽肤水主打77%鱼腥草提取物，适合希望在洁面后增加轻盈补水步骤的护理。",
+					ar: "تونر يبرز احتواءه على 77% من مستخلص الهارتليف، ويناسب روتينًا يبحث عن خطوة ترطيب خفيفة بعد التنظيف."
+				}
+			},
+			torriden: {
+				name: {
+					ko: "토리든 다이브인 저분자 히알루론산 세럼", en: "Torriden DIVE-IN Low Molecular Hyaluronic Acid Serum",
+					fr: "Sérum DIVE-IN à l’acide hyaluronique Torriden", it: "Siero DIVE-IN all’acido ialuronico Torriden",
+					ja: "Torriden ダイブイン 低分子ヒアルロン酸セラム", zh: "Torriden DIVE-IN 低分子透明质酸精华", ar: "Torriden DIVE-IN سيروم حمض الهيالورونيك"
+				},
+				benefit: {
+					ko: "히알루론산 보습 세럼으로, 속당김이나 건조함이 고민일 때 크림 전 수분 단계를 보태는 제품이에요.",
+					en: "A hyaluronic-acid hydrating serum that can add a moisture layer before cream when tightness or dryness is a concern.",
+					fr: "Un sérum hydratant à l’acide hyaluronique, à appliquer avant la crème si vous souhaitez ajouter une étape contre la sensation de tiraillement ou de sécheresse.",
+					it: "Un siero idratante all’acido ialuronico da applicare prima della crema se vuoi aggiungere idratazione in caso di secchezza o tensione.",
+					ja: "ヒアルロン酸の保湿セラムです。乾燥やつっぱりが気になるとき、クリームの前に水分ケアを加えられます。",
+					zh: "这是一款透明质酸保湿精华；在意干燥或紧绷时，可在面霜前增加补水步骤。",
+					ar: "سيروم مرطب بحمض الهيالورونيك؛ يمكن إضافته قبل الكريم عند الاهتمام بالجفاف أو الإحساس بالشد."
+				}
+			},
+			aestura: {
+				name: {
+					ko: "에스트라 아토베리어365 크림", en: "AESTURA ATOBARRIER365 Cream",
+					fr: "Crème ATOBARRIER365 AESTURA", it: "Crema ATOBARRIER365 AESTURA",
+					ja: "AESTURA アトバリア365 クリーム", zh: "AESTURA ATOBARRIER365 面霜", ar: "AESTURA ATOBARRIER365 كريم"
+				},
+				benefit: {
+					ko: "브랜드가 민감 피부 장벽 보습을 위해 소개하는 크림으로, 건조함과 보습 유지가 고민인 루틴의 마무리에 고려할 수 있어요.",
+					en: "A cream presented for barrier moisturization on sensitive skin; consider it as a final moisturizing step when dryness is a concern.",
+					fr: "Une crème présentée pour hydrater la barrière des peaux sensibles, à envisager en dernière étape si la sécheresse vous préoccupe.",
+					it: "Una crema proposta per idratare la barriera della pelle sensibile, da considerare come ultimo passaggio in caso di secchezza.",
+					ja: "敏感肌のバリア保湿向けとして紹介されているクリームです。乾燥が気になるときの仕上げの保湿に検討できます。",
+					zh: "品牌将其定位为敏感肌屏障保湿面霜；在意干燥时，可考虑作为护肤最后的保湿步骤。",
+					ar: "كريم يُقدَّم لترطيب حاجز البشرة الحساسة؛ يمكن أخذه في الاعتبار كخطوة ترطيب أخيرة عند الاهتمام بالجفاف."
+				}
+			},
+			illiyoon: {
+				name: {
+					ko: "일리윤 세라마이드 아토 집중 크림", en: "ILLIYOON Ceramide Ato Concentrate Cream",
+					fr: "Crème concentrée Ceramide Ato ILLIYOON", it: "Crema concentrata Ceramide Ato ILLIYOON",
+					ja: "ILLIYOON セラミド アト集中クリーム", zh: "ILLIYOON 神经酰胺Ato修护霜", ar: "ILLIYOON كريم سيراميد آتو المركز"
+				},
+				benefit: {
+					ko: "세라마이드 보습 크림으로, 건조한 부위에 보습막을 더하고 싶은 경우에 맞는 선택지예요.",
+					en: "A ceramide moisturizer to consider when you want a richer moisturizing layer on dry areas.",
+					fr: "Un soin hydratant aux céramides à envisager pour apporter une couche nourrissante aux zones sèches.",
+					it: "Una crema idratante con ceramidi da considerare per aggiungere uno strato più ricco sulle zone secche.",
+					ja: "セラミド配合の保湿クリームです。乾燥しやすい部分にしっかり保湿を加えたい場合に検討できます。",
+					zh: "这款神经酰胺保湿霜可作为干燥部位增加滋润保湿层的选择。",
+					ar: "مرطب بالسيراميد يمكن أخذه في الاعتبار لإضافة طبقة ترطيب أغنى إلى المناطق الجافة."
+				}
+			},
+			boj: {
+				name: {
+					ko: "조선미녀 맑은쌀 선크림", en: "Beauty of Joseon Relief Sun: Rice + Probiotics",
+					fr: "Crème solaire Relief Sun Riz + Probiotiques Beauty of Joseon", it: "Protezione solare Relief Sun Riso + Probiotici Beauty of Joseon",
+					ja: "Beauty of Joseon 米プロバイオティクス サンクリーム", zh: "Beauty of Joseon 米益生菌防晒霜", ar: "Beauty of Joseon واقي Relief Sun بالأرز والبروبيوتيك"
+				},
+				benefit: {
+					ko: "쌀 추출물과 프로바이오틱스 성분을 내세운 자외선 차단제예요. 잡티 고민이 있다면 새로운 잡티를 예방하는 기본 단계로 자외선 차단을 함께 챙길 수 있어요.",
+					en: "A sunscreen featuring rice extract and probiotics. When uneven tone is a concern, daily sun protection is a useful companion step to help prevent further sun-related discoloration.",
+					fr: "Une protection solaire mettant en avant l’extrait de riz et des probiotiques. En cas de taches, la protection quotidienne aide à limiter les marques liées au soleil.",
+					it: "Una protezione solare che valorizza estratto di riso e probiotici. In caso di macchie, la protezione quotidiana aiuta a prevenire ulteriori discromie dovute al sole.",
+					ja: "米エキスとプロバイオティクスを特徴とする日焼け止めです。色ムラが気になる場合は、日々の紫外線対策をあわせて行うことが大切です。",
+					zh: "这款防晒主打米提取物与益生菌。若在意肤色不均，日常防晒也是减少日晒导致色斑的重要搭配步骤。",
+					ar: "واقي شمس يبرز مستخلص الأرز والبروبيوتيك. عند الاهتمام بتفاوت اللون، تساعد الحماية اليومية من الشمس على الحد من التصبغات المرتبطة بها."
+				}
+			},
+			birch: {
+				name: {
+					ko: "라운드랩 자작나무 수분 크림", en: "ROUND LAB Birch Juice Moisturizing Cream",
+					fr: "Crème hydratante à la sève de bouleau ROUND LAB", it: "Crema idratante alla linfa di betulla ROUND LAB",
+					ja: "ROUND LAB 白樺樹液 保湿クリーム", zh: "ROUND LAB 白桦树汁保湿霜", ar: "ROUND LAB كريم ترطيب بعصارة البتولا"
+				},
+				benefit: {
+					ko: "자작나무 수액을 내세운 보습 크림으로, 복합성 피부에서 건조한 부위의 수분을 보충하는 용도로 고려할 수 있어요.",
+					en: "A moisturizer featuring birch juice; consider applying it to drier areas when combination skin needs targeted hydration.",
+					fr: "Une crème hydratante mettant en avant la sève de bouleau, à appliquer sur les zones plus sèches si votre peau est mixte.",
+					it: "Una crema idratante che valorizza la linfa di betulla, da applicare sulle zone più secche della pelle mista.",
+					ja: "白樺樹液を特徴とする保湿クリームです。混合肌で乾燥しやすい部分に使う保湿ケアとして検討できます。",
+					zh: "这款保湿霜主打桦树汁，可考虑用于混合性肌肤较干燥的部位进行保湿。",
+					ar: "مرطب يبرز عصارة البتولا؛ يمكن وضعه على المناطق الأكثر جفافًا عند العناية بالبشرة المختلطة."
+				}
+			},
+			medicubePad: {
+				name: {
+					ko: "메디큐브 제로모공패드 2.0", en: "medicube Zero Pore Pad 2.0",
+					fr: "Disques Zero Pore Pad 2.0 medicube", it: "Dischetti Zero Pore Pad 2.0 medicube",
+					ja: "medicube ゼロ毛穴パッド 2.0", zh: "medicube Zero Pore 毛孔棉片 2.0", ar: "medicube Zero Pore Pad 2.0 وسادات"
+				},
+				benefit: {
+					ko: "각질과 모공 결 관리를 위한 패드 제품이에요. 건조하거나 민감한 피부라면 빈도를 낮추고 다른 각질 제거 제품과 겹치지 않도록 하세요.",
+					en: "An exfoliating pad positioned for pore and skin-texture care. If your skin is dry or sensitive, use it sparingly and avoid combining it with other exfoliants.",
+					fr: "Un disque exfoliant destiné aux pores et au grain de peau. En cas de peau sèche ou sensible, espacez les utilisations et évitez de le combiner à d’autres exfoliants.",
+					it: "Un pad esfoliante pensato per pori e texture. Se la pelle è secca o sensibile, usalo con moderazione e non abbinarlo ad altri esfolianti.",
+					ja: "毛穴や肌のキメをケアする拭き取りパッドです。乾燥肌・敏感肌は使用頻度を控え、他の角質ケア製品との併用に注意してください。",
+					zh: "这是一款用于毛孔与肤理护理的擦拭棉片。干性或敏感肌应减少使用频率，避免与其他去角质产品叠加。",
+					ar: "وسادات تقشير مخصصة للعناية بالمسام وملمس البشرة. للبشرة الجافة أو الحساسة، قللي الاستخدام وتجنبي جمعها مع مقشرات أخرى."
+				}
+			},
+			goodal: {
+				name: {
+					ko: "구달 청귤 비타C 잡티 케어 세럼", en: "goodal Green Tangerine Vita C Dark Spot Care Serum",
+					fr: "Sérum anti-taches Vita C à la mandarine verte goodal", it: "Siero antimacchie Vita C al mandarino verde goodal",
+					ja: "goodal 青みかんビタC シミケアセラム", zh: "goodal 青橘维C淡斑精华", ar: "goodal سيروم فيتامين سي باليوسفي الأخضر للبقع"
+				},
+				benefit: {
+					ko: "청귤 유래 비타민C 성분을 활용한 잡티 케어 세럼으로, 칙칙함과 피부 톤이 고민인 루틴에 고려할 수 있어요.",
+					en: "A dark-spot-care serum featuring vitamin C from green tangerine, for routines focused on dullness and uneven-looking tone.",
+					fr: "Un sérum anti-taches mettant en avant la vitamine C de mandarine verte, à envisager si le teint terne ou irrégulier vous préoccupe.",
+					it: "Un siero antimacchie che valorizza la vitamina C del mandarino verde, da considerare se ti preoccupano colorito spento o disomogeneo.",
+					ja: "青みかん由来のビタミンCを特徴とするスポットケア美容液です。くすみや色ムラが気になるときに検討できます。",
+					zh: "这款淡斑精华主打青橘来源的维生素C，适合关注暗沉和肤色不均的护理思路。",
+					ar: "سيروم للعناية بالبقع يبرز فيتامين سي المستخلص من اليوسفي الأخضر، ويمكن أخذه في الاعتبار عند الاهتمام بالبهتان وتفاوت اللون."
+				}
+			},
+			numbuzin: {
+				name: {
+					ko: "넘버즈인 5번 비타민 집중 세럼", en: "numbuzin No.5 Vitamin Concentrated Serum",
+					fr: "Sérum concentré vitaminé No.5 numbuzin", it: "Siero concentrato vitaminico No.5 numbuzin",
+					ja: "numbuzin No.5 ビタミン集中セラム", zh: "numbuzin 5号维生素浓缩精华", ar: "numbuzin No.5 سيروم الفيتامين المركز"
+				},
+				benefit: {
+					ko: "브랜드가 흔적·톤 케어용으로 소개하는 비타민 세럼이에요. 칙칙함이 고민일 때 자외선 차단과 함께 사용하는 루틴을 고려할 수 있어요.",
+					en: "A vitamin serum presented for post-blemish marks and tone care; consider it alongside daily sunscreen when dullness is a concern.",
+					fr: "Un sérum vitaminé présenté pour les marques et l’éclat du teint, à associer à une protection solaire quotidienne si le teint terne vous préoccupe.",
+					it: "Un siero vitaminico presentato per macchie post-imperfezioni e luminosità, da abbinare alla protezione solare quotidiana.",
+					ja: "肌の跡やトーンケア向けとして紹介されているビタミン美容液です。くすみが気になる場合は日焼け止めと併用するケアを検討できます。",
+					zh: "品牌将其定位为痘印与肤色护理维生素精华；在意暗沉时，可与日常防晒搭配使用。",
+					ar: "سيروم فيتامينات يُقدَّم للعناية بآثار الحبوب وتوحيد اللون؛ يمكن دمجه مع واقي الشمس اليومي عند الاهتمام بالبهتان."
+				}
+			},
+			cosrx: {
+				name: {
+					ko: "코스알엑스 더 6 펩타이드 스킨 부스터 세럼", en: "COSRX The 6 Peptide Skin Booster Serum",
+					fr: "Sérum booster The 6 Peptides COSRX", it: "Siero booster The 6 Peptide COSRX",
+					ja: "COSRX ザ・6ペプチド スキンブースターセラム", zh: "COSRX 六重胜肽肌底精华", ar: "COSRX The 6 Peptide سيروم معزز للبشرة"
+				},
+				benefit: {
+					ko: "여러 펩타이드 성분을 담은 부스터 세럼으로, 피부 결이나 탄력 저하가 신경 쓰이는 루틴의 첫 세럼 단계로 고려할 수 있어요.",
+					en: "A booster serum featuring multiple peptides; consider it as an early serum step when skin texture or firmness is a concern.",
+					fr: "Un sérum booster mettant en avant plusieurs peptides, à envisager en première étape sérum si le grain ou la fermeté de la peau vous préoccupe.",
+					it: "Un siero booster con diversi peptidi, da considerare come primo siero se ti preoccupano la texture o la compattezza della pelle.",
+					ja: "複数のペプチドを特徴とするブースター美容液です。肌のキメやハリが気になるとき、最初の美容液として検討できます。",
+					zh: "这款肌底精华主打多种肽类成分；若在意肤理或紧致感，可考虑作为护肤前段的精华步骤。",
+					ar: "سيروم تمهيدي يبرز عدة ببتيدات؛ يمكن أخذه في الاعتبار كخطوة سيروم أولى عند الاهتمام بملمس البشرة أو تماسكها."
+				}
+			},
+			medicubePdrn: {
+				name: {
+					ko: "메디큐브 PDRN 핑크 펩타이드 세럼", en: "medicube PDRN Pink Peptide Serum",
+					fr: "Sérum PDRN Pink Peptide medicube", it: "Siero PDRN Pink Peptide medicube",
+					ja: "medicube PDRN ピンクペプチドセラム", zh: "medicube PDRN粉色胜肽精华", ar: "medicube PDRN Pink Peptide سيروم"
+				},
+				benefit: {
+					ko: "PDRN과 펩타이드 성분을 내세운 보습 세럼으로, 탄력과 피부 결을 함께 관리하고 싶은 경우에 고려할 수 있어요.",
+					en: "A hydrating serum featuring PDRN and peptides, to consider when your routine focuses on skin texture and the look of firmness.",
+					fr: "Un sérum hydratant mettant en avant le PDRN et les peptides, à envisager pour une routine axée sur le grain et l’apparence de fermeté.",
+					it: "Un siero idratante che valorizza PDRN e peptidi, da considerare per una routine dedicata a texture e aspetto della compattezza.",
+					ja: "PDRNとペプチドを特徴とする保湿美容液です。肌のキメやハリを意識したケアに検討できます。",
+					zh: "这款保湿精华主打PDRN与肽类成分，可考虑用于关注肤理与紧致感的护理。",
+					ar: "سيروم مرطب يبرز PDRN والببتيدات؛ يمكن أخذه في الاعتبار ضمن روتين يهتم بملمس البشرة ومظهر تماسكها."
+				}
+			}
+		};
+
+		const skinTypeProducts = {
+			oily: { basic: ["dokdo", "drg"], additional: ["boj", "torriden"] },
+			combination: { basic: ["dokdo", "birch"], additional: ["boj", "anua"] },
+			dry: { basic: ["dokdo", "aestura"], additional: ["torriden", "illiyoon"] },
+			normal: { basic: ["dokdo", "drg"], additional: ["boj", "torriden"] }
+		};
+
+		const concernProductSets = {
+			0: { oily: ["anua", "drg"], combination: ["anua", "drg"], dry: ["drg", "illiyoon"], normal: ["anua", "drg"] },
+			1: { oily: ["drg", "anua"], combination: ["drg", "anua"], dry: ["aestura", "drg"], normal: ["drg", "anua"] },
+			2: { oily: ["torriden", "birch"], combination: ["torriden", "aestura"], dry: ["torriden", "aestura"], normal: ["torriden", "illiyoon"] },
+			3: { oily: ["medicubePad", "dokdo"], combination: ["medicubePad", "dokdo"], dry: ["birch", "dokdo"], normal: ["medicubePad", "dokdo"] },
+			4: { oily: ["goodal", "numbuzin"], combination: ["goodal", "numbuzin"], dry: ["goodal", "numbuzin"], normal: ["goodal", "numbuzin"] },
+			5: { oily: ["cosrx", "medicubePdrn"], combination: ["cosrx", "medicubePdrn"], dry: ["cosrx", "medicubePdrn"], normal: ["cosrx", "medicubePdrn"] }
+		};
+
+		function escapeHtml(value) {
+			return String(value).replace(/[&<>"']/g, (character) => ({
+				"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+			})[character]);
+		}
+
+		function renderRecommendations(type, concernIndexes) {
+			const mustContainer = document.querySelector("#rec-must-items");
+			const alsoContainer = document.querySelector("#rec-also-items");
+			const concernCategory = document.querySelector("#concern-recommendation-category");
+			const concernTitle = document.querySelector("#concern-recommendation-title");
+			const concernContainer = document.querySelector("#rec-concern-items");
+			const recommendationNote = document.querySelector("#recommendation-note");
+			const title = document.querySelector('[data-i18n="recTitle"]');
+			const basicHeading = document.querySelector('[data-i18n="mustCategory"]');
+			const additionalHeading = document.querySelector('[data-i18n="alsoCategory"]');
+			if (!mustContainer || !alsoContainer || !concernCategory || !concernTitle || !concernContainer || !recommendationNote || !title || !basicHeading || !additionalHeading) {
+				throw new Error("Recommendation containers are missing from the survey result.");
+			}
+
+			const ui = recommendationUi[currentLanguage];
+			const messages = getMessages();
+			title.textContent = ui.title;
+			basicHeading.textContent = ui.basic;
+			additionalHeading.textContent = ui.additional;
+			concernTitle.textContent = ui.concerns;
+			recommendationNote.textContent = ui.open;
+
+			const selectedConcerns = concernIndexes.map((index) => messages.choices.concerns[index]).join(", ");
+			const renderProduct = (productId, concernLabel = selectedConcerns) => {
+				const product = productCatalog[productId];
+				if (!product) throw new Error(`Unknown recommendation product: ${productId}.`);
+				const name = product.name[currentLanguage];
+				const benefit = product.benefit[currentLanguage];
+				if (!name || !benefit) {
+					throw new Error(`Incomplete ${currentLanguage} product information for ${productId}.`);
+				}
+				const explanation = (concernLabel ? ui.fit : ui.noConcern)
+					.replace("{concerns}", escapeHtml(concernLabel || ""))
+					.replace("{skinType}", escapeHtml(ui.type[type]))
+					.replace("{benefit}", escapeHtml(benefit));
+				return `<div class="rec-item"><details><summary>${escapeHtml(name)}</summary><p>${explanation}</p></details></div>`;
+			};
+
+			const base = skinTypeProducts[type];
+			if (!base || base.basic.length < 2 || base.additional.length < 2) {
+				throw new Error(`At least two base products per category are required for ${type}.`);
+			}
+			mustContainer.innerHTML = base.basic.map((productId) => renderProduct(productId)).join("");
+			alsoContainer.innerHTML = base.additional.map((productId) => renderProduct(productId)).join("");
+
+			concernCategory.hidden = concernIndexes.length === 0;
+			concernContainer.innerHTML = concernIndexes.map((index) => {
+				const productIds = concernProductSets[index]?.[type];
+				if (!productIds || productIds.length < 2) throw new Error(`At least two products are required for concern ${index}/${type}.`);
+				return productIds.map((productId) => renderProduct(productId, messages.choices.concerns[index])).join("");
+			}).join("");
+		}
+
+		function renderResult() {
+			const messages = getMessages();
+			const answers = {
+				tightness: selectedValue("tightness"),
+				tzone: selectedValue("tzone"),
+				cheeks: selectedValue("cheeks"),
+				flaking: selectedValue("flaking"),
+				sensitivity: selectedValue("sensitivity")
+			};
+			const type = classifySkin(answers);
+			const ageIndex = form.querySelector('input[name="age"]:checked')?.value;
+			const ageRange = ageIndex === undefined ? messages.notSelected : messages.choices.age[Number(ageIndex)];
+			const concernIndexes = [...form.querySelectorAll('input[name="concern"]:checked')].map((input) => Number(input.value));
+			const notes = [];
+			if (answers.tightness > 0 || answers.flaking > 0) notes.push(messages.noteDryness);
+			if (answers.sensitivity > 0) notes.push(answers.sensitivity === 2 ? messages.noteSensitivityStrong : messages.noteSensitivityMild);
+
+			document.querySelector("#result-title").textContent = messages.skinTypes[type];
+			document.querySelector("#result-description").textContent = `${messages.descriptions[type]} ${notes.length ? notes.join(" ") : messages.noteNoSymptoms}`;
+			const summary = `${messages.ageLabel}: ${ageRange}`;
+			const concernSummary = concernIndexes.length
+				? `${messages.concernLabel}: ${concernIndexes.map((index) => messages.choices.concerns[index]).join(" · ")}`
+				: messages.noConcern;
+			document.querySelector("#result-meta").textContent = `${summary}\n${concernSummary}`;
+
+			renderRecommendations(type, concernIndexes);
+		}
+
+		languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
+
+		form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (!form.reportValidity()) {
+				error.classList.add("visible");
+				return;
+			}
+			error.classList.remove("visible");
+			result.classList.add("visible");
+			renderResult();
+			result.focus();
+		});
+
+		form.addEventListener("change", () => {
+			if (form.checkValidity()) error.classList.remove("visible");
+			if (result.classList.contains("visible") && form.checkValidity()) renderResult();
+		});
+
+		applyLanguage(currentLanguage);
+	</script>
+</body>
+</html>
