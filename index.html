@@ -125,7 +125,8 @@
 		}
 
 		html[lang="en"] h1 { max-width: 520px; font-family: "Georgia", "Times New Roman", serif; font-size: clamp(42px, 8vw, 64px); font-weight: 500; line-height: 1.06; letter-spacing: -.045em; }
-		html[lang="es"] h1 { max-width: 620px; }
+		html[lang="es"] h1, html[lang="it"] h1 { max-width: 620px; font-size: clamp(32px, 5.6vw, 44px); line-height: 1.12; }
+		html[lang="he"] h1 { max-width: 620px; font-size: clamp(28px, 4.9vw, 38px); line-height: 1.2; }
 		html[lang="he"] h1, html[lang="it"] h1 { font-weight: 750; }
 
 		.intro-copy {
@@ -325,6 +326,8 @@
 			.intro { padding-top: 34px; }
 			h1 { font-size: clamp(34px, 10vw, 48px); }
 			html[lang="en"] h1 { max-width: 420px; font-size: clamp(42px, 12vw, 58px); }
+			html[lang="es"] h1, html[lang="it"] h1 { font-size: clamp(20px, 6.5vw, 36px); }
+			html[lang="he"] h1 { font-size: clamp(18px, 5.8vw, 32px); }
 			.choices { grid-template-columns: 1fr; gap: 7px; margin-left: 0; margin-right: 0; }
 			.hint { margin-left: 0; margin-right: 0; }
 			.concern-note { margin-left: 0; margin-right: 0; }
