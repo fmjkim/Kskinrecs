@@ -1514,10 +1514,10 @@
 		};
 
 		const skinTypeProducts = {
-			oily: { basic: ["dokdo", "drg"], additional: ["boj", "torriden"] },
-			combination: { basic: ["dokdo", "birch"], additional: ["boj", "anua"] },
-			dry: { basic: ["dokdo", "aestura"], additional: ["torriden", "illiyoon"] },
-			normal: { basic: ["dokdo", "drg"], additional: ["boj", "torriden"] }
+			oily: { basic: ["dokdo", "drg", "boj"], additional: ["torriden", "anua"] },
+			combination: { basic: ["dokdo", "birch", "boj"], additional: ["anua", "aestura"] },
+			dry: { basic: ["dokdo", "aestura", "boj"], additional: ["torriden", "illiyoon"] },
+			normal: { basic: ["dokdo", "drg", "boj"], additional: ["torriden", "anua"] }
 		};
 
 		const concernProductSets = {
@@ -1588,8 +1588,8 @@
 			};
 
 			const base = skinTypeProducts[type];
-			if (!base || base.basic.length < 2 || base.additional.length < 2) {
-				throw new Error(`At least two base products per category are required for ${type}.`);
+			if (!base || base.basic.length !== 3 || base.additional.length < 2) {
+				throw new Error(`Exactly three essential products and at least two additional products are required for ${type}.`);
 			}
 			mustContainer.innerHTML = base.basic.map((productId) => renderProduct(productId)).join("");
 			alsoContainer.innerHTML = base.additional.map((productId) => renderProduct(productId)).join("");
