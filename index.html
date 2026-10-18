@@ -242,22 +242,22 @@
 		.rec-item details[open] summary { margin-bottom: 8px; }
 		.rec-item details p { margin: 0; color: #505c55; font-size: 13px; line-height: 1.7; }
 		.rec-item details a { display: inline-block; margin-top: 8px; color: var(--green-dark); font-size: 12px; font-weight: 700; }
-		.editorial { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
-		.editorial-section { margin: 0 0 10px; border: 1px solid var(--line); background: rgba(255, 254, 250, .55); }
+		.editorial { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--line); }
+		.editorial-section { margin: 0; border-bottom: 1px solid var(--line); }
 		.editorial-kicker { margin: 0 0 7px; color: var(--coral); font-size: 11px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
 		.editorial h2 { margin: 0 0 10px; font-family: "Noto Serif KR", "Batang", serif; font-size: 24px; font-weight: 600; line-height: 1.4; }
 		.editorial h3 { margin: 22px 0 8px; color: var(--green-dark); font-size: 15px; }
-		.editorial p, .editorial li { color: #505c55; font-size: 14px; line-height: 1.8; }
+		.editorial p, .editorial li { color: #505c55; font-size: 13px; line-height: 1.75; }
 		.editorial p { margin: 8px 0; }
 		.editorial ol, .editorial ul { padding-left: 22px; }
 		[dir="rtl"] .editorial ol, [dir="rtl"] .editorial ul { padding-left: 0; padding-right: 22px; }
-		.editorial-section > summary { padding: 14px; color: var(--green-dark); cursor: pointer; }
+		.editorial-section > summary { display: flex; align-items: baseline; gap: 10px; padding: 10px 2px; color: var(--green-dark); cursor: pointer; }
 		.editorial-section > summary:focus-visible { outline: 3px solid rgba(211, 109, 86, .45); outline-offset: 2px; }
 		.editorial-section > summary::marker { color: var(--coral); }
-		.editorial-section > summary .editorial-kicker { display: block; margin-bottom: 4px; }
-		.editorial-section > summary h2 { margin: 0; }
-		.editorial-section[open] > summary { border-bottom: 1px solid var(--line); }
-		.editorial-content { padding: 8px 14px 14px; }
+		.editorial-section > summary .editorial-kicker { flex: 0 0 auto; margin: 0; color: var(--muted); font-size: 10px; font-weight: 650; letter-spacing: .04em; text-transform: none; }
+		.editorial-section > summary h2 { margin: 0; color: var(--ink); font-family: inherit; font-size: 14px; font-weight: 650; line-height: 1.5; }
+		.editorial-section[open] > summary { color: var(--green); }
+		.editorial-content { padding: 0 2px 12px; }
 		.editorial-content > details { margin: 8px 0; padding: 12px 14px; border: 1px solid var(--line); background: rgba(255, 254, 250, .55); }
 		.editorial-content > details summary { color: var(--green-dark); cursor: pointer; font-size: 14px; font-weight: 700; line-height: 1.6; }
 		.editorial-content > details summary:focus-visible { outline: 3px solid rgba(211, 109, 86, .45); outline-offset: 3px; }
@@ -295,8 +295,10 @@
 			.concerns .choice label { padding: 9px; font-size: 12px; }
 			.note { display: block; }
 			.note strong { display: block; margin-bottom: 3px; }
-			.editorial { margin-top: 36px; }
-			.editorial h2 { font-size: 21px; }
+			.editorial { margin-top: 32px; }
+			.editorial-section > summary { gap: 8px; padding: 10px 0; }
+			.editorial-section > summary .editorial-kicker { font-size: 9px; }
+			.editorial-section > summary h2 { font-size: 13px; }
 			.submit-row { align-items: stretch; flex-direction: column; }
 			.submit-row button { width: 100%; }
 			.result { padding: 22px 18px; }
