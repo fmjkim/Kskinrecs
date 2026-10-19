@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex, follow">
+	<meta name="theme-color" content="#f5f4ee">
+	<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
+	<title>페이지를 찾을 수 없습니다 | Skin Note</title>
+	<style>
+		:root {
+			color-scheme: light;
+			font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+			color: #242d28;
+			background: #f5f4ee;
+		}
+		* { box-sizing: border-box; }
+		body { display: grid; min-height: 100vh; margin: 0; place-items: center; padding: 24px; }
+		main { width: min(100%, 560px); padding: 40px; border: 1px solid #d9ddd5; border-radius: 20px; background: #fffefa; }
+		p { color: #66736c; line-height: 1.8; }
+		.error-code { margin: 0; color: #d36d56; font-size: 13px; font-weight: 750; letter-spacing: .12em; }
+		h1 { margin: 10px 0; font-size: clamp(28px, 7vw, 40px); line-height: 1.25; }
+		nav { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 24px; }
+		a { color: #244735; font-weight: 650; text-underline-offset: 3px; }
+		a:focus-visible { outline: 3px solid #d36d56; outline-offset: 3px; }
+		@media (max-width: 480px) { main { padding: 28px 22px; } }
+	</style>
+</head>
+<body>
+	<main>
+		<p class="error-code">404 · SKIN NOTE</p>
+		<h1>페이지를 찾을 수 없습니다</h1>
+		<p>주소가 바뀌었거나 페이지가 존재하지 않을 수 있어요. 피부 타입 체크 페이지로 돌아가거나 아래 안내를 살펴보세요.</p>
+		<nav aria-label="페이지 안내">
+			<a href="/">홈으로 돌아가기</a>
+			<a href="/#skin-survey">피부 타입 테스트 시작</a>
+			<a href="/#how-it-works">검사 방법 보기</a>
+		</nav>
+	</main>
+</body>
+</html>
